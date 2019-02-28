@@ -1,1 +1,1 @@
-# plan-myeats
+# plan-my-eats
