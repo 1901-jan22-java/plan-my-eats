@@ -2,6 +2,8 @@ package com.revature.repository;
 
 import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
 import com.revature.beans.User;
 
 import java.util.ArrayList;
@@ -14,15 +16,13 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 
 @Service
+@Transactional
 public class UserService {
 	
 static List<User>users = new ArrayList<User>();
+@Autowired
+private UserRepository repo;
 
-	ApplicationContext context 
-	= new ClassPathXmlApplicationContext("beans.xml");
-	
-	@Autowired
-	UserRepository repo = (UserRepository)context.getBean(UserRepository.class);
 	
 	static {
 		users.add(new User("chocolate","dayZ666","iamthebomb",5,22,"Female",105.0));
@@ -34,7 +34,7 @@ static List<User>users = new ArrayList<User>();
 	}
 	
 	public User findById(int id) {
-		return repo.findById(id);
+		return repo.getOne(id);
 	}
 	
 	

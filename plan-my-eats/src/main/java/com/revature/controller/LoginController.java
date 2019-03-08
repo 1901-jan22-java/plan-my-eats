@@ -21,8 +21,6 @@ import com.revature.repository.UserService;
 @RequestMapping("/Login")
 public class LoginController {
 
-	ApplicationContext context 
-	= new ClassPathXmlApplicationContext("beans.xml");
 	@Autowired
 	UserService service;
 	

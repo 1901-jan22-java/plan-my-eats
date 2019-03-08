@@ -1,6 +1,6 @@
 package com.revature.controller;
 
-import javax.validation.Valid;
+
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
@@ -20,12 +20,8 @@ import com.revature.repository.UserService;
 @RequestMapping("/Register")
 public class RegisterController {
 
-	
-	// add newly registered user 
-	ApplicationContext context 
-	= new ClassPathXmlApplicationContext("beans.xml");
 	@Autowired
-	UserService service = (UserService)context.getBean(UserService.class);
+	UserService service;
 	// POST
 		@RequestMapping(method=RequestMethod.POST,
 				consumes=MediaType.APPLICATION_JSON_VALUE,
