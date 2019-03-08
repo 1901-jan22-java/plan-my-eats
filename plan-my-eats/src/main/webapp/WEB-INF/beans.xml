@@ -20,14 +20,14 @@
 	<mvc:mapping path="/**" />
 </mvc:cors>
 
-	<!-- tell spring data where to look for repository (DAO) 
+	<!-- tell spring data where to look for repository (DAO) -->
 	<jpa:repositories
 		base-package="com.revature.repository"></jpa:repositories>
 
-	 so that we don't have to push up sensitive db info must name properties 
-		db.X 
+	 <!-- so that we don't have to push up sensitive db info must name properties 
+		db.X --> 
 	<context:property-placeholder
-		location="classpath:db.properties" />
+		location="/WEB-INF/db.properties" />
 
 	<bean id="myDataSource"
 		class="org.apache.commons.dbcp.BasicDataSource">
@@ -36,9 +36,9 @@
 		<property name="username" value="${db.username}" />
 		<property name="password" value="${db.pwd}" />
 	</bean>
-	spring data is not natively compatible with hibernate it is compatible 
+	<!-- spring data is not natively compatible with hibernate it is compatible 
 		with JPA, and in turn any "vendor" of an ORM tool that is JPA compliant however 
-		we need to use a vendor adapter 
+		we need to use a vendor adapter  -->
 
 	<bean id="hibernateJpaVendorAdapter"
 		class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter">
@@ -66,5 +66,5 @@
 		class="org.springframework.orm.jpa.JpaTransactionManager">
 		<property name="entityManagerFactory" ref="entityManagerFactory"/>
 			
-	</bean> -->
+	</bean> 
 	</beans>
