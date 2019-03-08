@@ -11,7 +11,12 @@ import com.revature.beans.User;
 @Repository("userRepository")
 public interface UserRepository extends JpaRepository<User, Integer> {
 
+	
 	User findByUsernameLikeIgnoreCase(String username);
+	
+	User findByUsername(String username);
+	
+	User findById(int id);
 
 	User findByUsernameContaining(String contains);
 

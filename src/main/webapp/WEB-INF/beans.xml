@@ -11,21 +11,22 @@
 		http://www.springframework.org/schema/data/jpa http://www.springframework.org/schema/data/jpa/spring-jpa-1.8.xsd
 		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.2.xsd">
 
-<context:annotation-config/>
-<context:component-scan base-package="com.revature"></context:component-scan>
+	<context:annotation-config />
+	<context:component-scan
+		base-package="com.revature"></context:component-scan>
 
-<mvc:annotation-driven></mvc:annotation-driven>	
-<tx:annotation-driven />
-<mvc:cors>
-	<mvc:mapping path="/**" />
-</mvc:cors>
+	<mvc:annotation-driven></mvc:annotation-driven>
+	<tx:annotation-driven />
+	<mvc:cors>
+		<mvc:mapping path="/**" />
+	</mvc:cors>
 
 	<!-- tell spring data where to look for repository (DAO) -->
 	<jpa:repositories
 		base-package="com.revature.repository"></jpa:repositories>
 
-	 <!-- so that we don't have to push up sensitive db info must name properties 
-		db.X --> 
+	<!-- so that we don't have to push up sensitive db info must name properties 
+		db.X -->
 	<context:property-placeholder
 		location="/WEB-INF/db.properties" />
 
@@ -63,4 +64,4 @@
 
 	<!-- Enable Spring to search for @Transactional -->
 	<tx:annotation-driven />
-	</beans>
+</beans>
