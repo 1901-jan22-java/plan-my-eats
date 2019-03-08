@@ -23,8 +23,8 @@ public class User
 
 	@Id
 	@Column(name="USER_ID")
-	@SequenceGenerator(name="U_SEQ_GEN", sequenceName="U_SEQ", allocationSize=1)
-	@GeneratedValue(generator="U_SEQ_GEN", strategy=GenerationType.SEQUENCE)
+	@SequenceGenerator(name="eu_SEQ_GEN", sequenceName="eu_SEQ", allocationSize=1)
+	@GeneratedValue(generator="eu_SEQ_GEN", strategy=GenerationType.SEQUENCE)
 	private int userId;
 	@Column(name="PREFERENCE_STRING")
 	private String preference;
@@ -48,7 +48,7 @@ public class User
 	private Set<Restuarant> restaurants = new HashSet<Restuarant>();
 	public User() { }
 	public User(String preference, String username, String password, int height, int age, String gender,
-			double weight, Set<Recipe> recipes, Set<Restuarant> restaurants) {
+			double weight) {
 		super();
 		this.preference = preference;
 		this.username = username;
@@ -57,8 +57,7 @@ public class User
 		this.age = age;
 		this.gender = gender;
 		this.weight = weight;
-		this.recipes = recipes;
-		this.restaurants = restaurants;
+
 	}
 	public int getUserId() {
 		return userId;
