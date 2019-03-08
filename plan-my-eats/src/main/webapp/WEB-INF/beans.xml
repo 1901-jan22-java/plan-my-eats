@@ -24,7 +24,7 @@
 	<!-- so that we don't have to push up sensitive db info must name properties 
 		db.X -->
 	<context:property-placeholder
-		location="classpath:db.properties" />
+		location="/WEB-INF/db.properties" />
 
 	<bean id="myDataSource"
 		class="org.apache.commons.dbcp.BasicDataSource">
