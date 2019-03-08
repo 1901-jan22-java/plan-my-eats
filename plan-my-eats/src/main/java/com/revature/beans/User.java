@@ -46,6 +46,9 @@ public class User
 	@ManyToMany(cascade=CascadeType.ALL, fetch=FetchType.EAGER)
 	@JoinTable(name="user_restuarants", joinColumns=@JoinColumn(name="USER_ID"), inverseJoinColumns=@JoinColumn(name="RESTUARANT_ID"))
 	private Set<Restuarant> restaurants = new HashSet<Restuarant>();
+	@ManyToMany(cascade=CascadeType.ALL, fetch=FetchType.EAGER)
+	@JoinTable(name="user_preferences", joinColumns=@JoinColumn(name="USER_ID"), inverseJoinColumns=@JoinColumn(name="PREF_ID"))
+	private Set<Preferences> preferences = new HashSet<Preferences>();
 	public User() { }
 	public User(String preference, String username, String password, int height, int age, String gender,
 			double weight) {
