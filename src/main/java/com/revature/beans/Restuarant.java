@@ -11,13 +11,14 @@ import javax.persistence.Table;
 import org.springframework.stereotype.Component;
 
 @Entity
-@Table(name = "RESTUARANTS")
+@Table(name = "PME_RESTAURANTS")
 @Component
 public class Restuarant {
+	
 	@Id
-	@Column(name = "RESTUARANT_ID")
-	@SequenceGenerator(name = "RES_SEQ_GEN", sequenceName = "RES_SEQ", allocationSize = 1)
-	@GeneratedValue(generator = "RES_SEQ_GEN", strategy = GenerationType.SEQUENCE)
+	@Column(name = "RESTAURANT_ID")
+	@SequenceGenerator(name = "PME_RES_SEQ_GEN", sequenceName = "PME_RES_SEQ", allocationSize = 1)
+	@GeneratedValue(generator = "PME_RES_SEQ_GEN", strategy = GenerationType.SEQUENCE)
 	private int restuarantId;
 	@Column(name = "NAME")
 	private String name;

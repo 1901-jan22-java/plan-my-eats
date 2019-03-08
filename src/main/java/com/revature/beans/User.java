@@ -16,14 +16,17 @@ import javax.persistence.ManyToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
+import org.springframework.stereotype.Component;
+
 @Entity
-@Table(name = "EATS_USERS")
+@Table(name = "PME_USERS")
+@Component
 public class User {
 
 	@Id
 	@Column(name = "USER_ID")
-	@SequenceGenerator(name = "PME_SEQ_GEN", sequenceName = "PME_SEQ", allocationSize = 1)
-	@GeneratedValue(generator = "PME_SEQ_GEN", strategy = GenerationType.SEQUENCE)
+	@SequenceGenerator(name = "PME_USER_SEQ_GEN", sequenceName = "PME_USER_SEQ", allocationSize = 1)
+	@GeneratedValue(generator = "PME_USER_SEQ_GEN", strategy = GenerationType.SEQUENCE)
 	private int userId;
 	@Column(name = "PREFERENCE_STRING")
 	private String preference;
@@ -59,7 +62,6 @@ public class User {
 		this.age = age;
 		this.gender = gender;
 		this.weight = weight;
-
 	}
 
 	public int getUserId() {

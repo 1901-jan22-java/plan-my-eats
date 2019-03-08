@@ -14,12 +14,12 @@ public interface UserRepository extends JpaRepository<User, Integer> {
 	@Query("SELECT u FROM User u WHERE length(u.username) > ?1")
 	List<User> lengthQuery(int length);
 
-	User findById(int id);
+	User findByUserId(int id);
 
 	User findByUsername(String username);
 
 	User findByUsernameLikeIgnoreCase(String username);
 
-	User findByUsernameContaining(String contains);
+	User findByUsernameContaining(String username);
 
 }
