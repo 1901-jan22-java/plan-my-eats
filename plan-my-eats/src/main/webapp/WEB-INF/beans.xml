@@ -29,42 +29,38 @@
 	<context:property-placeholder
 		location="/WEB-INF/db.properties" />
 
-	<bean id="myDataSource"
+	<bean name="myDataSource"
 		class="org.apache.commons.dbcp.BasicDataSource">
 		<property name="driverClassName" value="${db.driver}" />
 		<property name="url" value="${db.url}" />
 		<property name="username" value="${db.username}" />
 		<property name="password" value="${db.pwd}" />
 	</bean>
-	<!-- spring data is not natively compatible with hibernate it is compatible 
-		with JPA, and in turn any "vendor" of an ORM tool that is JPA compliant however 
-		we need to use a vendor adapter  -->
 
-	<bean id="hibernateJpaVendorAdapter"
-		class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter">
-	</bean>
-
-	<bean id="entityManagerFactory"
-		class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
+	<bean name="mySessionFactory"
+		class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
 		<property name="dataSource" ref="myDataSource" />
-		<property name="jpaVendorAdapter"
-			ref="hibernateJpaVendorAdapter" />
 		<property name="packagesToScan" value="com.revature" />
-		<property name="jpaProperties">
+		<property name="hibernateProperties">
 			<props>
-				<prop key="hibernate.dialect">
-					org.hibernate.dialect.Oracle10gDialect
-				</prop>
-				<prop key="hibernate.show_sql">true</prop>
+				<prop key="hibernate.dialect">org.hibernate.dialect.Oracle10gDialect</prop>
 				<prop key="hibernate.hbm2ddl.auto">update</prop>
+				<prop key="hibernate.show_sql">true</prop>
 				<prop key="hibernate.format_sql">true</prop>
 			</props>
 		</property>
 	</bean>
-	
-	<bean id="transactionManager"
-		class="org.springframework.orm.jpa.JpaTransactionManager">
-		<property name="entityManagerFactory" ref="entityManagerFactory"/>
-			
-	</bean> 
+
+	<bean name="transactionManager"
+		class="org.springframework.orm.hibernate4.HibernateTransactionManager">
+		<property name="sessionFactory" ref="mySessionFactory" />
+	</bean>
+
+	<!-- Enable Application to be Annotation Driven -->
+	<context:annotation-config />
+	<context:component-scan
+		base-package="com.revature"></context:component-scan>
+
+	<!-- Enable Spring to search for @Transactional -->
+	<tx:annotation-driven />
 	</beans>
