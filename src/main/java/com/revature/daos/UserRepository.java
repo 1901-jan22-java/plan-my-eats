@@ -1,4 +1,4 @@
-package com.revature.repository;
+package com.revature.daos;
 
 import java.util.List;
 
@@ -11,15 +11,15 @@ import com.revature.beans.User;
 @Repository("userRepository")
 public interface UserRepository extends JpaRepository<User, Integer> {
 
-	
-	User findByUsernameLikeIgnoreCase(String username);
-	
-	User findByUsername(String username);
-	
+	@Query("SELECT u FROM User u WHERE length(u.username) > ?1")
+	List<User> lengthQuery(int length);
+
 	User findById(int id);
+
+	User findByUsername(String username);
+
+	User findByUsernameLikeIgnoreCase(String username);
 
 	User findByUsernameContaining(String contains);
 
-	@Query("SELECT u FROM User u WHERE length(u.username) > ?1")
-	List<User> lengthQuery(int length);
 }
