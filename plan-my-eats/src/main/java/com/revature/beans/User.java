@@ -23,8 +23,8 @@ public class User
 
 	@Id
 	@Column(name="USER_ID")
-	@SequenceGenerator(name="U_SEQ_GEN", sequenceName="U_SEQ", allocationSize=1)
-	@GeneratedValue(generator="U_SEQ_GEN", strategy=GenerationType.SEQUENCE)
+	@SequenceGenerator(name="eu_SEQ_GEN", sequenceName="eu_SEQ", allocationSize=1)
+	@GeneratedValue(generator="eu_SEQ_GEN", strategy=GenerationType.SEQUENCE)
 	private int userId;
 	@Column(name="PREFERENCE_STRING")
 	private String preference;
