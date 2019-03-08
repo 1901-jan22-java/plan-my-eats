@@ -41,10 +41,10 @@ public class User
 	@Column(nullable=false, name="WEIGHT")
 	private double weight;
 	@ManyToMany(cascade=CascadeType.ALL, fetch=FetchType.EAGER)
-	@JoinTable(name="recipes", joinColumns=@JoinColumn(name="USER_ID"), inverseJoinColumns=@JoinColumn(name="RECIPE_ID"))
+	@JoinTable(name="user_recipes", joinColumns=@JoinColumn(name="USER_ID"), inverseJoinColumns=@JoinColumn(name="RECIPE_ID"))
 	private Set<Recipe> recipes = new HashSet<Recipe>();
 	@ManyToMany(cascade=CascadeType.ALL, fetch=FetchType.EAGER)
-	@JoinTable(name="restuarant", joinColumns=@JoinColumn(name="USER_ID"), inverseJoinColumns=@JoinColumn(name="RESTUARANT_ID"))
+	@JoinTable(name="user_restuarants", joinColumns=@JoinColumn(name="USER_ID"), inverseJoinColumns=@JoinColumn(name="RESTUARANT_ID"))
 	private Set<Restuarant> restaurants = new HashSet<Restuarant>();
 	public User() { }
 	public User(String preference, String username, String password, int height, int age, String gender,
