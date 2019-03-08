@@ -3,7 +3,7 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.revature</groupId>
-	<artifactId>plan-my-eats</artifactId>
+	<artifactId>planstuff</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>war</packaging>
 
@@ -47,18 +47,15 @@
 			<groupId>commons-logging</groupId>
 			<artifactId>commons-logging</artifactId>
 		</dependency>
-
 		<!-- if you need to reinstall the jdbc jar to your .m2 folder open cmd 
 			prompt, cd into jars folder or wherever you have the jar installed, run the 
 			following mvn install:install-file -Dfile=ojdbc7.jar -DgroupId=com.oracle 
 			-DartifactId=ojdbc7 -Dversion=11.2.0 -Dpackaging=jar -->
-
 		<dependency>
 			<groupId>com.oracle</groupId>
 			<artifactId>ojdbc7</artifactId>
-			<version>11.2.0</version>
+			<version>12.1.0</version>
 		</dependency>
-
 		<dependency>
 			<groupId>org.hibernate</groupId>
 			<artifactId>hibernate-core</artifactId>
@@ -86,5 +83,9 @@
 			<artifactId>spring-aspects</artifactId>
 		</dependency>
 
+		<dependency>
+			<groupId>org.aspectj</groupId>
+			<artifactId>aspectjtools</artifactId>
+		</dependency>
 	</dependencies>
 </project>

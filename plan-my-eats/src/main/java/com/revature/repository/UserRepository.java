@@ -10,13 +10,10 @@ import org.springframework.stereotype.Repository;
 
 import com.revature.beans.User;
 
-@Repository("userRepository")
-public interface UserRepository extends JpaRepository<User, Integer>{
+@Repository
+public interface UserRepository extends JpaRepository<User,Integer>{
 
-	User findByUsernameLikeIgnoreCase(String username);
-	
-	User findByUsernameContaining(String contains);
-	
-	@Query("SELECT u FROM User u WHERE length(u.username) > ?1")
-	List<User> lengthQuery(int length);
+	@Query("SELECT u from User u WHERE u.username = ?1")
+	User findByUsername(String username);
+
 }
