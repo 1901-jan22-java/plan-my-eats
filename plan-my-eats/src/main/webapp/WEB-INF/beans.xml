@@ -28,11 +28,7 @@
 	<context:property-placeholder
 		location="/WEB-INF/db.properties" />
 
-<<<<<<< HEAD
-	<bean name="myDataSource"
-=======
 	<bean id="dataSource"
->>>>>>> dayZ
 		class="org.apache.commons.dbcp.BasicDataSource">
 		<property name="driverClassName" value="${db.driver}" />
 		<property name="url" value="${db.url}" />
@@ -40,11 +36,6 @@
 		<property name="password" value="${db.pwd}" />
 	</bean>
 
-<<<<<<< HEAD
-	<bean name="mySessionFactory"
-		class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
-		<property name="dataSource" ref="myDataSource" />
-=======
 	<bean id="hibernateJpaVendorAdapter"
 		class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter">
 	</bean>
@@ -54,15 +45,10 @@
 		class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
 		<property name="dataSource" ref="dataSource" />
 		<property name="jpaVendorAdapter" ref="hibernateJpaVendorAdapter" />
->>>>>>> dayZ
 		<property name="packagesToScan" value="com.revature" />
 		<property name="hibernateProperties">
 			<props>
 				<prop key="hibernate.dialect">org.hibernate.dialect.Oracle10gDialect</prop>
-<<<<<<< HEAD
-				<prop key="hibernate.hbm2ddl.auto">update</prop>
-=======
->>>>>>> dayZ
 				<prop key="hibernate.show_sql">true</prop>
 				<prop key="hibernate.format_sql">true</prop>
 				<prop key="hibernate.hbm2ddl.auto">create</prop>
@@ -74,16 +60,5 @@
 		class="org.springframework.orm.hibernate4.HibernateTransactionManager">
 		<property name="sessionFactory" ref="mySessionFactory" />
 	</bean>
-<<<<<<< HEAD
-
-	<!-- Enable Application to be Annotation Driven -->
-	<context:annotation-config />
-	<context:component-scan
-		base-package="com.revature"></context:component-scan>
-
-	<!-- Enable Spring to search for @Transactional -->
-	<tx:annotation-driven />
-=======
 	<jpa:repositories base-package="com.revature" />
->>>>>>> dayZ
 	</beans>
