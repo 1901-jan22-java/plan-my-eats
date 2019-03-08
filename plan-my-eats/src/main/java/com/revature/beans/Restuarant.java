@@ -21,12 +21,14 @@ public class Restuarant
 	private String name;
 	@Column(name="LOCATION")
 	private String location;
+	@Column(name="TYPE")
+	private String type;
 	public Restuarant() { }
-	public Restuarant(int restuarantId, String name, String location) {
+	public Restuarant(String name, String location, String type) {
 		super();
-		this.restuarantId = restuarantId;
 		this.name = name;
 		this.location = location;
+		this.type = type;
 	}
 	public int getRestuarantId() {
 		return restuarantId;
@@ -46,9 +48,18 @@ public class Restuarant
 	public void setLocation(String location) {
 		this.location = location;
 	}
+	public String getType() {
+		return type;
+	}
+	public void setType(String type) {
+		this.type = type;
+	}
 	@Override
 	public String toString() {
-		return "Restuarant [restuarantId=" + restuarantId + ", name=" + name + ", location=" + location + "]";
-	} 
+		return "Restuarant [restuarantId=" + restuarantId + ", name=" + name + ", location=" + location + ", type="
+				+ type + "]";
+	}
+	
+	
 	
 }
