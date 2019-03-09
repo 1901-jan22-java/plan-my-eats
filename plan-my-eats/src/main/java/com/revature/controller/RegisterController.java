@@ -14,24 +14,37 @@ import com.revature.beans.User;
 import com.revature.repository.UserService;
 
 @RestController
-@RequestMapping("/Register")
+@RequestMapping("/register")
 public class RegisterController {
 
 
 	@Autowired
 	UserService service;
 	// POST
-		@RequestMapping(method=RequestMethod.POST,
-				consumes=MediaType.APPLICATION_JSON_VALUE,
-				produces=MediaType.APPLICATION_JSON_VALUE)
-		public ResponseEntity<User> add(@RequestBody User user){
-			 //could add server side validation
-			User u = service.findByUsername(user.getUsername());
-			if(u==null) {
-				// good he did not exist before so he will be added 
-				return new ResponseEntity<User>(u, HttpStatus.OK);
-			}else {
-				return new ResponseEntity<User>(HttpStatus.CONFLICT);
-			}
+	@RequestMapping(method=RequestMethod.POST,
+			consumes=MediaType.APPLICATION_JSON_VALUE,
+			produces=MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<User> add(@RequestBody User user){
+		//could add server side validation
+		User u = service.findByUsername(user.getUsername());
+		System.out.println(user + " THIS WAS THE USER!!");
+		if(u==null) {
+			service.saveUser(user);
+			System.out.println(user);
+			return new ResponseEntity<User>(user, HttpStatus.OK);
+		}else {
+			return new ResponseEntity<User>(HttpStatus.CONFLICT);
 		}
+	}
+	
+	@RequestMapping(method=RequestMethod.GET) 
+	public ResponseEntity<String> showInfo() {
+		return new ResponseEntity<String>("This means something is at least working!", HttpStatus.OK);
+	}
+	
+	@RequestMapping(method=RequestMethod.PUT)
+	public ResponseEntity<User> addPreference(@RequestBody User user) {
+		return null;
+	}
+
 }

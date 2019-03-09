@@ -17,15 +17,22 @@ public class Restuarant
 	@SequenceGenerator(name="RES_SEQ_GEN", sequenceName="RES_SEQ", allocationSize=1)
 	@GeneratedValue(generator="RES_SEQ_GEN", strategy=GenerationType.SEQUENCE)
 	private int restuarantId;
+	
 	@Column(name="NAME")
 	private String name;
+	
 	@Column(name="LOCATION")
 	private String location;
+	
 	@Column(name="TYPE")
 	private String type;
+	
+	@Column(name="IMAGE_REF")
+	private String imgRef;
+	
 	public Restuarant() { }
+	
 	public Restuarant(String name, String location, String type) {
-		super();
 		this.name = name;
 		this.location = location;
 		this.type = type;

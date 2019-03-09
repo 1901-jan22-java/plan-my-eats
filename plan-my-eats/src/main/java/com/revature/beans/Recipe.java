@@ -17,17 +17,22 @@ public class Recipe
 	@SequenceGenerator(name="REC_SEQ_GEN", sequenceName="REC_SEQ", allocationSize=1)
 	@GeneratedValue(generator="REC_SEQ_GEN", strategy=GenerationType.SEQUENCE)
 	private int recipeId;
+	
 	@Column(name="INGREDIENTS")
 	private String ingredients;
+	
 	@Column(name="NAME")
 	private String recipeName;
+	
 	@Column(name="CALORIES")
 	private int calories;
+	
 	@Column(name="TYPES")
 	private String types;
+	
 	public Recipe() { }
+	
 	public Recipe(String ingredients, String recipeName, int calories, String types) {
-		super();
 		this.ingredients = ingredients;
 		this.recipeName = recipeName;
 		this.calories = calories;
