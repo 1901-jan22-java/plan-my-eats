@@ -18,13 +18,14 @@ import javax.persistence.Table;
 import org.springframework.stereotype.Component;
 
 @Entity
-@Table(name = "USERS")
+@Table(name = "PME_USERS")
+@Component
 public class User {
 
 	@Id
 	@Column(name = "USER_ID")
-	@SequenceGenerator(name = "U_SEQ_GEN", sequenceName = "U_SEQ", allocationSize = 1)
-	@GeneratedValue(generator = "U_SEQ_GEN", strategy = GenerationType.SEQUENCE)
+	@SequenceGenerator(name = "PME_U_SEQ_GEN", sequenceName = "PME_U_SEQ", allocationSize = 1)
+	@GeneratedValue(generator = "PME__SEQ_GEN", strategy = GenerationType.SEQUENCE)
 	private int userId;
 
 	@Column(nullable = false, unique = true, name = "USERNAME")

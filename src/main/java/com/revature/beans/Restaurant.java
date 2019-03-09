@@ -9,29 +9,30 @@ import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="RESTAURANTS")
-public class Restaurant 
-{
+@Table(name = "PME_RESTAURANTS")
+public class Restaurant {
+
 	@Id
 	@Column(name = "RESTAURANT_ID")
 	@SequenceGenerator(name = "PME_RES_SEQ_GEN", sequenceName = "PME_RES_SEQ", allocationSize = 1)
 	@GeneratedValue(generator = "PME_RES_SEQ_GEN", strategy = GenerationType.SEQUENCE)
 	private int restuarantId;
-	
-	@Column(name="NAME")
+
+	@Column(name = "NAME")
 	private String name;
-	
-	@Column(name="LOCATION")
+
+	@Column(name = "LOCATION")
 	private String location;
-	
-	@Column(name="TYPE")
+
+	@Column(name = "TYPE")
 	private String type;
-	
-	@Column(name="IMAGE_REF")
+
+	@Column(name = "IMAGE_REF")
 	private String imgRef;
-	
-	public Restaurant() { }
-	
+
+	public Restaurant() {
+	}
+
 	public Restaurant(String name, String location, String type) {
 		this.name = name;
 		this.location = location;
@@ -61,18 +62,19 @@ public class Restaurant
 	public void setLocation(String location) {
 		this.location = location;
 	}
+
 	public String getType() {
 		return type;
 	}
+
 	public void setType(String type) {
 		this.type = type;
 	}
+
 	@Override
 	public String toString() {
 		return "Restuarant [restuarantId=" + restuarantId + ", name=" + name + ", location=" + location + ", type="
 				+ type + "]";
 	}
-	
-	
-	
+
 }

@@ -1,9 +1,9 @@
-package com.revature.App;
+package com.revature.app;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.revature.beans.User;
-import com.revature.repository.UserService;
+import com.revature.service.UserService;
 
 public class App {
 	
@@ -16,4 +16,5 @@ public class App {
 //		users.add(new User("spicy","ZIZI","nah",6,20,"Male",155.0));
 		service.saveUser(u);
 	}
+	
 }

@@ -7,7 +7,7 @@ import org.springframework.stereotype.Repository;
 import com.revature.beans.User;
 
 @Repository
-public interface UserRepository extends JpaRepository<User,Integer>{
+public interface UserRepository extends JpaRepository<User, Integer> {
 
 	@Query("SELECT u FROM User u WHERE length(u.username) > ?1")
 	List<User> lengthQuery(int length);
