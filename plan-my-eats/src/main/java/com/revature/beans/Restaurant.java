@@ -10,7 +10,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name="RESTUARANTS")
-public class Restuarant 
+public class Restaurant 
 {
 	@Id
 	@Column(name="RESTUARANT_ID")
@@ -30,9 +30,9 @@ public class Restuarant
 	@Column(name="IMAGE_REF")
 	private String imgRef;
 	
-	public Restuarant() { }
+	public Restaurant() { }
 	
-	public Restuarant(String name, String location, String type) {
+	public Restaurant(String name, String location, String type) {
 		this.name = name;
 		this.location = location;
 		this.type = type;

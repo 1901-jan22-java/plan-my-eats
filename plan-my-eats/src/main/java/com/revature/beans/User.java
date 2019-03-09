@@ -50,7 +50,7 @@ public class User
 	
 	@ManyToMany(cascade=CascadeType.ALL, fetch=FetchType.EAGER)
 	@JoinTable(name="RESTAURANT_HISTORY", joinColumns=@JoinColumn(name="USER_ID"), inverseJoinColumns=@JoinColumn(name="RESTUARANT_ID"))
-	private Set<Restuarant> restaurants = new HashSet<Restuarant>();
+	private Set<Restaurant> restaurants = new HashSet<Restaurant>();
 	
 	@ManyToMany(cascade=CascadeType.ALL, fetch=FetchType.EAGER)
 	@JoinTable(name="PREFERENCE_PROFILE", joinColumns=@JoinColumn(name="USER_ID"), inverseJoinColumns=@JoinColumn(name="PREF_ID"))
@@ -112,6 +112,30 @@ public class User
 	}
 	public void setWeight(double weight) {
 		this.weight = weight;
+	}
+
+	public Set<Recipe> getRecipes() {
+		return recipes;
+	}
+
+	public void setRecipes(Set<Recipe> recipes) {
+		this.recipes = recipes;
+	}
+
+	public Set<Restaurant> getRestaurants() {
+		return restaurants;
+	}
+
+	public void setRestaurants(Set<Restaurant> restaurants) {
+		this.restaurants = restaurants;
+	}
+
+	public Set<Preferences> getPreferences() {
+		return preferences;
+	}
+
+	public void setPreferences(Set<Preferences> preferences) {
+		this.preferences = preferences;
 	}
 
 	@Override
