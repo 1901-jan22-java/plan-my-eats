@@ -25,10 +25,6 @@ static List<User>users = new ArrayList<User>();
 private UserRepository repo;
 
 	
-	static {
-		users.add(new User("chocolate","dayZ666","iamthebomb",5,22,"Female",105.0));
-		users.add(new User("spicy","ZIZI","nah",6,20,"Male",155.0));
-	}
 	public User saveUser(User u) {
 		repo.save(u);
 		return u;

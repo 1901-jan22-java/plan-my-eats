@@ -16,15 +16,12 @@
 
 <mvc:annotation-driven></mvc:annotation-driven>	
 <tx:annotation-driven />
-<mvc:cors>
-	<mvc:mapping path="/**" />
-</mvc:cors>
 
 	<!-- tell spring data where to look for repository (DAO) -->
 
 
-	 <!-- so that we don't have to push up sensitive db info must name properties 
-		db.X --> 
+	<!-- so that we don't have to push up sensitive db info must name properties 
+		db.X -->
 	<context:property-placeholder
 		location="/WEB-INF/db.properties" />
 
@@ -35,6 +32,9 @@
 		<property name="username" value="${db.username}" />
 		<property name="password" value="${db.pwd}" />
 	</bean>
+	<!-- spring data is not natively compatible with hibernate it is compatible 
+		with JPA, and in turn any "vendor" of an ORM tool that is JPA compliant however 
+		we need to use a vendor adapter -->
 
 	<bean id="hibernateJpaVendorAdapter"
 		class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter">
@@ -46,7 +46,7 @@
 		<property name="dataSource" ref="dataSource" />
 		<property name="jpaVendorAdapter" ref="hibernateJpaVendorAdapter" />
 		<property name="packagesToScan" value="com.revature" />
-		<property name="hibernateProperties">
+		<property name="jpaProperties">
 			<props>
 				<prop key="hibernate.dialect">org.hibernate.dialect.Oracle10gDialect</prop>
 				<prop key="hibernate.show_sql">true</prop>
@@ -55,10 +55,11 @@
 			</props>
 		</property>
 	</bean>
-
-	<bean name="transactionManager"
-		class="org.springframework.orm.hibernate4.HibernateTransactionManager">
-		<property name="sessionFactory" ref="mySessionFactory" />
+	
+	<bean id="transactionManager"
+		class="org.springframework.orm.jpa.JpaTransactionManager">
+		<property name="entityManagerFactory" ref="entityManagerFactory"/>
+			
 	</bean>
 	<jpa:repositories base-package="com.revature" />
 	</beans>
