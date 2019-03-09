@@ -29,7 +29,6 @@ public class LoginController {
 	    method=RequestMethod.GET,
 		produces=MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<User> findByUsername(@PathVariable String username) {
-		
 		// I guess this is all i need but how do we maintain session ? with this user ?? to be revealed later 
 		User u = service.findByUsername(username);
 		
