@@ -8,31 +8,34 @@ import javax.persistence.Id;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
-import org.springframework.stereotype.Component;
-
 @Entity
-@Table(name = "PME_RESTAURANTS")
-@Component
-public class Restuarant {
-	
+@Table(name="RESTAURANTS")
+public class Restaurant 
+{
 	@Id
 	@Column(name = "RESTAURANT_ID")
 	@SequenceGenerator(name = "PME_RES_SEQ_GEN", sequenceName = "PME_RES_SEQ", allocationSize = 1)
 	@GeneratedValue(generator = "PME_RES_SEQ_GEN", strategy = GenerationType.SEQUENCE)
 	private int restuarantId;
-	@Column(name = "NAME")
+	
+	@Column(name="NAME")
 	private String name;
-	@Column(name = "LOCATION")
+	
+	@Column(name="LOCATION")
 	private String location;
-
-	public Restuarant() {
-	}
-
-	public Restuarant(int restuarantId, String name, String location) {
-		super();
-		this.restuarantId = restuarantId;
+	
+	@Column(name="TYPE")
+	private String type;
+	
+	@Column(name="IMAGE_REF")
+	private String imgRef;
+	
+	public Restaurant() { }
+	
+	public Restaurant(String name, String location, String type) {
 		this.name = name;
 		this.location = location;
+		this.type = type;
 	}
 
 	public int getRestuarantId() {
@@ -58,10 +61,18 @@ public class Restuarant {
 	public void setLocation(String location) {
 		this.location = location;
 	}
-
+	public String getType() {
+		return type;
+	}
+	public void setType(String type) {
+		this.type = type;
+	}
 	@Override
 	public String toString() {
-		return "Restuarant [restuarantId=" + restuarantId + ", name=" + name + ", location=" + location + "]";
+		return "Restuarant [restuarantId=" + restuarantId + ", name=" + name + ", location=" + location + ", type="
+				+ type + "]";
 	}
-
+	
+	
+	
 }
