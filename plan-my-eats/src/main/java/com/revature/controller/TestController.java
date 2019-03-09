@@ -69,11 +69,8 @@ public class TestController {
 			
 			//Update user
 //			service.update(u);
-			new ResponseEntity<User>(u, HttpStatus.OK);
+			return new ResponseEntity<User>(u, HttpStatus.OK);
 		}		
-		
-		
-		return null;
 	}
 	
 	
