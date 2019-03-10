@@ -1,5 +1,7 @@
 package com.revature.controllers;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -15,28 +17,34 @@ import com.revature.beans.PlaceDetailsResponse;
 @CrossOrigin
 @RestController
 @RequestMapping("/api")
-public class ApiController {
+public class APIController {
+
+	private static Log log = LogFactory.getLog(APIController.class);
 
 	@RequestMapping(method = RequestMethod.POST, consumes = MediaType.TEXT_PLAIN_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<PlaceDetailsResponse> hitResApi(@RequestBody String params) {
 		String[] filters = params.split(";");
 		String apiUrl = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?&location=" + filters[0]
 				+ "&radius=1500&type=restaurant&keyword=" + filters[1] + "&key=AIzaSyAv7FWb5nyCLZw9fxrpkaKLc3NS1BRGeXM";
-		System.out.println(apiUrl);
+		log.info("API URL: " + apiUrl);
 
 		try {
+
 			RestTemplate restTemplate = new RestTemplate();
 			ResponseEntity<PlaceDetailsResponse> responseEntity = restTemplate.getForEntity(apiUrl,
 					PlaceDetailsResponse.class);
 			PlaceDetailsResponse restaurants = responseEntity.getBody();
+
 			if (responseEntity.getStatusCode().toString().equals("200")) {
 				return new ResponseEntity<PlaceDetailsResponse>(restaurants, HttpStatus.OK);
 			} else {
 				return new ResponseEntity<PlaceDetailsResponse>(HttpStatus.BAD_REQUEST);
 			}
 
-		} catch (Exception theException) {
-			theException.printStackTrace();
+		} catch (Exception e) {
+			log.error("", e);
+			// or we can do this
+			// log.error(e);
 		}
 		return new ResponseEntity<PlaceDetailsResponse>(HttpStatus.BAD_REQUEST);
 	}

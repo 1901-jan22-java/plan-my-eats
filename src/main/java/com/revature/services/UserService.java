@@ -4,11 +4,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.revature.beans.User;
 import com.revature.repositories.UserRepository;
 
-//@Service
+@Service
+@Transactional
 public class UserService {
 
 	private static List<User> users = new ArrayList<User>();

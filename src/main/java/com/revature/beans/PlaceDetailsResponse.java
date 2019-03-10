@@ -8,6 +8,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class PlaceDetailsResponse {
+
 	@JsonProperty("results")
 	private List<PlaceDetails> results;
 
@@ -23,6 +24,7 @@ public class PlaceDetailsResponse {
 	public String toString() {
 		return "PlaceDetailsResponse [results=" + results + "]";
 	}
+
 }
 
 @JsonIgnoreProperties(ignoreUnknown = true)

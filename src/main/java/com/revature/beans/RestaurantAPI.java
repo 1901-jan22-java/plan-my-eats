@@ -1,14 +1,13 @@
-package com.revature.controllers;
+package com.revature.beans;
 
-import org.springframework.stereotype.Controller;
+public class RestaurantAPI {
 
-@Controller
-public class RestaurantApi {
 	private String results;
-	
-	public RestaurantApi() {}
 
-	public RestaurantApi(String results) {
+	public RestaurantAPI() {
+	}
+
+	public RestaurantAPI(String results) {
 		this.results = results;
 	}
 
@@ -24,6 +23,5 @@ public class RestaurantApi {
 	public String toString() {
 		return "RestaurantApi [results=" + results + "]";
 	}
-	
-	
+
 }

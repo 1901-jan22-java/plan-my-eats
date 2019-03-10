@@ -9,8 +9,8 @@ import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "PME_USER_PREFERENCES")
-public class Preferences {
+@Table(name = "PME_USER_PREFERENCE")
+public class Preference {
 
 	@Id
 	@Column(name = "PREF_ID")
@@ -21,10 +21,10 @@ public class Preferences {
 	@Column(name = "NAME")
 	private String name;
 
-	public Preferences() {
+	public Preference() {
 	}
 
-	public Preferences(String name) {
+	public Preference(String name) {
 		super();
 		this.name = name;
 	}
