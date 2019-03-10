@@ -1,10 +1,10 @@
 package com.revature.repository;
 
+import org.springframework.data.repository.query.Param;
 
-
-import com.revature.beans.Restuarant;
+import com.revature.beans.Restaurant;
 import com.revature.beans.User;
-
+import org.springframework.data.jpa.repository.Modifying;
 import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -18,4 +18,42 @@ public interface UserRepository extends JpaRepository<User,Integer>{
 	User findByUsername(String username);
 
 
+	@Query(value="SELECT u from User WHERE u.restaurant LIKE '%':restaurant'%'")
+	List<User> findByRestaurant(@Param("restaurant")String restaurant);
+	
+	@Query(value="SELECT u from User WHERE u.recipe LIKE '%':recipe'%'")
+	List<User> findByRecipe(@Param("recipe")String recipe);
+	
+	
+   @Modifying
+   @Query("update User u set u.preference=?1 WHERE u.username = ?2")
+    User setUserPreferenceByUsername(String preference,String username);
+   
+   @Modifying
+   @Query("update User u set u.height=?1 WHERE u.username = ?2")
+    User setUserHeightByUsername(int height,String username);
+   
+   @Modifying
+   @Query("update User u set u.weight=?1 WHERE u.username = ?2")
+    User setUserWeightByUsername(double weight,String username);
+   
+   
+   @Modifying
+   @Query("update User u set u.age=?1 WHERE u.username = ?2")
+    User setUserAgeByUsername(int age,String username);
+   
+   @Modifying
+   @Query("update User u set u.gender=?1 WHERE u.username = ?2")
+    User setUserGenderByUsername(String gender,String username);
+   
+   @Modifying
+   @Query("update User u set u.height=?1,u.weight=?2,u.gender=?3,u.age=?4 WHERE u.username = ?5")
+    User setUserInfoByUsername(int height, double weight, String gender, int age,String username);
+   
+   @Modifying
+   @Query("update User u set u.preference =?1 u.height=?2,u.weight=?3,u.gender=?4,u.age=?5 WHERE u.username = ?6")
+    User setUserAllInfoByUsername(String preference,int height, double weight, String gender, int age,String username);
 }
+
+
+

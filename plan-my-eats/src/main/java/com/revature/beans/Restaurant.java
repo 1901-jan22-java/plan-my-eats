@@ -9,30 +9,36 @@ import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="RESTUARANTS")
-public class Restuarant 
+@Table(name="RESTAURANTS")
+public class Restaurant 
 {
 	@Id
 	@Column(name="RESTUARANT_ID")
 	@SequenceGenerator(name="RES_SEQ_GEN", sequenceName="RES_SEQ", allocationSize=1)
 	@GeneratedValue(generator="RES_SEQ_GEN", strategy=GenerationType.SEQUENCE)
-	private int restuarantId;
+	private int restaurantId;
 	@Column(name="NAME")
 	private String name;
 	@Column(name="LOCATION")
 	private String location;
-	public Restuarant() { }
-	public Restuarant(int restuarantId, String name, String location) {
+	@Column(name="TYPE")
+	private String type;
+	
+	@Column(name="IMAGE_REF")
+	private String imgRef;
+	public Restaurant() { }
+	public Restaurant(int restaurantId, String name, String location,String type) {
 		super();
-		this.restuarantId = restuarantId;
+		
 		this.name = name;
 		this.location = location;
+		this.type = type;
 	}
 	public int getRestuarantId() {
-		return restuarantId;
+		return restaurantId;
 	}
 	public void setRestuarantId(int restuarantId) {
-		this.restuarantId = restuarantId;
+		this.restaurantId = restuarantId;
 	}
 	public String getName() {
 		return name;
@@ -46,9 +52,16 @@ public class Restuarant
 	public void setLocation(String location) {
 		this.location = location;
 	}
+
+	public String getType() {
+		return type;
+	}
+	public void setType(String type) {
+		this.type = type;
+	}
 	@Override
 	public String toString() {
-		return "Restuarant [restuarantId=" + restuarantId + ", name=" + name + ", location=" + location + "]";
+		return "Restuarant [restuarantId=" + restaurantId + ", name=" + name + ", location=" + location + "]";
 	} 
 	
 }

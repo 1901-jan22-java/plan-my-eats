@@ -11,9 +11,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
-
+import org.springframework.web.bind.annotation.RequestBody;
 import com.revature.beans.User;
-import com.revature.repository.UserService;
+import com.revature.service.UserService;
 
 
 
@@ -45,6 +45,16 @@ public class LoginController {
 		}
 	}
 	
+	@RequestMapping(method=RequestMethod.POST, consumes=MediaType.APPLICATION_JSON_VALUE, produces=MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<User> login(@RequestBody User user) {
+		User u = service.findByUsername(user.getUsername());
+		if(u == null || !u.getPassword().equals(user.getPassword())) {
+			//Username does not exist or password is incorrect
+			return new ResponseEntity<User>(HttpStatus.NO_CONTENT); 
+		} else  {
+			return new ResponseEntity<User>(u, HttpStatus.OK);
+		}
+	}
 	
 	
 	

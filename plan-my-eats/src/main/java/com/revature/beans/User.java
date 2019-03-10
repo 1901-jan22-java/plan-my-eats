@@ -41,19 +41,18 @@ public class User
 	@Column(nullable=false, name="WEIGHT")
 	private double weight;
 
-	/*
-	 * @ManyToMany(cascade=CascadeType.ALL, fetch=FetchType.EAGER)
-	 * 
-	 * @JoinTable(name="user_recipes", joinColumns=@JoinColumn(name="USER_ID"),
-	 * inverseJoinColumns=@JoinColumn(name="RECIPE_ID")) private Set<Recipe> recipes
-	 * = new HashSet<Recipe>();
-	 * 
-	 * @ManyToMany(cascade=CascadeType.ALL, fetch=FetchType.EAGER)
-	 * 
-	 * @JoinTable(name="user_restuarants", joinColumns=@JoinColumn(name="USER_ID"),
-	 * inverseJoinColumns=@JoinColumn(name="RESTUARANT_ID")) private Set<Restuarant>
-	 * restaurants = new HashSet<Restuarant>();
-	 */
+
+	@ManyToMany(cascade=CascadeType.ALL, fetch=FetchType.EAGER)
+	@JoinTable(name="RECIPE_HISTORY", joinColumns=@JoinColumn(name="USER_ID"), inverseJoinColumns=@JoinColumn(name="RECIPE_ID"))
+	private Set<Recipe> recipes = new HashSet<Recipe>();
+	
+	@ManyToMany(cascade=CascadeType.ALL, fetch=FetchType.EAGER)
+	@JoinTable(name="RESTAURANT_HISTORY", joinColumns=@JoinColumn(name="USER_ID"), inverseJoinColumns=@JoinColumn(name="RESTUARANT_ID"))
+	private Set<Restaurant> restaurants = new HashSet<Restaurant>();
+	
+	@ManyToMany(cascade=CascadeType.ALL, fetch=FetchType.EAGER)
+	@JoinTable(name="PREFERENCE_PROFILE", joinColumns=@JoinColumn(name="USER_ID"), inverseJoinColumns=@JoinColumn(name="PREF_ID"))
+	private Set<Preferences> preferences = new HashSet<Preferences>();
 	public User() { }
 	public User(String preference, String username, String password, int height, int age, String gender,
 			double weight) {
@@ -116,19 +115,7 @@ public class User
 	public void setWeight(double weight) {
 		this.weight = weight;
 	}
-	/*
-	 * public Set<Recipe> getRecipes() { return recipes; } public void
-	 * setRecipes(Set<Recipe> recipes) { this.recipes = recipes; } public
-	 * Set<Restuarant> getRestaurants() { return restaurants; } public void
-	 * setRestaurants(Set<Restuarant> restaurants) { this.restaurants = restaurants;
-	 * }
-	 * 
-	 * @Override public String toString() { return "User [userId=" + userId +
-	 * ", preference=" + preference + ", username=" + username + ", password=" +
-	 * password + ", height=" + height + ", age=" + age + ", gender=" + gender +
-	 * ", weight=" + weight + ", recipes=" + recipes + ", restaurants=" +
-	 * restaurants + "]"; }
-	 */
+	
 	
 	
 }
