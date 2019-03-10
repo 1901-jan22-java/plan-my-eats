@@ -1,7 +1,10 @@
-drop table pokemon;
-drop table associates;
-drop table user_recipes;
-drop table user_restuarants;
+select * from pme_preference_profile;
+select * from pme_preferences;
 
-select * from following;
-select * from pokemon;
+select * from pme_recipe;
+select * from pme_recipe_history;
+
+select * from pme_restaurants;
+select * from pme_restaurant_history;
+
+select * from pme_users;

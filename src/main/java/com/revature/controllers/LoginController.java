@@ -23,7 +23,7 @@ public class LoginController {
 	// find user by user name and then save to the session
 	@RequestMapping(value = "/{username}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<User> findByUsername(@PathVariable String username) {
-		
+
 		// I guess this is all i need but how do we maintain session ? with this user ??
 		// to be revealed later
 		User u = service.findByUsername(username);
@@ -37,7 +37,7 @@ public class LoginController {
 			return new ResponseEntity<User>(u, HttpStatus.OK);
 
 		}
-		
+
 	}
 
 	@RequestMapping(method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)

@@ -25,7 +25,7 @@ public class User {
 	@Id
 	@Column(name = "USER_ID")
 	@SequenceGenerator(name = "PME_U_SEQ_GEN", sequenceName = "PME_U_SEQ", allocationSize = 1)
-	@GeneratedValue(generator = "PME__SEQ_GEN", strategy = GenerationType.SEQUENCE)
+	@GeneratedValue(generator = "PME_U_SEQ_GEN", strategy = GenerationType.SEQUENCE)
 	private int userId;
 
 	@Column(nullable = false, unique = true, name = "USERNAME")
@@ -47,15 +47,15 @@ public class User {
 	private double weight;
 
 	@ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-	@JoinTable(name = "RECIPE_HISTORY", joinColumns = @JoinColumn(name = "USER_ID"), inverseJoinColumns = @JoinColumn(name = "RECIPE_ID"))
+	@JoinTable(name = "PME_RECIPE_HISTORY", joinColumns = @JoinColumn(name = "USER_ID"), inverseJoinColumns = @JoinColumn(name = "RECIPE_ID"))
 	private Set<Recipe> recipes = new HashSet<Recipe>();
 
 	@ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-	@JoinTable(name = "RESTAURANT_HISTORY", joinColumns = @JoinColumn(name = "USER_ID"), inverseJoinColumns = @JoinColumn(name = "RESTUARANT_ID"))
+	@JoinTable(name = "PME_RESTAURANT_HISTORY", joinColumns = @JoinColumn(name = "USER_ID"), inverseJoinColumns = @JoinColumn(name = "RESTUARANT_ID"))
 	private Set<Restaurant> restaurants = new HashSet<Restaurant>();
 
 	@ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-	@JoinTable(name = "PREFERENCE_PROFILE", joinColumns = @JoinColumn(name = "USER_ID"), inverseJoinColumns = @JoinColumn(name = "PREF_ID"))
+	@JoinTable(name = "PME_PREFERENCE_PROFILE", joinColumns = @JoinColumn(name = "USER_ID"), inverseJoinColumns = @JoinColumn(name = "PREF_ID"))
 	private Set<Preference> preferences = new HashSet<Preference>();
 
 	public User() {

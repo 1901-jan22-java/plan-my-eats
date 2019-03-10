@@ -1,32 +1,35 @@
 package com.revature.services;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.revature.beans.Preference;
 import com.revature.repositories.PreferenceRepository;
 
 @Service
+@Transactional
 public class PreferenceService {
 
-	private static List<Preference> preferences = new ArrayList<>();
-
-	static {
-		preferences.add(new Preference("Vegetarian"));
-		preferences.add(new Preference("Vegan"));
-		preferences.add(new Preference("Pescatarian"));
-		preferences.add(new Preference("Chinese"));
-		preferences.add(new Preference("Indian"));
-	}
-	
 	@Autowired
 	PreferenceRepository repo;
+
+	public void save(Preference newPref) {
+		repo.save(newPref);
+	}
+
+	public void saveAll(Iterable<Preference> newPrefs) {
+		repo.save(newPrefs);
+	}
 	
 	public Preference getById(int id) {
 		return repo.getPreferenceByPrefId(id);
 	}
-	
+
+	public List<Preference> getAll() {
+		return repo.findAll();
+	}
+
 }

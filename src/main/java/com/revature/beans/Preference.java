@@ -8,8 +8,11 @@ import javax.persistence.Id;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
+import org.springframework.stereotype.Component;
+
 @Entity
-@Table(name = "PME_USER_PREFERENCE")
+@Table(name = "PME_PREFERENCES")
+@Component
 public class Preference {
 
 	@Id

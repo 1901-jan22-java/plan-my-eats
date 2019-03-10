@@ -1,6 +1,5 @@
 package com.revature.services;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,14 +13,11 @@ import com.revature.repositories.UserRepository;
 @Transactional
 public class UserService {
 
-	private static List<User> users = new ArrayList<User>();
-
 	@Autowired
 	UserRepository repo;
-
-	static {
-		users.add(new User("chocolate", "dayZ666", "iamthebomb", 5, 22, "Female", 105.0));
-		users.add(new User("spicy", "ZIZI", "nah", 6, 20, "Male", 155.0));
+	
+	public List<User> getAll() {
+		return repo.findAll();
 	}
 
 	public User saveUser(User u) {
@@ -29,6 +25,10 @@ public class UserService {
 		return u;
 	}
 
+	public void saveAll(Iterable<User> list) {
+		repo.save(list);
+	}
+	
 	public User findById(int id) {
 		return repo.findByUserId(id);
 	}
