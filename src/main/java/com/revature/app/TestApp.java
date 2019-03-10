@@ -3,9 +3,9 @@ package com.revature.app;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.revature.beans.User;
-import com.revature.service.UserService;
+import com.revature.services.UserService;
 
-public class App {
+public class TestApp {
 	
 	@Autowired
 	UserService service;

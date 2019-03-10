@@ -1,4 +1,4 @@
-package com.revature.beans;
+package com.revature.controllers;
 
 import org.springframework.stereotype.Controller;
 

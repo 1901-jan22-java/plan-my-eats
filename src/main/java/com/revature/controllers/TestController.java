@@ -1,4 +1,4 @@
-package com.revature.controller;
+package com.revature.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -16,7 +16,7 @@ import com.revature.beans.Preferences;
 import com.revature.beans.Recipe;
 import com.revature.beans.Restaurant;
 import com.revature.beans.User;
-import com.revature.service.UserService;
+import com.revature.services.UserService;
 
 @CrossOrigin
 @RestController

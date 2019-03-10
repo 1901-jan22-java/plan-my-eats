@@ -9,7 +9,6 @@ import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 @Entity
-<<<<<<< HEAD:src/main/java/com/revature/beans/Restaurant.java
 @Table(name = "PME_RESTAURANTS")
 public class Restaurant {
 
@@ -17,26 +16,12 @@ public class Restaurant {
 	@Column(name = "RESTAURANT_ID")
 	@SequenceGenerator(name = "PME_RES_SEQ_GEN", sequenceName = "PME_RES_SEQ", allocationSize = 1)
 	@GeneratedValue(generator = "PME_RES_SEQ_GEN", strategy = GenerationType.SEQUENCE)
-=======
-@Table(name="RESTAURANTS")
-public class Restaurant 
-{
-	@Id
-	@Column(name="RESTAURANT_ID")
-	@SequenceGenerator(name="RES_SEQ_GEN", sequenceName="RES_SEQ", allocationSize=1)
-	@GeneratedValue(generator="RES_SEQ_GEN", strategy=GenerationType.SEQUENCE)
->>>>>>> Edwin:plan-my-eats/src/main/java/com/revature/beans/Restaurant.java
 	private int restuarantId;
 
 	@Column(name = "NAME")
 	private String name;
-<<<<<<< HEAD:src/main/java/com/revature/beans/Restaurant.java
-
-	@Column(name = "LOCATION")
-=======
 	
 	@Column(name="ADDRESS")
->>>>>>> Edwin:plan-my-eats/src/main/java/com/revature/beans/Restaurant.java
 	private String location;
 
 	@Column(name = "TYPE")

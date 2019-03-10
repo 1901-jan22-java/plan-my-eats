@@ -1,4 +1,4 @@
-package com.revature.service;
+package com.revature.services;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -6,7 +6,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.revature.beans.User;
-import com.revature.repository.UserRepository;
+import com.revature.repositories.UserRepository;
 
 //@Service
 public class UserService {
