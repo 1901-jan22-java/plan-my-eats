@@ -53,6 +53,9 @@ class RecipeDetails {
 	
 	@JsonProperty("calories")
 	private int calories;
+	
+	@JsonProperty("yield")
+	private int servings;
 
 	public String getName() {
 		return name;
@@ -76,6 +79,14 @@ class RecipeDetails {
 
 	public void setIngredients(List<String> ingredients) {
 		this.ingredients = ingredients;
+	}
+
+	public int getServings() {
+		return servings;
+	}
+
+	public void setServings(int servings) {
+		this.servings = servings;
 	}
 
 	@Override
