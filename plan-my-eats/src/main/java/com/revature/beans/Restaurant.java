@@ -9,11 +9,11 @@ import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="RESTUARANTS")
+@Table(name="RESTAURANTS")
 public class Restaurant 
 {
 	@Id
-	@Column(name="RESTUARANT_ID")
+	@Column(name="RESTAURANT_ID")
 	@SequenceGenerator(name="RES_SEQ_GEN", sequenceName="RES_SEQ", allocationSize=1)
 	@GeneratedValue(generator="RES_SEQ_GEN", strategy=GenerationType.SEQUENCE)
 	private int restuarantId;
@@ -21,7 +21,7 @@ public class Restaurant
 	@Column(name="NAME")
 	private String name;
 	
-	@Column(name="LOCATION")
+	@Column(name="ADDRESS")
 	private String location;
 	
 	@Column(name="TYPE")
