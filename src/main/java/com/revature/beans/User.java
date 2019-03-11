@@ -167,4 +167,11 @@ public class User {
 		this.preferences = preferences;
 	}
 
+	@Override
+	public String toString() {
+		return "User [userId=" + userId + ", username=" + username + ", password=" + password + ", height=" + height
+				+ ", age=" + age + ", gender=" + gender + ", weight=" + weight + ", recipes=" + recipes
+				+ ", restaurants=" + restaurants + ", preferences=" + preferences + "]";
+	}
+	
 }
