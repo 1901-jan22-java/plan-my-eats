@@ -30,7 +30,7 @@ public class RegisterController {
 			return new ResponseEntity<User>(HttpStatus.CONFLICT);
 		}
 	}
-
+	
 	@RequestMapping(method = RequestMethod.GET)
 	public ResponseEntity<String> showInfo() {
 		return new ResponseEntity<String>("This means something is at least working!", HttpStatus.OK);
