@@ -7,13 +7,14 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class RecipeDetailsResults {
+
 	@JsonProperty("hits")
 	private List<RecipeResults> hits;
-	
+
 	public List<RecipeResults> getHits() {
 		return hits;
 	}
-	
+
 	public void setHits(List<RecipeResults> hits) {
 		this.hits = hits;
 	}
@@ -22,10 +23,12 @@ public class RecipeDetailsResults {
 	public String toString() {
 		return "RecipeDetailsResults [hits=" + hits + "]";
 	}
+
 }
 
-@JsonIgnoreProperties(ignoreUnknown = true) 
+@JsonIgnoreProperties(ignoreUnknown = true)
 class RecipeResults {
+
 	@JsonProperty("recipe")
 	private RecipeDetails recipe;
 
@@ -41,19 +44,21 @@ class RecipeResults {
 	public String toString() {
 		return "RecipeResults [recipe=" + recipe + "]";
 	}
+
 }
 
-@JsonIgnoreProperties(ignoreUnknown = true) 
+@JsonIgnoreProperties(ignoreUnknown = true)
 class RecipeDetails {
+
 	@JsonProperty("label")
 	private String name;
-	
+
 	@JsonProperty("ingredientLines")
 	private List<String> ingredients;
-	
+
 	@JsonProperty("calories")
 	private int calories;
-	
+
 	@JsonProperty("yield")
 	private int servings;
 
@@ -91,7 +96,7 @@ class RecipeDetails {
 
 	@Override
 	public String toString() {
-		return "RecipeDetails [name=" + name  + ", calories=" + calories + "]";
+		return "RecipeDetails [name=" + name + ", calories=" + calories + "]";
 	}
-}
 
+}

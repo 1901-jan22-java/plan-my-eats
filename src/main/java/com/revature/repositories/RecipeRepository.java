@@ -11,21 +11,21 @@ import com.revature.beans.Recipe;
 public interface RecipeRepository extends JpaRepository<Recipe, Integer> {
 
 	// get by ingred, name, calories types
-	@Query("Select r from Recipe r WHERE r.ingredient = ?1")
-	List<Recipe> findRecipeByIngredient(String ingredient);
+	@Query("Select r from Recipe r WHERE r.ingredients = ?1")
+	List<Recipe> findRecipeByIngredients(String ingredients);
 
-	@Query("Select r from Recipe WHERE r.name = ?1")
-	Recipe findRecipeByName(String name);
+	@Query("Select r from Recipe r WHERE r.recipeName = ?1")
+	Recipe findRecipeByRecipeName(String name);
 
-	@Query("Select r from Recipe WHERE r.calories = ?1")
+	@Query("Select r from Recipe r WHERE r.calories = ?1")
 	List<Recipe> findRecipeByCalorie(int calories);
 
-	@Query("Select r from Recipe WHERE r.calories < ?1")
+	@Query("Select r from Recipe r WHERE r.calories < ?1")
 	List<Recipe> findRecipesLessThanCalories(int calories);
 
-	@Query("Select r from Recipe WHERE r.calories > ?1")
+	@Query("Select r from Recipe r WHERE r.calories > ?1")
 	List<Recipe> findRecipesGreaterThanCalories(int calories);
 
-	@Query("Select r from Recipe WHERE r.types LIKE '%':types'%'")
-	List<Recipe> findRecipesByTypes(String types);
+//	@Query("Select r from Recipe r WHERE r.types LIKE '%':types'%'")
+//	List<Recipe> findRecipesByTypes(String types);
 }

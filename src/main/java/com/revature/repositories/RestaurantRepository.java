@@ -19,5 +19,5 @@ public interface RestaurantRepository extends JpaRepository<Restaurant, Integer>
 
 	@Query("Select r from Restaurant r WHERE r.name = ?1")
 	Restaurant findByName(String name);
-	
+
 }

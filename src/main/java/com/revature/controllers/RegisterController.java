@@ -21,6 +21,7 @@ public class RegisterController {
 
 	@RequestMapping(method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<User> register(@RequestBody User user) {
+
 		User u = service.findByUsername(user.getUsername());
 
 		if (u == null) {
@@ -29,8 +30,9 @@ public class RegisterController {
 		} else {
 			return new ResponseEntity<User>(HttpStatus.CONFLICT);
 		}
+
 	}
-	
+
 	@RequestMapping(method = RequestMethod.GET)
 	public ResponseEntity<String> showInfo() {
 		return new ResponseEntity<String>("This means something is at least working!", HttpStatus.OK);

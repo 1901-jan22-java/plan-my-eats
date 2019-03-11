@@ -21,15 +21,15 @@ public class PreferenceController {
 	@Autowired
 	PreferenceService service;
 
-	@RequestMapping(method= RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<List<Preference>> getPreferences(){
+	@RequestMapping(method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<List<Preference>> getPreferences() {
 		return new ResponseEntity<List<Preference>>(service.getAll(), HttpStatus.OK);
 	}
 
-	@RequestMapping(method= RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<List<Preference>> postPreference(@RequestBody Preference newPref){
+	@RequestMapping(method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<List<Preference>> postPreference(@RequestBody Preference newPref) {
 		service.save(newPref);
 		return new ResponseEntity<List<Preference>>(service.getAll(), HttpStatus.OK);
 	}
-	
+
 }

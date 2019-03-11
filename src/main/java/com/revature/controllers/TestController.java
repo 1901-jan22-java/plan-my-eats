@@ -70,12 +70,15 @@ public class TestController {
 //			service.update(u);
 			return new ResponseEntity<User>(u, HttpStatus.OK);
 		}
+
 	}
 
 	static class UserPrefs {
+
 		public User user;
 		public Restaurant restaurants;
 		public Recipe recipes;
 		public Preference preferences;
+
 	}
 }

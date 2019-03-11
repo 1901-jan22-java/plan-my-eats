@@ -37,13 +37,13 @@ public class UserService {
 		return repo.findByUsername(username);
 	}
 
-	public List<User> findByRestauarnt(String restaurant) {
-		return repo.findByRestaurant(restaurant);
-	}
-
-	public List<User> findByRecipe(String recipe) {
-		return repo.findByRecipe(recipe);
-	}
+//	public List<User> findByRestauarnt(String restaurant) {
+//		return repo.findByRestaurants(restaurant);
+//	}
+//
+//	public List<User> findByRecipe(String recipe) {
+//		return repo.findByRecipes(recipe);
+//	}
 
 	public User updateUserGender(String gender, String username) {
 		return repo.setUserGenderByUsername(gender, username);
@@ -62,17 +62,17 @@ public class UserService {
 	}
 
 	// the method below will most likely change to append to strings
-	public User updateUserPreference(String preference, String username) {
-		return repo.setUserPreferenceByUsername(preference, username);
+	public User updateUserPreferences(String preference, String username) {
+		return repo.setUserPreferencesByUsername(preference, username);
 	}
 
 	public User updateUserInfo(int height, double weight, String gender, int age, String username) {
 		return repo.setUserInfoByUsername(height, weight, gender, age, username);
 	}
 
-	public User updateUserAllInfo(String preference, int height, double weight, String gender, int age,
-			String username) {
-		return repo.setUserAllInfoByUsername(preference, height, weight, gender, age, username);
-	}
+//	public User updateUserAllInfo(String preference, int height, double weight, String gender, int age,
+//			String username) {
+//		return repo.setUserAllInfoByUsername(preference, height, weight, gender, age, username);
+//	}
 
 }

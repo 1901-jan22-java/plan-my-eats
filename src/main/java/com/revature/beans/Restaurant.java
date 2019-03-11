@@ -37,16 +37,17 @@ public class Restaurant {
 		super();
 	}
 
-	public Restaurant(String name, String location, String type) { 
+	public Restaurant(String name, String location, String type) {
 		super();
-		
+
 		this.name = name;
 		this.location = location;
 		this.type = type;
 	}
-	public Restaurant(int restaurantId, String name, String location,String type) {
+
+	public Restaurant(int restaurantId, String name, String location, String type) {
 		super();
-		
+
 		this.restaurantId = restaurantId;
 		this.name = name;
 		this.location = location;

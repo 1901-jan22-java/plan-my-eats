@@ -20,12 +20,12 @@ public class RecipeService {
 		return repo.findOne(id);
 	}
 
-	public List<Recipe> getByIngredient(String ingredient) {
-		return repo.findRecipeByIngredient(ingredient);
+	public List<Recipe> getByIngredients(String ingredients) {
+		return repo.findRecipeByIngredients(ingredients);
 	}
 
 	public Recipe getRecipeByName(String name) {
-		return repo.findRecipeByName(name);
+		return repo.findRecipeByRecipeName(name);
 	}
 
 	public List<Recipe> getByCalories(int calories) {
@@ -40,7 +40,8 @@ public class RecipeService {
 		return repo.findRecipesGreaterThanCalories(calories);
 	}
 
-	public List<Recipe> getRecipesByTypes(String types) {
-		return repo.findRecipesByTypes(types);
-	}
+//	public List<Recipe> getRecipesByTypes(String types) {
+//		return repo.findRecipesByTypes(types);
+//	}
+	
 }
