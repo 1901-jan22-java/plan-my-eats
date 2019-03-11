@@ -12,11 +12,11 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 
-import com.revature.beans.User;
-import com.revature.beans.Restaurant;
-import com.revature.beans.Recipe;
 import com.revature.beans.Preferences;
-import com.revature.repository.UserService;
+import com.revature.beans.Recipe;
+import com.revature.beans.Restaurant;
+import com.revature.beans.User;
+import com.revature.service.UserService;
 
 @CrossOrigin
 @RestController

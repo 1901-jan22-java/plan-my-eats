@@ -16,14 +16,13 @@ public class Restaurant
 	@Column(name="RESTAURANT_ID")
 	@SequenceGenerator(name="RES_SEQ_GEN", sequenceName="RES_SEQ", allocationSize=1)
 	@GeneratedValue(generator="RES_SEQ_GEN", strategy=GenerationType.SEQUENCE)
-	private int restuarantId;
-	
-	@Column(name="NAME")
+	private int restaurantId;
+
 	private String name;
 	
 	@Column(name="ADDRESS")
 	private String location;
-	
+
 	@Column(name="TYPE")
 	private String type;
 	
@@ -38,10 +37,10 @@ public class Restaurant
 		this.type = type;
 	}
 	public int getRestuarantId() {
-		return restuarantId;
+		return restaurantId;
 	}
 	public void setRestuarantId(int restuarantId) {
-		this.restuarantId = restuarantId;
+		this.restaurantId = restuarantId;
 	}
 	public String getName() {
 		return name;
@@ -55,6 +54,7 @@ public class Restaurant
 	public void setLocation(String location) {
 		this.location = location;
 	}
+
 	public String getType() {
 		return type;
 	}
@@ -63,10 +63,7 @@ public class Restaurant
 	}
 	@Override
 	public String toString() {
-		return "Restuarant [restuarantId=" + restuarantId + ", name=" + name + ", location=" + location + ", type="
+		return "Restuarant [restuarantId=" + restaurantId + ", name=" + name + ", location=" + location + ", type="
 				+ type + "]";
 	}
-	
-	
-	
 }

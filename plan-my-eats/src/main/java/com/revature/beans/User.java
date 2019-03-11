@@ -43,7 +43,7 @@ public class User
 	
 	@Column(nullable=false, name="WEIGHT")
 	private double weight;
-	
+
 	@ManyToMany(cascade=CascadeType.ALL, fetch=FetchType.EAGER)
 	@JoinTable(name="RECIPE_HISTORY", joinColumns=@JoinColumn(name="USER_ID"), inverseJoinColumns=@JoinColumn(name="RECIPE_ID"))
 	private Set<Recipe> recipes = new HashSet<Recipe>();
@@ -58,7 +58,7 @@ public class User
 	
 	public User() { }
 	
-	public User(String preference, String username, String password, int height, int age, String gender,
+	public User(String username, String password, int height, int age, String gender,
 			double weight) {
 		this.username = username;
 		this.password = password;
@@ -66,9 +66,6 @@ public class User
 		this.age = age;
 		this.gender = gender;
 		this.weight = weight;
-
-		//this.recipes = recipes;
-		//this.restaurants = restaurants;
 	}
 	public int getUserId() {
 		return userId;
@@ -144,5 +141,4 @@ public class User
 				+ ", age=" + age + ", gender=" + gender + ", weight=" + weight + ", recipes=" + recipes
 				+ ", restaurants=" + restaurants + ", preferences=" + preferences + "]";
 	}
-
 }

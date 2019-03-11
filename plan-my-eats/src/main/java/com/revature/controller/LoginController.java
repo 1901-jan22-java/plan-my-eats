@@ -11,9 +11,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
-
+import org.springframework.web.bind.annotation.RequestBody;
 import com.revature.beans.User;
-import com.revature.repository.UserService;
+import com.revature.service.UserService;
 
 
 @CrossOrigin
