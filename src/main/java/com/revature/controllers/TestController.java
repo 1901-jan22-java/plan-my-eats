@@ -12,19 +12,11 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 
-<<<<<<< HEAD:src/main/java/com/revature/controllers/TestController.java
 import com.revature.beans.Preference;
 import com.revature.beans.Recipe;
 import com.revature.beans.Restaurant;
 import com.revature.beans.User;
 import com.revature.services.UserService;
-=======
-import com.revature.beans.Preferences;
-import com.revature.beans.Recipe;
-import com.revature.beans.Restaurant;
-import com.revature.beans.User;
-import com.revature.service.UserService;
->>>>>>> development:plan-my-eats/src/main/java/com/revature/controller/TestController.java
 
 @CrossOrigin
 @RestController
