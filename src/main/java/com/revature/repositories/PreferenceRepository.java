@@ -6,8 +6,10 @@ import org.springframework.stereotype.Repository;
 import com.revature.beans.Preference;
 
 @Repository
-public interface PreferenceRepository extends JpaRepository<Preference, Integer>{
+public interface PreferenceRepository extends JpaRepository<Preference, Integer> {
 
 	Preference getPreferenceByPrefId(int prefId);
-	
+
+	Preference getPreferenceByName(String name);
+
 }

@@ -23,13 +23,17 @@ public class PreferenceService {
 	public void saveAll(Iterable<Preference> newPrefs) {
 		repo.save(newPrefs);
 	}
-	
+
 	public Preference getById(int id) {
 		return repo.getPreferenceByPrefId(id);
 	}
 
 	public List<Preference> getAll() {
 		return repo.findAll();
+	}
+
+	public Preference getByName(String name) {
+		return repo.getPreferenceByName(name);
 	}
 
 }
