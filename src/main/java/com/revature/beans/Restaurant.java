@@ -19,7 +19,7 @@ public class Restaurant {
 	@Column(name = "RESTAURANT_ID")
 	@SequenceGenerator(name = "PME_RES_SEQ_GEN", sequenceName = "PME_RES_SEQ", allocationSize = 1)
 	@GeneratedValue(generator = "PME_RES_SEQ_GEN", strategy = GenerationType.SEQUENCE)
-	private int restuarantId;
+	private int restaurantId;
 
 	@Column(name = "NAME")
 	private String name;
@@ -34,20 +34,31 @@ public class Restaurant {
 	private String imgRef;
 
 	public Restaurant() {
+		super();
 	}
 
-	public Restaurant(String name, String location, String type) {
+	public Restaurant(String name, String location, String type) { 
+		super();
+		
+		this.name = name;
+		this.location = location;
+		this.type = type;
+	}
+	public Restaurant(int restaurantId, String name, String location,String type) {
+		super();
+		
+		this.restaurantId = restaurantId;
 		this.name = name;
 		this.location = location;
 		this.type = type;
 	}
 
-	public int getRestuarantId() {
-		return restuarantId;
+	public int getRestaurantId() {
+		return restaurantId;
 	}
 
-	public void setRestuarantId(int restuarantId) {
-		this.restuarantId = restuarantId;
+	public void setRestuarantId(int restaurantId) {
+		this.restaurantId = restaurantId;
 	}
 
 	public String getName() {
@@ -76,7 +87,7 @@ public class Restaurant {
 
 	@Override
 	public String toString() {
-		return "Restuarant [restuarantId=" + restuarantId + ", name=" + name + ", location=" + location + ", type="
+		return "Restuarant [restuarantId=" + restaurantId + ", name=" + name + ", location=" + location + ", type="
 				+ type + "]";
 	}
 
