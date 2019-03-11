@@ -22,7 +22,8 @@
 		<mvc:mapping path="/**" />
 	</mvc:cors>
 
-	<jpa:repositories base-package="com.revature.repositories" />
+	<jpa:repositories
+		base-package="com.revature.repositories" />
 
 	<context:property-placeholder
 		location="/WEB-INF/db.properties" />
