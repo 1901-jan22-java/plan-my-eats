@@ -29,8 +29,8 @@ private UserRepository repo;
 
 	
 	static {
-		users.add(new User("chocolate","dayZ666","iamthebomb",5,22,"Female",105.0));
-		users.add(new User("spicy","ZIZI","nah",6,20,"Male",155.0));
+		users.add(new User("dayZ666","iamthebomb",5,22,"Female",105.0));
+		users.add(new User("ZIZI","nah",6,20,"Male",155.0));
 	}
 	public User saveUser(User u) {
 		repo.save(u);
@@ -44,13 +44,6 @@ private UserRepository repo;
 	
 	public User findByUsername(String username) {
 		return repo.findByUsername(username);
-	}
-	public List<User> findByRestauarnt(String restaurant){
-		return repo.findByRestaurant(restaurant);
-	}
-	
-	public List<User> findByRecipe(String recipe){
-		return repo.findByRecipe(recipe);
 	}
 	public User updateUserGender(String gender,String username) {
 		return repo.setUserGenderByUsername(gender, username);
@@ -70,14 +63,15 @@ private UserRepository repo;
 	}
 	
 	//the method below will most likely change to append to strings 
-	public User updateUserPreference(String preference,String username) {
-		return repo.setUserPreferenceByUsername(preference, username);
-	}
-	public User updateUserInfo(int height,double weight, String gender,int age,String username) {
-		return repo.setUserInfoByUsername(height,weight,gender,age, username);
-	}
-	public User updateUserAllInfo(String preference,int height,double weight,String gender,int age,String username) {
-		return repo.setUserAllInfoByUsername(preference,height,weight,gender,age, username);
+//	public User updateUserPreference(String preference,String username) {
+//		return repo.setUserPreferenceByUsername(preference, username);
+//	}
+//	public User updateUserInfo(int height,double weight, String gender,int age,String username) {
+//		return repo.setUserInfoByUsername(height,weight,gender,age, username);
+//	}
+	
+	public User test() {
+		return null;
 	}
 	
 	
