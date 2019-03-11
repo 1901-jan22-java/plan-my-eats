@@ -8,8 +8,6 @@ drop table pme_users;
 
 drop sequence pme_rec_seq;
 drop sequence pme_res_seq;
-drop sequence pme_seq;
-drop sequence pme_u_seq;
 drop sequence pme_user_seq;
 
 drop table eats_users;
@@ -17,3 +15,8 @@ drop table recipes;
 drop table preference_profile;
 drop table recipe_history;
 drop table restaurant_history;
+
+drop sequence rec_seq;
+drop sequence u_seq;
+drop sequence pme_seq;
+drop sequence pme_u_seq;

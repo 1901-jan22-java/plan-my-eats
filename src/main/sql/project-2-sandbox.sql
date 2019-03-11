@@ -1,7 +1,7 @@
-select * from pme_preference_profile;
 select * from pme_preferences;
+select * from pme_preference_profile;
 
-select * from pme_recipe;
+select * from pme_recipes;
 select * from pme_recipe_history;
 
 select * from pme_restaurants;
