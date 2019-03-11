@@ -25,8 +25,8 @@ public class User {
 
 	@Id
 	@Column(name = "USER_ID")
-	@SequenceGenerator(name = "U_SEQ_GEN", sequenceName = "U_SEQ", allocationSize = 1)
-	@GeneratedValue(generator = "U_SEQ_GEN", strategy = GenerationType.SEQUENCE)
+	@SequenceGenerator(name = "PME_USER_SEQ_GEN", sequenceName = "PME_USER_SEQ", allocationSize = 1)
+	@GeneratedValue(generator = "PME_USER_SEQ_GEN", strategy = GenerationType.SEQUENCE)
 	private int userId;
 
 	@Column(name = "PREFERENCE_STRING")

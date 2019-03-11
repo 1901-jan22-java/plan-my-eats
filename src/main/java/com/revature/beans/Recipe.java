@@ -17,8 +17,8 @@ public class Recipe {
 
 	@Id
 	@Column(name = "RECIPE_ID")
-	@SequenceGenerator(name = "REC_SEQ_GEN", sequenceName = "REC_SEQ", allocationSize = 1)
-	@GeneratedValue(generator = "REC_SEQ_GEN", strategy = GenerationType.SEQUENCE)
+	@SequenceGenerator(name = "PME_REC_SEQ_GEN", sequenceName = "PME_REC_SEQ", allocationSize = 1)
+	@GeneratedValue(generator = "PME_REC_SEQ_GEN", strategy = GenerationType.SEQUENCE)
 	private int recipeId;
 
 	@Column(name = "INGREDIENTS")
