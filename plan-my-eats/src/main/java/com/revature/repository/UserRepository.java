@@ -57,7 +57,7 @@ public interface UserRepository extends JpaRepository<User,Integer>{
    
    @Modifying
    @Query("update User u set u.preferences =?1 u.height=?2,u.weight=?3,u.gender=?4,u.age=?5 WHERE u.username = ?6")
-    User setUserAllInfoByUsername(String preference,int height, double weight, String gender, int age,String username);
+    User setUserAllInfoByUsername(Preferences preference,int height, double weight, String gender, int age,String username);
    
    
    
