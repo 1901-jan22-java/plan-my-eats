@@ -1,11 +1,13 @@
 package com.revature.services;
 
 import java.util.List;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.revature.beans.Preference;
 import com.revature.beans.User;
 import com.revature.repositories.UserRepository;
 
@@ -68,6 +70,10 @@ public class UserService {
 
 	public User updateUserInfo(int height, double weight, String gender, int age, String username) {
 		return repo.setUserInfoByUsername(height, weight, gender, age, username);
+	}
+
+	public User updatePreferences(Set<Preference> pref, int id) {
+		return repo.setUserPreferenceByUserId(pref, id);
 	}
 
 //	public User updateUserAllInfo(String preference, int height, double weight, String gender, int age,

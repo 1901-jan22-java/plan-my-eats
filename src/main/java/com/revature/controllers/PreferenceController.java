@@ -1,6 +1,7 @@
 package com.revature.controllers;
 
 import java.util.List;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -12,24 +13,37 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.revature.beans.Preference;
+import com.revature.beans.User;
 import com.revature.services.PreferenceService;
+import com.revature.services.UserService;
 
 @RestController
 @RequestMapping("/preference")
 public class PreferenceController {
 
 	@Autowired
-	PreferenceService service;
+	PreferenceService ps;
+	@Autowired
+	UserService us;
 
 	@RequestMapping(method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<List<Preference>> getPreferences() {
-		return new ResponseEntity<List<Preference>>(service.getAll(), HttpStatus.OK);
+		return new ResponseEntity<List<Preference>>(ps.getAll(), HttpStatus.OK);
 	}
 
 	@RequestMapping(method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<List<Preference>> postPreference(@RequestBody Preference newPref) {
-		service.save(newPref);
-		return new ResponseEntity<List<Preference>>(service.getAll(), HttpStatus.OK);
+	public ResponseEntity<User> updatePreference(@RequestBody Set<Preference> preferences, User user) {
+		User u = us.findByUsername(user.getUsername());
+		if (u.getPreferences().isEmpty()) {
+			// User has an account but no info is available for some reason
+			us.updatePreferences(preferences, u.getUserId());
+
+			return new ResponseEntity<User>(u, HttpStatus.OK);
+		} else {
+			us.updatePreferences(preferences, u.getUserId());
+
+			return new ResponseEntity<User>(u, HttpStatus.OK);
+		}
 	}
 
 }
