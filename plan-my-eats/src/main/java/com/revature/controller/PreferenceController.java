@@ -37,11 +37,11 @@ public class PreferenceController {
 		User u = services.findByUsername(user.getUsername());
 		if(u.getPreferences().isEmpty()) {
 			//User has an account but no info is available for some reason
-			services.updatePreferences(user.getPreferences(),u.getUserId());
-
+			System.out.println("THIS IS THE USER!: " + u + ", WE SENT THIS IN : " + user);
+			services.updatePreferences(u, user.getPreferences(), u.getUserId());
 			return new ResponseEntity<User>(u, HttpStatus.OK);
 		}else {
-			services.updatePreferences(user.getPreferences(),u.getUserId());
+			services.updatePreferences(u, user.getPreferences(), u.getUserId());
 			
 			return new ResponseEntity<User>(u, HttpStatus.OK);
 		}

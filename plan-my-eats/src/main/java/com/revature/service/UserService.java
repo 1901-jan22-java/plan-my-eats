@@ -59,8 +59,11 @@ private UserRepository repo;
 		return repo.setUserHeightByUsername(height, username);
 	}
 	
-	public User updatePreferences(Set<Preferences> pref,int id) {
-		return repo.setUserPreferenceByUserId(pref, id);
+	public void updatePreferences(User u, Set<Preferences> pref, int id) {
+		u = repo.getOne(id);
+		u.setPreferences(pref);
+		repo.save(u);
+		
 	}
 	
 	//the method below will most likely change to append to strings 

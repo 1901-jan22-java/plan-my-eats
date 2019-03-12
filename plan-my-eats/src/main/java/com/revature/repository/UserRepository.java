@@ -24,9 +24,9 @@ public interface UserRepository extends JpaRepository<User,Integer>{
    @Query("update User u set u.preferences=?1 WHERE u.username = ?2")
     User setUserPreferenceByUsername(String preference,String username);
    
-   //@Modifying
+   @Modifying
    @Query("update User u set u.preferences=?1 WHERE u.userId = ?2")
-   User setUserPreferenceByUserId(Set<Preferences> s,int id);
+   void setUserPreferenceByUserId(Set<Preferences> s,Integer userId);
    
    @Modifying
    @Query("update User u set u.height=?1 WHERE u.username = ?2")
