@@ -34,7 +34,7 @@ public class PreferenceController {
 	@RequestMapping(method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<User> updatePreference(@RequestBody Set<Preferences> preferences,User user) {
 		User u = services.findByUsername(user.getUsername());
-		if(u.getPreference().isEmpty()) {
+		if(u.getPreferences().isEmpty()) {
 			//User has an account but no info is available for some reason
 			services.updatePreferences(preferences,u.getUserId());
 

@@ -38,7 +38,7 @@ public class RecipeService {
 	public List<Recipe> getByLGreaterThanCalorie(int calories){
 		return repo.findRecipesGreaterThanCalories(calories);
 	}
-	public List<Recipe> getRecipesByTypes(String types){
+	/*public List<Recipe> getRecipesByTypes(String types){
 		return repo.findRecipesByTypes(types);
-	}
+	}*/
 }
