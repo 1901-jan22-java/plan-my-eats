@@ -29,6 +29,8 @@ public class Restaurant
 	@Column(name="IMAGE_REF")
 	private String imgRef;
 	
+	
+
 	public Restaurant() { }
 	
 	public Restaurant(String name, String location, String type) {
@@ -60,6 +62,13 @@ public class Restaurant
 	}
 	public void setType(String type) {
 		this.type = type;
+	}
+	public String getImgRef() {
+		return imgRef;
+	}
+
+	public void setImgRef(String imgRef) {
+		this.imgRef = imgRef;
 	}
 	@Override
 	public String toString() {

@@ -54,7 +54,7 @@ public class User
 	
 	@ManyToMany(cascade=CascadeType.ALL, fetch=FetchType.EAGER)
 	@JoinTable(name="PREFERENCE_PROFILE", joinColumns=@JoinColumn(name="USER_ID"), inverseJoinColumns=@JoinColumn(name="PREF_ID"))
-	private Set<Preferences> preferences = new HashSet<Preferences>();
+	private Set<Preference> preferences = new HashSet<Preference>();
 	
 	public User() { }
 	
@@ -127,11 +127,11 @@ public class User
 		this.restaurants = restaurants;
 	}
 
-	public Set<Preferences> getPreferences() {
+	public Set<Preference> getPreferences() {
 		return preferences;
 	}
 
-	public void setPreferences(Set<Preferences> preferences) {
+	public void setPreferences(Set<Preference> preferences) {
 		this.preferences = preferences;
 	}
 

@@ -10,7 +10,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name="USER_PREFERENCES")
-public class Preferences 
+public class Preference 
 {
 
 	@Id
@@ -20,8 +20,8 @@ public class Preferences
 	private int prefId;
 	@Column(name="NAME")
 	private String name;
-	public Preferences() { }
-	public Preferences(String name) {
+	public Preference() { }
+	public Preference(String name) {
 		super();
 		this.name = name;
 	}

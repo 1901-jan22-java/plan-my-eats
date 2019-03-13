@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 
-import com.revature.beans.Preferences;
+import com.revature.beans.Preference;
 import com.revature.beans.Recipe;
 import com.revature.beans.Restaurant;
 import com.revature.beans.User;
@@ -56,7 +56,7 @@ public class TestController {
 		User user = prefs.user;
 		Restaurant res = prefs.restaurants;
 		Recipe rec = prefs.recipes;
-		Preferences pre = prefs.preferences;
+		Preference pre = prefs.preferences;
 		
 		User u = service.findByUsername(user.getUsername());
 		
@@ -78,7 +78,7 @@ public class TestController {
 		public User user;
 		public Restaurant restaurants;
 		public Recipe recipes;
-		public Preferences preferences;
+		public Preference preferences;
 	}
 }
 
