@@ -15,6 +15,22 @@ public class RecipeDetailsResults {
 		return hits;
 	}
 
+	public String getName(int i) {
+		return hits.get(i).getRecipe().getName();
+	}
+
+	public int getCalories(int i) {
+		return hits.get(i).getRecipe().getCalories();
+	}
+
+	public int getServings(int i) {
+		return hits.get(i).getRecipe().getServings();
+	}
+
+	public List<String> getIngredients(int i) {
+		return hits.get(i).getRecipe().getIngredients();
+	}
+
 	public void setHits(List<RecipeResults> hits) {
 		this.hits = hits;
 	}
