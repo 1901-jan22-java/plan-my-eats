@@ -62,6 +62,13 @@ public class UserService {
 	public User updateUserHeight(int height, String username) {
 		return repo.setUserHeightByUsername(height, username);
 	}
+	
+	public void updatePreferences(User u, Set<Preference> pref, int id) {
+		u = repo.getOne(id);
+		u.setPreferences(pref);
+		repo.save(u);
+		
+	}
 
 	// the method below will most likely change to append to strings
 	public User updateUserPreferences(String preference, String username) {
