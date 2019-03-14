@@ -60,7 +60,7 @@ public class UserService {
 		return repo.setUserHeightByUsername(height, username);
 	}
 	
-	public void updatePreferences(User u, Set<Preferences> pref, int id) {
+	public void updatePreferences(User u, Set<Preference> pref, int id) {
 		u = repo.getOne(id);
 		u.setPreferences(pref);
 		repo.save(u);
