@@ -63,6 +63,19 @@ public class User {
 	private Set<Preference> preferences = new HashSet<Preference>();
 
 	public User() {
+		super();
+	}
+
+	public User(String username, String password, int height, int age, String gender, double weight) {
+		super();
+		this.username = username;
+		this.password = password;
+		this.height = height;
+		this.age = age;
+		this.gender = gender;
+		this.weight = weight;
+		// this.recipes = recipes;
+		// this.restaurants = restaurants;
 	}
 
 	public User(String preference, String username, String password, int height, int age, String gender,
@@ -173,5 +186,5 @@ public class User {
 				+ ", age=" + age + ", gender=" + gender + ", weight=" + weight + ", recipes=" + recipes
 				+ ", restaurants=" + restaurants + ", preferences=" + preferences + "]";
 	}
-	
+
 }

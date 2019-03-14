@@ -86,6 +86,14 @@ public class Restaurant {
 		this.type = type;
 	}
 
+	public String getImgRef() {
+		return imgRef;
+	}
+
+	public void setImgRef(String imgRef) {
+		this.imgRef = imgRef;
+	}
+
 	@Override
 	public String toString() {
 		return "Restuarant [restuarantId=" + restaurantId + ", name=" + name + ", location=" + location + ", type="

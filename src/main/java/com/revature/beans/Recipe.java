@@ -34,9 +34,11 @@ public class Recipe {
 	private String types;
 
 	public Recipe() {
+		super();
 	}
 
 	public Recipe(String ingredients, String recipeName, int calories, String types) {
+		super();
 		this.ingredients = ingredients;
 		this.recipeName = recipeName;
 		this.calories = calories;

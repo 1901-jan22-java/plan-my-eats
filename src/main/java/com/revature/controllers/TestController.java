@@ -56,7 +56,7 @@ public class TestController {
 		Restaurant res = prefs.restaurants;
 		Recipe rec = prefs.recipes;
 		Preference pre = prefs.preferences;
-
+		
 		User u = service.findByUsername(user.getUsername());
 
 		if (u == null) {
@@ -79,6 +79,5 @@ public class TestController {
 		public Restaurant restaurants;
 		public Recipe recipes;
 		public Preference preferences;
-
 	}
 }
