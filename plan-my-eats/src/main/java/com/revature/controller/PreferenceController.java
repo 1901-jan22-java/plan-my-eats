@@ -34,16 +34,17 @@ public class PreferenceController {
 
 	@RequestMapping(method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<User> updatePreference(@RequestBody User user) {
-		User u = services.findByUsername(user.getUsername());
-		if(u.getPreferences().isEmpty()) {
+		//User u = services.findByUsername(user.getUsername());
+		if(user.getPreferences().isEmpty()) {
 			//User has an account but no info is available for some reason
-			System.out.println("THIS IS THE USER!: " + u + ", WE SENT THIS IN : " + user);
-			services.updatePreferences(u, user.getPreferences(), u.getUserId());
-			return new ResponseEntity<User>(u, HttpStatus.OK);
+			//System.out.println("THIS IS THE USER!: " + u + ", WE SENT THIS IN : " + user);
+			//services.updatePreferences(u, user.getPreferences(), u.getUserId());
+			services.saveUser(user);
+			return new ResponseEntity<User>(user, HttpStatus.OK);
 		}else {
-			services.updatePreferences(u, user.getPreferences(), u.getUserId());
-			
-			return new ResponseEntity<User>(u, HttpStatus.OK);
+			//services.updatePreferences(u, user.getPreferences(), u.getUserId());
+			services.saveUser(user);
+			return new ResponseEntity<User>(user, HttpStatus.OK);
 		}
 	}
 
