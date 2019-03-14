@@ -1,7 +1,6 @@
 package com.revature.controller;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
 
@@ -15,7 +14,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 
-import com.revature.beans.Preferences;
+import com.revature.beans.Preference;
+import com.revature.beans.Recipe;
 import com.revature.beans.RecipeDetailsResults;
 import com.revature.beans.User;
 
@@ -68,8 +68,8 @@ public class RecipeController
 				else
 				{
 					firstIndex = index;
-					List<Preferences> li = new ArrayList<Preferences>(u.getPreferences());
-					Preferences pref = li.get(index);
+					List<Preference> li = new ArrayList<Preference>(u.getPreferences());
+					Preference pref = li.get(index);
 					if(pref.getPrefId() > 19)
 					{
 						tries--;
@@ -84,7 +84,7 @@ public class RecipeController
 		}
 		else 
 		{
-			List<Preferences> li = new ArrayList<Preferences>(u.getPreferences());
+			List<Preference> li = new ArrayList<Preference>(u.getPreferences());
 			if(li.size() != 0)
 			{
 				if(li.get(0).getPrefId() < 20)
@@ -104,6 +104,12 @@ public class RecipeController
             RestTemplate restTemplate = new RestTemplate();
             ResponseEntity<RecipeDetailsResults> responseEntity = restTemplate.getForEntity(apiUrl, RecipeDetailsResults.class);
             RecipeDetailsResults recipes = responseEntity.getBody();
+            List<Recipe> recp = new ArrayList<Recipe>();
+            for(int i = 0; i < 20; i++)
+            {
+            	Recipe r;
+            	
+            }
             if (responseEntity.getStatusCode().toString().equals("200")) {
                 return new ResponseEntity<RecipeDetailsResults>(recipes, HttpStatus.OK);
             } else {

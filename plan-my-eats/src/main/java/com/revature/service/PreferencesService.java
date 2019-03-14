@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.revature.beans.Preferences;
+import com.revature.beans.Preference;
 import com.revature.repository.PreferencesRepository;
 
 
@@ -19,24 +19,24 @@ public class PreferencesService {
 	private PreferencesRepository repo;
 	
 
-	public void save(Preferences newPref) {
+	public void save(Preference newPref) {
 		repo.save(newPref);
 	}
 
-	public void saveAll(Iterable<Preferences> newPrefs) {
+	public void saveAll(Iterable<Preference> newPrefs) {
 		repo.save(newPrefs);
 	}
 
 
-	public List<Preferences> getAll() {
+	public List<Preference> getAll() {
 		return repo.findAll();
 	}
 
-	public Preferences getById(int id) {
+	public Preference getById(int id) {
 		return repo.getOne(id);
 	}
 	
-	public Preferences getByName(String name) {
+	public Preference getByName(String name) {
 		return repo.findByName(name);
 	}
 }

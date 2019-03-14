@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.revature.beans.Preferences;
+import com.revature.beans.Preference;
 import com.revature.beans.User;
 import com.revature.service.PreferencesService;
 import com.revature.service.UserService;
@@ -28,8 +28,8 @@ public class PreferenceController {
 	UserService services;
 
 	@RequestMapping(method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<List<Preferences>> getPreferences() {
-		return new ResponseEntity<List<Preferences>>(service.getAll(), HttpStatus.OK);
+	public ResponseEntity<List<Preference>> getPreferences() {
+		return new ResponseEntity<List<Preference>>(service.getAll(), HttpStatus.OK);
 	}
 
 	@RequestMapping(method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)

@@ -2,7 +2,7 @@ package com.revature.repository;
 
 import org.springframework.data.repository.query.Param;
 
-import com.revature.beans.Preferences;
+import com.revature.beans.Preference;
 import com.revature.beans.Restaurant;
 import com.revature.beans.User;
 import org.springframework.data.jpa.repository.Modifying;
@@ -26,7 +26,7 @@ public interface UserRepository extends JpaRepository<User,Integer>{
    
    @Modifying
    @Query("update User u set u.preferences=?1 WHERE u.userId = ?2")
-   void setUserPreferenceByUserId(Set<Preferences> s,Integer userId);
+   void setUserPreferenceByUserId(Set<Preference> s,Integer userId);
    
    @Modifying
    @Query("update User u set u.height=?1 WHERE u.username = ?2")
