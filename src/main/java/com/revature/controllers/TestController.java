@@ -18,8 +18,8 @@ import com.revature.beans.Restaurant;
 import com.revature.beans.User;
 import com.revature.services.UserService;
 
-@CrossOrigin
 @RestController
+@CrossOrigin
 @RequestMapping("/testing")
 public class TestController {
 
