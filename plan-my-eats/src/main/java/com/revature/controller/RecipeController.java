@@ -107,8 +107,14 @@ public class RecipeController
             List<Recipe> recp = new ArrayList<Recipe>();
             for(int i = 0; i < 20; i++)
             {
-            	Recipe r;
-            	
+            	Recipe r = new Recipe();
+            	r.setCalories(recipes.getCalories(i) / recipes.getServings(i));
+            	for(int j = 0; j < recipes.getIngredients(i).size(); j++)
+            	{
+            		r.setIngredients(r.getIngredients() + recipes.getIngredients(i).get(j) + ".");
+            	}
+            	r.setRecipeName(recipes.getName(i));
+            	recp.add(r);
             }
             if (responseEntity.getStatusCode().toString().equals("200")) {
                 return new ResponseEntity<RecipeDetailsResults>(recipes, HttpStatus.OK);
