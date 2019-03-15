@@ -43,11 +43,12 @@ public class RestaurantController {
 		System.out.println(apiUrl);
 
 		try {
+
 			RestTemplate restTemplate = new RestTemplate();
 			ResponseEntity<PlaceDetailsResponse> responseEntity = restTemplate.getForEntity(apiUrl,
 					PlaceDetailsResponse.class);
 			PlaceDetailsResponse restaurants = responseEntity.getBody();
-			
+
 //			// what is this variable?
 //			int count = 0;
 			List<Restaurant> rests = new ArrayList<Restaurant>();
@@ -72,8 +73,8 @@ public class RestaurantController {
 		} catch (Exception theException) {
 			theException.printStackTrace();
 		}
-		return new ResponseEntity<List<Restaurant>>(HttpStatus.BAD_REQUEST);
 
+		return new ResponseEntity<List<Restaurant>>(HttpStatus.BAD_REQUEST);
 	}
 
 }

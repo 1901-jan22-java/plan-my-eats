@@ -19,7 +19,6 @@ public class ProfileViewController {
 
 	@Autowired
 	UserService service;
-	// I will do this tomorrow morning
 	// here you will have to show all user preferences bmi recipes / restaurants/
 	// etc
 

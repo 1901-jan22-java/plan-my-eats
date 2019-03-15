@@ -26,10 +26,10 @@ public class Restaurant {
 
 	@Column(name = "ADDRESS")
 	private String location;
-	
+
 	@Column(name = "LATITUDE")
 	private String latitude;
-	
+
 	@Column(name = "LONGITUDE")
 	private String longitude;
 
@@ -126,5 +126,5 @@ public class Restaurant {
 		return "Restaurant [restaurantId=" + restaurantId + ", name=" + name + ", location=" + location + ", latitude="
 				+ latitude + ", longitude=" + longitude + ", type=" + type + ", imgRef=" + imgRef + "]";
 	}
-	
+
 }

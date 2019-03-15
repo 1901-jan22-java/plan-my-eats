@@ -14,6 +14,11 @@ import com.revature.beans.User;
 @Repository
 public interface UserRepository extends JpaRepository<User, Integer> {
 
+
+	@Modifying
+	@Query("update User u set u.preferences=?1 WHERE u.userId = ?2")
+	void setUserPreferenceByUserId(Set<Preference> s, Integer userId);
+
 	@Query("SELECT u FROM User u WHERE length(u.username) > ?1")
 	List<User> lengthQuery(int length);
 
@@ -32,26 +37,6 @@ public interface UserRepository extends JpaRepository<User, Integer> {
 	@Modifying
 	@Query("update User u set u.preferences=?1 WHERE u.userId = ?2")
 	User setUserPreferenceByUserId(Set<Preference> s, int id);
-
-//	@Modifying
-//	@Query("update User u set u.preferences =?1 u.height=?2,u.weight=?3,u.gender=?4,u.age=?5 WHERE u.username = ?6")
-//	User setUserAllInfoByUsername(Preferences preference, int height, double weight, String gender, int age,
-//			String username);
-//
-//	@Modifying
-//	@Query("update User u set u.height=?1,u.weight=?2,u.gender=?3,u.age=?4 WHERE u.username = ?5")
-//	User setUserInfoByUsername(int height, double weight, String gender, int age, String username);
-//
-//	@Modifying
-//	@Query("update User u set u.preference =?1 u.height=?2,u.weight=?3,u.gender=?4,u.age=?5 WHERE u.username = ?6")
-//	User setUserAllInfoByUsername(String preference, int height, double weight, String gender, int age,
-//			String username);
-//
-//	@Query(value = "SELECT u from User u WHERE u.restaurants LIKE '%':restaurant'%'")
-//	List<User> findByRestaurants(@Param("restaurant") String restaurant);
-//
-//	@Query(value = "SELECT u from User u WHERE u.recipes LIKE '%':recipe'%'")
-//	List<User> findByRecipes(@Param("recipe") String recipe);
 
 	@Modifying
 	@Query("update User u set u.preferences=?1 WHERE u.username = ?2")
@@ -76,10 +61,5 @@ public interface UserRepository extends JpaRepository<User, Integer> {
 	@Modifying
 	@Query("update User u set u.height=?1,u.weight=?2,u.gender=?3,u.age=?4 WHERE u.username = ?5")
 	User setUserInfoByUsername(int height, double weight, String gender, int age, String username);
-
-//	@Modifying
-//	@Query("update User u set u.preference =?1 u.height=?2,u.weight=?3,u.gender=?4,u.age=?5 WHERE u.username = ?6")
-//	User setUserAllInfoByUsername(String preference, int height, double weight, String gender, int age,
-//			String username);
 
 }

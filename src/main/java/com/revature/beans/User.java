@@ -15,6 +15,7 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 import org.springframework.stereotype.Component;
 
@@ -49,6 +50,9 @@ public class User {
 
 	@Column(nullable = false, name = "WEIGHT")
 	private double weight;
+	
+	@Transient
+	private String token;
 
 	@ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	@JoinTable(name = "PME_RECIPE_HISTORY", joinColumns = @JoinColumn(name = "USER_ID"), inverseJoinColumns = @JoinColumn(name = "RECIPE_ID"))
@@ -178,6 +182,14 @@ public class User {
 
 	public void setPreferences(Set<Preference> preferences) {
 		this.preferences = preferences;
+	}
+
+	public String getToken() {
+		return token;
+	}
+
+	public void setToken(String token) {
+		this.token = token;
 	}
 
 	@Override

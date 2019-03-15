@@ -25,7 +25,7 @@ import com.revature.services.UserService;
 public class PreferenceController {
 
 	private static final Log log = LogFactory.getLog(PreferenceController.class);
-	
+
 	@Autowired
 	PreferenceService ps;
 	@Autowired
@@ -38,17 +38,17 @@ public class PreferenceController {
 
 	@RequestMapping(method = RequestMethod.PUT, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<User> updatePreference(@RequestBody User u) {
-		log.info ("USER: " + u);
+		log.info("USER: " + u);
 		// User u = us.findByUsername(user.getUsername());
-		if(u.getPreferences().isEmpty()) {
-			//us.updatePreferences(u, user.getPreferences(), u.getUserId());
+		if (u.getPreferences().isEmpty()) {
+			// us.updatePreferences(u, user.getPreferences(), u.getUserId());
 			us.saveUser(u);
 			return new ResponseEntity<User>(u, HttpStatus.OK);
-		}else {
-			//us.updatePreferences(u, user.getPreferences(), u.getUserId());
+		} else {
+			// us.updatePreferences(u, user.getPreferences(), u.getUserId());
 			us.saveUser(u);
 			return new ResponseEntity<User>(u, HttpStatus.OK);
 		}
 	}
-
+	
 }

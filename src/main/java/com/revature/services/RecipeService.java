@@ -19,7 +19,7 @@ public class RecipeService {
 	public List<Recipe> getAll() {
 		return repo.findAll();
 	}
-	
+
 	public Recipe findRecipeById(int id) {
 		return repo.findOne(id);
 	}
@@ -47,5 +47,5 @@ public class RecipeService {
 //	public List<Recipe> getRecipesByTypes(String types) {
 //		return repo.findRecipesByTypes(types);
 //	}
-	
+
 }

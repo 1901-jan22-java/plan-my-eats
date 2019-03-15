@@ -29,15 +29,15 @@ import com.revature.services.RecipeService;
 public class RecipeController {
 
 	private static final Log log = LogFactory.getLog(RecipeController.class);
-	
+
 	@Autowired
 	RecipeService rs;
-	
-	@RequestMapping(method=RequestMethod.GET, produces=MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<List<Recipe>> getRecipes(){
+
+	@RequestMapping(method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<List<Recipe>> getRecipes() {
 		return new ResponseEntity<List<Recipe>>(rs.getAll(), HttpStatus.OK);
 	}
-	
+
 	@RequestMapping(method = RequestMethod.POST, consumes = MediaType.TEXT_PLAIN_VALUE, produces = MediaType.APPLICATION_JSON_VALUE, value = "/recipe")
 	public ResponseEntity<RecipeDetailsResults> hitRecApi(@RequestBody User u) {
 		Random rand = new Random();

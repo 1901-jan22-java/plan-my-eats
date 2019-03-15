@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.revature.beans.User;
+import com.revature.interceptors.ImpTokenService;
+import com.revature.interceptors.TokenService;
 import com.revature.services.UserService;
 
 @RestController
@@ -20,6 +22,8 @@ public class RegisterController {
 
 	@Autowired
 	UserService service;
+
+	TokenService tokenService = ImpTokenService.getInstance();
 
 	@RequestMapping(method = RequestMethod.GET)
 	public ResponseEntity<String> showInfo() {
@@ -33,6 +37,8 @@ public class RegisterController {
 
 		if (u == null) {
 			user = service.saveUser(user);
+			String token = tokenService.generateToken(user);
+			user.setToken(token);
 			return new ResponseEntity<User>(user, HttpStatus.CREATED);
 		} else {
 			return new ResponseEntity<User>(HttpStatus.CONFLICT);

@@ -35,7 +35,8 @@ public class RestaurantService {
 	public Restaurant getById(int id) {
 		return repo.getOne(id);
 	}
-	public List<Restaurant> getRestaurant(){
+
+	public List<Restaurant> getRestaurant() {
 		return repo.findAll();
 	}
 }

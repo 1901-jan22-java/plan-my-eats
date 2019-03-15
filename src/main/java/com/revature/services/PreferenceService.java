@@ -24,10 +24,6 @@ public class PreferenceService {
 		repo.save(newPrefs);
 	}
 
-	public Preference getById(int id) {
-		return repo.getPreferenceByPrefId(id);
-	}
-
 	public List<Preference> getAll() {
 		return repo.findAll();
 	}
@@ -36,4 +32,8 @@ public class PreferenceService {
 		return repo.getPreferenceByName(name);
 	}
 
+	public Preference getById(int id) {
+		return repo.getOne(id);
+	}
+	
 }

@@ -15,15 +15,13 @@
 	<context:component-scan
 		base-package="com.revature" />
 
-	<tx:annotation-driven />
-
 	<mvc:annotation-driven />
+	<mvc:interceptors>
+		<bean class="com.revature.interceptors.JWTAuthenticationFilter"></bean>
+	</mvc:interceptors>
 	<mvc:cors>
 		<mvc:mapping path="/**" />
 	</mvc:cors>
-
-	<jpa:repositories
-		base-package="com.revature.repositories" />
 
 	<context:property-placeholder
 		location="/WEB-INF/db.properties" />

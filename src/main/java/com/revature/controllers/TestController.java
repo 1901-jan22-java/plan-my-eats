@@ -1,5 +1,7 @@
 package com.revature.controllers;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -23,6 +25,8 @@ import com.revature.services.UserService;
 @RequestMapping("/testing")
 public class TestController {
 
+	private static final Log log = LogFactory.getLog(TestController.class);
+
 	@Autowired
 	UserService service;
 
@@ -34,7 +38,7 @@ public class TestController {
 	@RequestMapping(method = RequestMethod.POST, consumes = MediaType.TEXT_PLAIN_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
 	@ResponseBody
 	public ResponseEntity<String> apiRequest(@RequestBody String apiUrl) {
-		System.out.println(apiUrl);
+		log.info(apiUrl);
 		try {
 			RestTemplate restTemplate = new RestTemplate();
 			ResponseEntity<String> responseEntity = restTemplate.getForEntity(apiUrl, String.class);
@@ -56,7 +60,7 @@ public class TestController {
 		Restaurant res = prefs.restaurants;
 		Recipe rec = prefs.recipes;
 		Preference pre = prefs.preferences;
-		
+
 		User u = service.findByUsername(user.getUsername());
 
 		if (u == null) {
