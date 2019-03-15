@@ -32,7 +32,7 @@ public class PreferenceController {
 		return new ResponseEntity<List<Preference>>(ps.getAll(), HttpStatus.OK);
 	}
 
-	@RequestMapping(method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+	@RequestMapping(method = RequestMethod.PUT, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<User> updatePreference(@RequestBody User user) {
 		// User u = us.findByUsername(user.getUsername());
 		if(user.getPreferences().isEmpty()) {

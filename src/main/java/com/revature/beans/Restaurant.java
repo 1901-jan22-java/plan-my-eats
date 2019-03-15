@@ -26,6 +26,12 @@ public class Restaurant {
 
 	@Column(name = "ADDRESS")
 	private String location;
+	
+	@Column(name = "LATITUDE")
+	private String latitude;
+	
+	@Column(name = "LONGITUDE")
+	private String longitude;
 
 	@Column(name = "TYPE")
 	private String type;
@@ -37,28 +43,33 @@ public class Restaurant {
 		super();
 	}
 
-	public Restaurant(String name, String location, String type) {
+	public Restaurant(String name, String location, String latitude, String longitude, String type, String imgRef) {
 		super();
-
 		this.name = name;
 		this.location = location;
+		this.latitude = latitude;
+		this.longitude = longitude;
 		this.type = type;
+		this.imgRef = imgRef;
 	}
 
-	public Restaurant(int restaurantId, String name, String location, String type) {
+	public Restaurant(int restaurantId, String name, String location, String latitude, String longitude, String type,
+			String imgRef) {
 		super();
-
 		this.restaurantId = restaurantId;
 		this.name = name;
 		this.location = location;
+		this.latitude = latitude;
+		this.longitude = longitude;
 		this.type = type;
+		this.imgRef = imgRef;
 	}
 
 	public int getRestaurantId() {
 		return restaurantId;
 	}
 
-	public void setRestuarantId(int restaurantId) {
+	public void setRestaurantId(int restaurantId) {
 		this.restaurantId = restaurantId;
 	}
 
@@ -76,6 +87,22 @@ public class Restaurant {
 
 	public void setLocation(String location) {
 		this.location = location;
+	}
+
+	public String getLatitude() {
+		return latitude;
+	}
+
+	public void setLatitude(String latitude) {
+		this.latitude = latitude;
+	}
+
+	public String getLongitude() {
+		return longitude;
+	}
+
+	public void setLongitude(String longitude) {
+		this.longitude = longitude;
 	}
 
 	public String getType() {
@@ -96,8 +123,8 @@ public class Restaurant {
 
 	@Override
 	public String toString() {
-		return "Restuarant [restuarantId=" + restaurantId + ", name=" + name + ", location=" + location + ", type="
-				+ type + "]";
+		return "Restaurant [restaurantId=" + restaurantId + ", name=" + name + ", location=" + location + ", latitude="
+				+ latitude + ", longitude=" + longitude + ", type=" + type + ", imgRef=" + imgRef + "]";
 	}
-
+	
 }
