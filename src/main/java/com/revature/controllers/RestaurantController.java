@@ -19,8 +19,8 @@ import com.revature.beans.Restaurant;
 import com.revature.services.RestaurantService;
 import com.revature.services.UserService;
 
-@CrossOrigin
 @RestController
+@CrossOrigin
 @RequestMapping("/restaurant")
 public class RestaurantController {
 

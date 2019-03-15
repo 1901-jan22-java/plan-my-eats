@@ -16,6 +16,10 @@ public class RecipeService {
 	@Autowired
 	private RecipeRepository repo;
 
+	public List<Recipe> getAll() {
+		return repo.findAll();
+	}
+	
 	public Recipe findRecipeById(int id) {
 		return repo.findOne(id);
 	}

@@ -76,8 +76,8 @@ public class PlaceDetailsResponse {
 }
 
 @JsonIgnoreProperties(ignoreUnknown = true)
-
 class PlaceDetails {
+	
 	@JsonProperty("name")
 	private String name;
 
@@ -115,10 +115,12 @@ class PlaceDetails {
 	public String toString() {
 		return "PlaceDetails [name=" + name + ", address=" + address + ", photos=" + photos + "]";
 	}
+	
 }
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 class PlacePhoto {
+	
 	@JsonProperty("photo_reference")
 	private String reference;
 
@@ -134,4 +136,5 @@ class PlacePhoto {
 	public String toString() {
 		return "PlacePhoto [reference=" + reference + "]";
 	}
+	
 }

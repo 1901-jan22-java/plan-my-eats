@@ -2,6 +2,8 @@ package com.revature.controllers;
 
 import java.util.List;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -22,6 +24,8 @@ import com.revature.services.UserService;
 @RequestMapping("/preference")
 public class PreferenceController {
 
+	private static final Log log = LogFactory.getLog(PreferenceController.class);
+	
 	@Autowired
 	PreferenceService ps;
 	@Autowired
@@ -33,18 +37,17 @@ public class PreferenceController {
 	}
 
 	@RequestMapping(method = RequestMethod.PUT, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<User> updatePreference(@RequestBody User user) {
+	public ResponseEntity<User> updatePreference(@RequestBody User u) {
+		log.info ("USER: " + u);
 		// User u = us.findByUsername(user.getUsername());
-		if(user.getPreferences().isEmpty()) {
-			//User has an account but no info is available for some reason
-			//System.out.println("THIS IS THE USER!: " + u + ", WE SENT THIS IN : " + user);
+		if(u.getPreferences().isEmpty()) {
 			//us.updatePreferences(u, user.getPreferences(), u.getUserId());
-			us.saveUser(user);
-			return new ResponseEntity<User>(user, HttpStatus.OK);
+			us.saveUser(u);
+			return new ResponseEntity<User>(u, HttpStatus.OK);
 		}else {
-			//services.updatePreferences(u, user.getPreferences(), u.getUserId());
-			us.saveUser(user);
-			return new ResponseEntity<User>(user, HttpStatus.OK);
+			//us.updatePreferences(u, user.getPreferences(), u.getUserId());
+			us.saveUser(u);
+			return new ResponseEntity<User>(u, HttpStatus.OK);
 		}
 	}
 
