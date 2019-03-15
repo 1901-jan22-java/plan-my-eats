@@ -24,13 +24,10 @@
 		<mvc:mapping path="/**" />
 	</mvc:cors>
 
-	<!-- tell spring data where to look for repository (DAO) -->
 	<jpa:repositories
 		base-package="com.revature.repositories" />
 	<tx:annotation-driven />
 
-	<!-- so that we don't have to push up sensitive db info must name properties 
-		db.X -->
 	<context:property-placeholder
 		location="/WEB-INF/db.properties" />
 	<bean name="myDataSource"
@@ -41,9 +38,6 @@
 		<property name="password" value="${db.pwd}" />
 	</bean>
 
-	<!-- spring data is not natively compatible with hibernate it is compatible 
-		with JPA, and in turn any "vendor" of an ORM tool that is JPA compliant however 
-		we need to use a vendor adapter -->
 	<bean id="hibernateJpaVendorAdapter"
 		class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter">
 	</bean>

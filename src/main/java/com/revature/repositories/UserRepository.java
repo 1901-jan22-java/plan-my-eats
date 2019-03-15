@@ -7,20 +7,14 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.revature.beans.Preference;
 import com.revature.beans.User;
 
 @Repository
+@Transactional
 public interface UserRepository extends JpaRepository<User, Integer> {
-
-
-	@Modifying
-	@Query("update User u set u.preferences=?1 WHERE u.userId = ?2")
-	void setUserPreferenceByUserId(Set<Preference> s, Integer userId);
-
-	@Query("SELECT u FROM User u WHERE length(u.username) > ?1")
-	List<User> lengthQuery(int length);
 
 	User findByUserId(int id);
 
@@ -29,6 +23,13 @@ public interface UserRepository extends JpaRepository<User, Integer> {
 	User findByUsernameLikeIgnoreCase(String username);
 
 	User findByUsernameContaining(String username);
+
+	@Query("SELECT u FROM User u WHERE length(u.username) > ?1")
+	List<User> lengthQuery(int length);
+
+	@Modifying
+	@Query("update User u set u.preferences=?1 WHERE u.userId = ?2")
+	void setUserPreferenceByUserId(Set<Preference> s, Integer userId);
 
 	@Modifying
 	@Query("update User u set u.preferences=?1 WHERE u.username = ?2")

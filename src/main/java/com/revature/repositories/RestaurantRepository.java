@@ -1,14 +1,16 @@
 package com.revature.repositories;
 
-import org.springframework.data.jpa.repository.Query;
-
 import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
+
 import com.revature.beans.Restaurant;
 
 @Repository
+@Transactional
 public interface RestaurantRepository extends JpaRepository<Restaurant, Integer> {
 
 	@Query("Select r from Restaurant r WHERE r.type = ?1")

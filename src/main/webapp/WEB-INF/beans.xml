@@ -23,6 +23,10 @@
 		<mvc:mapping path="/**" />
 	</mvc:cors>
 
+	<jpa:repositories
+		base-package="com.revature.repositories" />
+	<tx:annotation-driven />
+
 	<context:property-placeholder
 		location="/WEB-INF/db.properties" />
 	<bean name="myDataSource"
