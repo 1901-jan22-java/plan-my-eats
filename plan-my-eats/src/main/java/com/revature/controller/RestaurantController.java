@@ -11,16 +11,11 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 
-
 import com.revature.beans.PlaceDetailsResponse;
-import com.revature.beans.Preference;
 import com.revature.beans.Restaurant;
-import com.revature.beans.User;
-import com.revature.service.PreferencesService;
 import com.revature.service.RestaurantService;
 import com.revature.service.UserService;
 
@@ -51,7 +46,6 @@ public class RestaurantController {
             ResponseEntity<PlaceDetailsResponse> responseEntity = restTemplate.getForEntity(apiUrl, PlaceDetailsResponse.class);
             PlaceDetailsResponse restaurants = responseEntity.getBody();
           
-            int count =0;
             List<Restaurant>rests = new ArrayList<Restaurant>();
             System.out.print(restaurants.getResult().toArray().length);
             for(int i=0;i<restaurants.getResult().toArray().length;i++) {
@@ -74,9 +68,7 @@ public class RestaurantController {
         } catch (Exception theException) {
             theException.printStackTrace();
         }
-		return new ResponseEntity<List<Restaurant>>(HttpStatus.BAD_REQUEST);
-		
-		
+		return new ResponseEntity<List<Restaurant>>(HttpStatus.BAD_REQUEST);	
 	}
 	
 }

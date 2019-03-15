@@ -1,7 +1,6 @@
 package com.revature.controller;
 
 import java.util.List;
-import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -17,6 +16,7 @@ import com.revature.beans.Preference;
 import com.revature.beans.User;
 import com.revature.service.PreferencesService;
 import com.revature.service.UserService;
+
 @CrossOrigin
 @RestController
 @RequestMapping("/preference")

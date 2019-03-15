@@ -36,7 +36,4 @@ public class PreferencesService {
 		return repo.getOne(id);
 	}
 	
-	public Preference getByName(String name) {
-		return repo.findByName(name);
-	}
 }
