@@ -83,5 +83,7 @@ public class TestController {
 		public Restaurant restaurants;
 		public Recipe recipes;
 		public Preference preferences;
+
 	}
+
 }

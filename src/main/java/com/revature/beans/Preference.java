@@ -50,7 +50,7 @@ public class Preference {
 
 	@Override
 	public String toString() {
-		return "Preferences [prefId=" + prefId + ", name=" + name + "]";
+		return "Preference [prefId=" + prefId + ", name=" + name + "]";
 	}
 
 }
