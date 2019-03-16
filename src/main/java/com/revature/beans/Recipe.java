@@ -1,5 +1,7 @@
 package com.revature.beans;
 
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -21,11 +23,11 @@ public class Recipe {
 	@GeneratedValue(generator = "PME_REC_SEQ_GEN", strategy = GenerationType.SEQUENCE)
 	private int recipeId;
 
-	@Column(name = "INGREDIENTS")
-	private String ingredients;
-
 	@Column(name = "NAME")
 	private String recipeName;
+	
+	@Column(name = "INGREDIENTS")
+	private List<String> ingredients;
 
 	@Column(name = "CALORIES")
 	private int calories;
@@ -37,13 +39,23 @@ public class Recipe {
 		super();
 	}
 
-	public Recipe(String ingredients, String recipeName, int calories, String types) {
+	public Recipe(String recipeName, List<String> ingredients, int calories, String types) {
 		super();
-		this.ingredients = ingredients;
 		this.recipeName = recipeName;
+		this.ingredients = ingredients;
 		this.calories = calories;
 		this.types = types;
 	}
+
+	public Recipe(int recipeId, String recipeName, List<String> ingredients, int calories, String types) {
+		super();
+		this.recipeId = recipeId;
+		this.recipeName = recipeName;
+		this.ingredients = ingredients;
+		this.calories = calories;
+		this.types = types;
+	}
+
 
 	public int getRecipeId() {
 		return recipeId;
@@ -53,11 +65,11 @@ public class Recipe {
 		this.recipeId = recipeId;
 	}
 
-	public String getIngredients() {
+	public List<String> getIngredients() {
 		return ingredients;
 	}
 
-	public void setIngredients(String ingredients) {
+	public void setIngredients(List<String> ingredients) {
 		this.ingredients = ingredients;
 	}
 
@@ -91,4 +103,45 @@ public class Recipe {
 				+ ", calories=" + calories + ", types=" + types + "]";
 	}
 
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + calories;
+		result = prime * result + ((ingredients == null) ? 0 : ingredients.hashCode());
+		result = prime * result + ((recipeName == null) ? 0 : recipeName.hashCode());
+		result = prime * result + ((types == null) ? 0 : types.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Recipe other = (Recipe) obj;
+		if (calories != other.calories)
+			return false;
+		if (ingredients == null) {
+			if (other.ingredients != null)
+				return false;
+		} else if (!ingredients.equals(other.ingredients))
+			return false;
+		if (recipeName == null) {
+			if (other.recipeName != null)
+				return false;
+		} else if (!recipeName.equals(other.recipeName))
+			return false;
+		if (types == null) {
+			if (other.types != null)
+				return false;
+		} else if (!types.equals(other.types))
+			return false;
+		return true;
+	}
+
+	
 }

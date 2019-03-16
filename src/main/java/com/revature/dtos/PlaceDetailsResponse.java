@@ -1,7 +1,6 @@
 package com.revature.dtos;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
@@ -71,70 +70,6 @@ public class PlaceDetailsResponse {
 	@Override
 	public String toString() {
 		return "PlaceDetailsResponse [results=" + results + "]";
-	}
-
-}
-
-@JsonIgnoreProperties(ignoreUnknown = true)
-class PlaceDetails {
-
-	@JsonProperty("name")
-	private String name;
-
-	@JsonProperty("vicinity")
-	private String address;
-
-	@JsonProperty("photos")
-	private List<PlacePhoto> photos = Collections.emptyList();
-
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
-	}
-
-	public String getAddress() {
-		return address;
-	}
-
-	public void setAddress(String address) {
-		this.address = address;
-	}
-
-	public List<PlacePhoto> getPhotos() {
-		return photos;
-	}
-
-	public void setPhotos(List<PlacePhoto> photos) {
-		this.photos = photos;
-	}
-
-	@Override
-	public String toString() {
-		return "PlaceDetails [name=" + name + ", address=" + address + ", photos=" + photos + "]";
-	}
-
-}
-
-@JsonIgnoreProperties(ignoreUnknown = true)
-class PlacePhoto {
-
-	@JsonProperty("photo_reference")
-	private String reference;
-
-	public String getReference() {
-		return reference;
-	}
-
-	public void setReference(String reference) {
-		this.reference = reference;
-	}
-
-	@Override
-	public String toString() {
-		return "PlacePhoto [reference=" + reference + "]";
 	}
 
 }
