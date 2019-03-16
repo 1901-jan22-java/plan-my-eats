@@ -5,6 +5,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
@@ -23,6 +25,10 @@ public class RestaurantPhoto {
 
 	@Column(name = "reference")
 	private String reference;
+
+	@ManyToOne
+	@JoinColumn(name = "RESTAURANT_ID", nullable = false)
+	private Restaurant restaurant;
 
 	public RestaurantPhoto() {
 		super();
@@ -53,6 +59,14 @@ public class RestaurantPhoto {
 
 	public void setReference(String reference) {
 		this.reference = reference;
+	}
+
+	public Restaurant getRestaurant() {
+		return restaurant;
+	}
+
+	public void setRestaurant(Restaurant restaurant) {
+		this.restaurant = restaurant;
 	}
 
 	@Override
