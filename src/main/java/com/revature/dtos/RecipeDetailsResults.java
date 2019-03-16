@@ -1,4 +1,4 @@
-package com.revature.beans;
+package com.revature.dtos;
 
 import java.util.List;
 

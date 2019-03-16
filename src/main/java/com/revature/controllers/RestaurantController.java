@@ -3,6 +3,8 @@ package com.revature.controllers;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -14,8 +16,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 
-import com.revature.beans.PlaceDetailsResponse;
 import com.revature.beans.Restaurant;
+import com.revature.dtos.PlaceDetailsResponse;
 import com.revature.services.RestaurantService;
 import com.revature.services.UserService;
 
@@ -24,6 +26,8 @@ import com.revature.services.UserService;
 @RequestMapping("/restaurant")
 public class RestaurantController {
 
+	private static final Log log = LogFactory.getLog(RestaurantController.class);
+	
 	@Autowired
 	RestaurantService rs;
 
@@ -40,7 +44,7 @@ public class RestaurantController {
 		String[] filters = params.split(";");
 		String apiUrl = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?&location=" + filters[0]
 				+ "&radius=1500&type=restaurant&keyword=" + filters[1] + "&key=AIzaSyAv7FWb5nyCLZw9fxrpkaKLc3NS1BRGeXM";
-		System.out.println(apiUrl);
+		log.info("API Url: " + apiUrl);
 
 		try {
 
@@ -48,11 +52,10 @@ public class RestaurantController {
 			ResponseEntity<PlaceDetailsResponse> responseEntity = restTemplate.getForEntity(apiUrl,
 					PlaceDetailsResponse.class);
 			PlaceDetailsResponse restaurants = responseEntity.getBody();
-
-//			// what is this variable?
-//			int count = 0;
+			
 			List<Restaurant> rests = new ArrayList<Restaurant>();
-			System.out.print(restaurants.getResult().toArray().length);
+			log.info("Result Size: " + restaurants.getResult().toArray().length);
+			
 			for (int i = 0; i < restaurants.getResult().toArray().length; i++) {
 
 				Restaurant r = new Restaurant();
@@ -70,8 +73,8 @@ public class RestaurantController {
 				return new ResponseEntity<List<Restaurant>>(HttpStatus.BAD_REQUEST);
 			}
 
-		} catch (Exception theException) {
-			theException.printStackTrace();
+		} catch (Exception e) {
+			log.error("Params: " + params, e);
 		}
 
 		return new ResponseEntity<List<Restaurant>>(HttpStatus.BAD_REQUEST);

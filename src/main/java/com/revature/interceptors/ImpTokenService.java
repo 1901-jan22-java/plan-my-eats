@@ -8,6 +8,9 @@ import java.util.Date;
 import javax.crypto.spec.SecretKeySpec;
 import javax.xml.bind.DatatypeConverter;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+
 import com.revature.beans.User;
 
 import io.jsonwebtoken.Claims;
@@ -17,6 +20,8 @@ import io.jsonwebtoken.SignatureAlgorithm;
 
 public class ImpTokenService implements TokenService {
 
+	private static final Log log = LogFactory.getLog(ImpTokenService.class);
+	
 	private static final long TOKEN_EXPIRY = 1000 * 60 * 60 * 24; // 1 day
 	private static final TokenService instance = new ImpTokenService();
 
@@ -55,14 +60,14 @@ public class ImpTokenService implements TokenService {
 	@Override
 	public boolean validateToken(String token) {
 		try {
-			System.out.println(token);
+			log.info(token);
 
 			Jwts.parser().setSigningKey(DatatypeConverter.parseBase64Binary(
 					"ThisISAsUPerLoNgPasSWord0417anDNumbRs!BWYUBUUYB*@!^&#GUYWQGD!^@GDUYWQGD&!^FDUQWFUD!&^FUWQYDF^!F"))
 					.parseClaimsJws(token.split(" ")[1]).getBody();
 			return true;
 		} catch (Exception e) {
-			System.out.println("JWT validation failed at {}. Exception was {}"
+			log.error("JWT validation failed at {}. Exception was {}"
 					+ LocalDateTime.now().format(DateTimeFormatter.ofPattern("HH:mm dd/MM/yyyy")));
 			return false;
 		}

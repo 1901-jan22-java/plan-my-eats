@@ -19,12 +19,12 @@ public class JWTAuthenticationFilter extends HandlerInterceptorAdapter {
 //		final String token = user.getToken();
 //
 //		if (token == null) {
-//			log.info("Authentication failed");
+//			log.error("Authentication failed");
 //			return new ResponseEntity<User>(HttpStatus.BAD_REQUEST);
 //		}
 //
 //		if (tokenService.validateToken(token)) {
-//			log.info("Token is invalid! Log in again to request a new token!");
+//			log.error("Token is invalid! Log in again to request a new token!");
 //			return new ResponseEntity<User>(HttpStatus.UNAUTHORIZED);
 //		}
 //
@@ -40,7 +40,7 @@ public class JWTAuthenticationFilter extends HandlerInterceptorAdapter {
 		log.info(request.getRequestURI().split("/")[2]);
 		if (request.getRequestURI().split("/")[2].equals("login")
 				|| request.getRequestURI().split("/")[2].equals("register")) {
-			log.info("This is a login request.");
+			log.error("This is a login request.");
 			return true;
 		}
 		final String token = request.getHeader("Authorization");
@@ -55,7 +55,7 @@ public class JWTAuthenticationFilter extends HandlerInterceptorAdapter {
 		boolean valid = tokenService.validateToken(token);
 		log.info(valid);
 		if (!valid) {
-			log.info("Authentication failed: Token is invalid");
+			log.error("Authentication failed: Token is invalid");
 //			response.setContentType("application/json");
 			response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
 			return false;

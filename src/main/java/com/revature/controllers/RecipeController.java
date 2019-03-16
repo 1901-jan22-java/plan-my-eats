@@ -19,8 +19,8 @@ import org.springframework.web.client.RestTemplate;
 
 import com.revature.beans.Preference;
 import com.revature.beans.Recipe;
-import com.revature.beans.RecipeDetailsResults;
 import com.revature.beans.User;
+import com.revature.dtos.RecipeDetailsResults;
 import com.revature.services.RecipeService;
 
 @CrossOrigin
@@ -38,23 +38,26 @@ public class RecipeController {
 		return new ResponseEntity<List<Recipe>>(rs.getAll(), HttpStatus.OK);
 	}
 
+	// What in the actual world is this thing... o.o
 	@RequestMapping(method = RequestMethod.POST, consumes = MediaType.TEXT_PLAIN_VALUE, produces = MediaType.APPLICATION_JSON_VALUE, value = "/recipe")
 	public ResponseEntity<RecipeDetailsResults> hitRecApi(@RequestBody User u) {
 		Random rand = new Random();
 		String[] filters = new String[2];
 		double calories = 0;
+
 		/*
+		 * Men BMi = 66.4730 + (13.7516 x weight in kg) + (5.0033 x height in cm) -
+		 * (6.7550 x age in years)
 		 * 
-		 * Men BMR = 66.4730 + (13.7516 x weight in kg) + (5.0033 x height in cm) �
-		 * (6.7550 x age in years) Women BMR = 655.0955 + (9.5634 x weight in kg) +
-		 * (1.8496 x height in cm) � (4.6756 x age in years)
+		 * Women BMR = 655.0955 + (9.5634 x weight in kg) + (1.8496 x height in cm) -
+		 * (4.6756 x age in years)
 		 * 
 		 */
-		if (u.getGender() == "male") {
+		if (u.getGender().equalsIgnoreCase("male")) {
 			calories = 66.4730d + (13.7516 * (u.getWeight() * 0.4539d)) + (5.0033d * (u.getHeight() * 2.54d))
 					- (6.7550 * u.getAge());
 			calories *= 1.2d;
-		} else if (u.getGender() == "female") {
+		} else if (u.getGender().equalsIgnoreCase("female")) {
 			calories = 655.0955d + (9.5634d * (u.getWeight() * 0.4539d)) + (1.8496d * (u.getHeight() * 2.54d))
 					- (4.6756d * u.getAge());
 			calories *= 1.2d;
@@ -116,6 +119,7 @@ public class RecipeController {
 				r.setRecipeName(recipes.getName(i));
 				recp.add(r);
 			}
+
 			if (responseEntity.getStatusCode().toString().equals("200")) {
 				return new ResponseEntity<RecipeDetailsResults>(recipes, HttpStatus.OK);
 			} else {
