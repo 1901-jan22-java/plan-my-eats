@@ -1,7 +1,5 @@
 package com.revature.beans;
 
-import java.util.List;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -25,9 +23,9 @@ public class Recipe {
 
 	@Column(name = "NAME")
 	private String recipeName;
-	
+
 	@Column(name = "INGREDIENTS")
-	private List<String> ingredients;
+	private String ingredients;
 
 	@Column(name = "CALORIES")
 	private int calories;
@@ -39,7 +37,7 @@ public class Recipe {
 		super();
 	}
 
-	public Recipe(String recipeName, List<String> ingredients, int calories, String types) {
+	public Recipe(String recipeName, String ingredients, int calories, String types) {
 		super();
 		this.recipeName = recipeName;
 		this.ingredients = ingredients;
@@ -47,7 +45,7 @@ public class Recipe {
 		this.types = types;
 	}
 
-	public Recipe(int recipeId, String recipeName, List<String> ingredients, int calories, String types) {
+	public Recipe(int recipeId, String recipeName, String ingredients, int calories, String types) {
 		super();
 		this.recipeId = recipeId;
 		this.recipeName = recipeName;
@@ -55,7 +53,6 @@ public class Recipe {
 		this.calories = calories;
 		this.types = types;
 	}
-
 
 	public int getRecipeId() {
 		return recipeId;
@@ -65,11 +62,11 @@ public class Recipe {
 		this.recipeId = recipeId;
 	}
 
-	public List<String> getIngredients() {
+	public String getIngredients() {
 		return ingredients;
 	}
 
-	public void setIngredients(List<String> ingredients) {
+	public void setIngredients(String ingredients) {
 		this.ingredients = ingredients;
 	}
 
@@ -107,10 +104,8 @@ public class Recipe {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + calories;
 		result = prime * result + ((ingredients == null) ? 0 : ingredients.hashCode());
 		result = prime * result + ((recipeName == null) ? 0 : recipeName.hashCode());
-		result = prime * result + ((types == null) ? 0 : types.hashCode());
 		return result;
 	}
 
@@ -123,8 +118,6 @@ public class Recipe {
 		if (getClass() != obj.getClass())
 			return false;
 		Recipe other = (Recipe) obj;
-		if (calories != other.calories)
-			return false;
 		if (ingredients == null) {
 			if (other.ingredients != null)
 				return false;
@@ -135,13 +128,7 @@ public class Recipe {
 				return false;
 		} else if (!recipeName.equals(other.recipeName))
 			return false;
-		if (types == null) {
-			if (other.types != null)
-				return false;
-		} else if (!types.equals(other.types))
-			return false;
 		return true;
 	}
 
-	
 }

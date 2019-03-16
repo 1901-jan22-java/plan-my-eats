@@ -62,7 +62,7 @@ public class RestaurantController {
 				r.setName(restaurants.namesList().get(i));
 				r.setType(filters[1]);
 				r.setLocation(restaurants.AddressList().get(i));
-				r.setImgRef(restaurants.PhotosList().get(i));
+//				r.setImgRef(restaurants.PhotosList().get(i));
 				rests.add(r);
 
 			}
@@ -78,6 +78,11 @@ public class RestaurantController {
 		}
 
 		return new ResponseEntity<List<Restaurant>>(HttpStatus.BAD_REQUEST);
+	}
+	
+	@RequestMapping(path = "/test", method=RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<List<Restaurant>> pleaseWork(){
+		return new ResponseEntity<List<Restaurant>>(rs.getRestaurant(), HttpStatus.OK);
 	}
 
 }

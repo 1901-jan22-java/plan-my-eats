@@ -5,6 +5,7 @@ import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.revature.beans.RestaurantPhoto;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class PlaceDetailsResponse {
@@ -46,20 +47,15 @@ public class PlaceDetailsResponse {
 		return address;
 	}
 
-	public List<String> PhotosList() {
-		int count = 0;
-		List<String> photo = new ArrayList<String>();
+	public List<RestaurantPhoto> PhotosList() {
+		List<RestaurantPhoto> photo = new ArrayList<RestaurantPhoto>();
 
 		for (int i = 0; i < results.size(); i++) {
-			if (count == 2) {
-				photo.add(results.get(i).getPhotos().get(i).getReference());
+			if (i%3 == 2) {
+				photo.add(new RestaurantPhoto(results.get(i).getPhotos().get(i).getReference()));
 			}
-			count++;
-			if (count == 3) {
-				count = 0;
-			}
-
 		}
+		
 		return photo;
 	}
 

@@ -1,5 +1,7 @@
 package com.revature.beans;
 
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -37,13 +39,21 @@ public class Restaurant {
 	private String type;
 
 	@Column(name = "IMAGE_REF")
-	private String imgRef;
+	private List<RestaurantPhoto> imgRef;
 
 	public Restaurant() {
 		super();
 	}
 
-	public Restaurant(String name, String location, String latitude, String longitude, String type, String imgRef) {
+	public Restaurant(String name, String location, List<RestaurantPhoto> imgRef) {
+		super();
+		this.name = name;
+		this.location = location;
+		this.imgRef = imgRef;
+	}
+
+	public Restaurant(String name, String location, String latitude, String longitude, String type,
+			List<RestaurantPhoto> imgRef) {
 		super();
 		this.name = name;
 		this.location = location;
@@ -54,7 +64,7 @@ public class Restaurant {
 	}
 
 	public Restaurant(int restaurantId, String name, String location, String latitude, String longitude, String type,
-			String imgRef) {
+			List<RestaurantPhoto> imgRef) {
 		super();
 		this.restaurantId = restaurantId;
 		this.name = name;
@@ -113,11 +123,11 @@ public class Restaurant {
 		this.type = type;
 	}
 
-	public String getImgRef() {
+	public List<RestaurantPhoto> getImgRef() {
 		return imgRef;
 	}
 
-	public void setImgRef(String imgRef) {
+	public void setImgRef(List<RestaurantPhoto> imgRef) {
 		this.imgRef = imgRef;
 	}
 
@@ -125,6 +135,37 @@ public class Restaurant {
 	public String toString() {
 		return "Restaurant [restaurantId=" + restaurantId + ", name=" + name + ", location=" + location + ", latitude="
 				+ latitude + ", longitude=" + longitude + ", type=" + type + ", imgRef=" + imgRef + "]";
+	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((location == null) ? 0 : location.hashCode());
+		result = prime * result + ((name == null) ? 0 : name.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Restaurant other = (Restaurant) obj;
+		if (location == null) {
+			if (other.location != null)
+				return false;
+		} else if (!location.equals(other.location))
+			return false;
+		if (name == null) {
+			if (other.name != null)
+				return false;
+		} else if (!name.equals(other.name))
+			return false;
+		return true;
 	}
 
 }

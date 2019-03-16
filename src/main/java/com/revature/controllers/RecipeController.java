@@ -39,7 +39,7 @@ public class RecipeController {
 	}
 
 	// What in the actual world is this thing... o.o
-	@RequestMapping(path = "/old", method = RequestMethod.POST, consumes = MediaType.TEXT_PLAIN_VALUE, produces = MediaType.APPLICATION_JSON_VALUE, value = "/recipe")
+	@RequestMapping(method = RequestMethod.POST, consumes = MediaType.TEXT_PLAIN_VALUE, produces = MediaType.APPLICATION_JSON_VALUE, value = "/recipe")
 	public ResponseEntity<RecipeDetailsResults> hitRecApi(@RequestBody User u) {
 		Random rand = new Random();
 		String[] filters = new String[2];
@@ -113,7 +113,11 @@ public class RecipeController {
 			for (int i = 0; i < 20; i++) {
 				Recipe r = new Recipe();
 				r.setCalories(recipes.getCalories(i) / recipes.getServings(i));
-				r.setIngredients(recipes.getIngredients(i));
+				StringBuilder sb = new StringBuilder();
+				for(String ingredient :recipes.getIngredients(i)) {
+					sb.append(ingredient + "\n");
+				}
+				r.setIngredients(sb.toString().substring(0, sb.length()-2));
 				r.setRecipeName(recipes.getName(i));
 				recp.add(r);
 			}
@@ -130,7 +134,7 @@ public class RecipeController {
 		return new ResponseEntity<RecipeDetailsResults>(HttpStatus.BAD_REQUEST);
 	}
 
-	@RequestMapping(method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+	@RequestMapping(path = "/test", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<List<Recipe>> pleaseWork(User u) {
 		return rs.searchByUserPreference(u);
 	}

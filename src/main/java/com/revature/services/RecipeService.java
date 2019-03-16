@@ -68,11 +68,14 @@ public class RecipeService {
 			// Recipe Constructor Signature
 			// public Recipe(String ingredients, String recipeName, int calories, String
 			// types)
-			Recipe r = new Recipe(rd.getName(), rd.getIngredients(), (rd.getCalories() / rd.getServings()),
-					keywords.toString());
-			if(repo.findRecipeByRecipeName(r.getRecipeName()) == null) {
-				repo.save(r);
+			StringBuilder sb = new StringBuilder();
+			for (String i : rd.getIngredients()) {
+				sb.append(i + "\n");
 			}
+
+			Recipe r = new Recipe(rd.getName(), sb.toString().substring(0, sb.length() - 2),
+					(rd.getCalories() / rd.getServings()), keywords.toString());
+			repo.save(r);
 			res.add(r);
 		}
 
