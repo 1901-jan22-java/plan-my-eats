@@ -32,7 +32,7 @@
 	<distributionManagement>
 		<repository>
 			<id>plan-my-eats</id>
-			<url>http://localhost:8080/</url>
+			<url>plan-my-eats/</url>
 		</repository>
 	</distributionManagement>
 	<!-- Let Spring handle our dependency management -->
