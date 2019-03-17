@@ -18,7 +18,7 @@ import org.springframework.stereotype.Component;
 public class RestaurantPhoto {
 
 	@Id
-	@Column(name = "ID")
+	@Column(name = "PHOTO_ID")
 	@SequenceGenerator(name = "PME_RES_PHOTO_SEQ_GEN", sequenceName = "PME_PHOTO_RES_SEQ", allocationSize = 1)
 	@GeneratedValue(generator = "PME_RES_PHOTO_SEQ_GEN", strategy = GenerationType.SEQUENCE)
 	private int id;
