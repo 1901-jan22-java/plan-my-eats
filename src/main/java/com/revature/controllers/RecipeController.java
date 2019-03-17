@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -26,6 +27,8 @@ import com.revature.services.UserService;
 @RestController
 @RequestMapping("/recipe")
 public class RecipeController {
+
+	private static final Logger log = Logger.getLogger(RecipeController.class);
 
 	@Autowired
 	UserService us;
@@ -95,7 +98,7 @@ public class RecipeController {
 		String apiUrl = "https://api.edamam.com/search?q="
 				+ "&app_id=3ee293b7&app_key=5143a3f492a353eb02eac1fac6912dbc&from=0&to=3&calories="
 				+ (int) (calories * 0.33d) + "&health=" + filters[0] + "+" + filters[1];
-		System.out.println(apiUrl);
+		log.info(apiUrl);
 
 		try {
 			RestTemplate restTemplate = new RestTemplate();
@@ -118,8 +121,8 @@ public class RecipeController {
 				return new ResponseEntity<RecipeDetailsResults>(HttpStatus.BAD_REQUEST);
 			}
 
-		} catch (Exception theException) {
-			theException.printStackTrace();
+		} catch (Exception e) {
+			log.error("", e);
 		}
 		return new ResponseEntity<RecipeDetailsResults>(HttpStatus.BAD_REQUEST);
 	}

@@ -15,7 +15,7 @@ public class PlaceDetailsResponse {
 		return results;
 	}
 
-	public List<String> namesList() {
+	public List<String> NamesList() {
 		List<String> names = new ArrayList<String>();
 
 		for (PlaceDetails p : results) {
@@ -66,4 +66,5 @@ public class PlaceDetailsResponse {
 	public String toString() {
 		return "PlaceDetailsResponse [results=" + results + "]";
 	}
+
 }

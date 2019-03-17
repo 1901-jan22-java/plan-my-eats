@@ -17,4 +17,9 @@ public class PlaceGeometry {
 		this.location = location;
 	}
 
+	@Override
+	public String toString() {
+		return "PlaceGeometry [location=" + location + "]";
+	}
+
 }

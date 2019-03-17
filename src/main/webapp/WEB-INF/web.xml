@@ -14,9 +14,6 @@
 		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
 	</listener>
 
-	<!-- Configure the one and only one servlet in a Spring web mvc application: 
-		our Dispatcher Servlet. This servlet will serve as our front controller, 
-		and redirect all requests to our controller classes -->
 	<servlet>
 		<servlet-name>FrontController</servlet-name>
 		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>

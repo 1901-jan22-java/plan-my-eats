@@ -3,6 +3,7 @@ package com.revature.controllers;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -24,6 +25,8 @@ import com.revature.services.UserService;
 @RestController
 @RequestMapping("/restaurant")
 public class RestaurantController {
+	
+	private static final Logger log = Logger.getLogger(RestaurantController.class);
 
 	@Autowired
 	RestaurantService rs;
@@ -40,7 +43,7 @@ public class RestaurantController {
 		String[] filters = params.split(";");
 		String apiUrl = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?&location=" + filters[0]
 				+ "&radius=1500&type=restaurant&keyword=" + filters[1] + "&key=AIzaSyAv7FWb5nyCLZw9fxrpkaKLc3NS1BRGeXM";
-		System.out.println(apiUrl);
+		log.info(apiUrl);
 
 		try {
 			RestTemplate restTemplate = new RestTemplate();
@@ -49,16 +52,16 @@ public class RestaurantController {
 			PlaceDetailsResponse restaurants = responseEntity.getBody();
 
 			List<Restaurant> rests = new ArrayList<Restaurant>();
-			System.out.print(restaurants.getResult().toArray().length);
+			log.info(restaurants.getResult().toArray().length);
 			for (int i = 0; i < restaurants.getResult().toArray().length; i++) {
 
 				Restaurant r = new Restaurant();
-				r.setName(restaurants.namesList().get(i));
-				r.setType(filters[1]);
+				r.setName(restaurants.NamesList().get(i));
 				r.setLocation(restaurants.VicinityList().get(i));
-				r.setImgRef(restaurants.PhotosList().get(i));
+				r.setType(filters[1]);
 				r.setLatitude(restaurants.LatitudeList().get(i));
 				r.setLongitude(restaurants.LongitudeList().get(i));
+				r.setImgRef(restaurants.PhotosList().get(i));
 				rests.add(r);
 
 			}
