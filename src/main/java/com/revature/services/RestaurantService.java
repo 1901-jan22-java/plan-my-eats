@@ -1,7 +1,9 @@
 package com.revature.services;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Properties;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +13,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.client.RestTemplate;
 
 import com.revature.beans.Restaurant;
+import com.revature.configurations.KeyConfiguration;
 import com.revature.dtos.google.places.PlaceDetails;
 import com.revature.dtos.google.places.PlaceDetailsResponse;
 import com.revature.dtos.google.places.PlaceLocation;
@@ -26,9 +29,11 @@ public class RestaurantService {
 	@Autowired
 	private static RestaurantRepository repo;
 
+	private static String appKey = KeyConfiguration.PROPS.getProperty("google.places.appKey");
+
 	private static String buildAPIUrl(String location, String keywords) {
 		String apiUrl = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?&location=" + location
-				+ "&radius=1500&type=restaurant&keyword=" + keywords + "&key=AIzaSyAv7FWb5nyCLZw9fxrpkaKLc3NS1BRGeXM";
+				+ "&radius=1500&type=restaurant&keyword=" + keywords + "&key=" + appKey;
 		log.info("API Url: " + apiUrl);
 		return apiUrl;
 	}

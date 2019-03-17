@@ -72,14 +72,14 @@ public class RestaurantController {
 				return new ResponseEntity<List<Restaurant>>(HttpStatus.BAD_REQUEST);
 			}
 
-		} catch (Exception theException) {
-			theException.printStackTrace();
+		} catch (Exception e) {
+			log.error("", e);
 		}
 		return new ResponseEntity<List<Restaurant>>(HttpStatus.BAD_REQUEST);
 	}
 
 	@RequestMapping(method = RequestMethod.PUT, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<User> updateRestaurantHistory(@RequestBody User user) {
+	public ResponseEntity<User> updateUserRestaurantHistory(@RequestBody User user) {
 		us.saveUser(user);
 		return new ResponseEntity<User>(user, HttpStatus.OK);
 	}

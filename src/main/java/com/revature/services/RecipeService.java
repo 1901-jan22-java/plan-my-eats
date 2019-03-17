@@ -1,8 +1,11 @@
 package com.revature.services;
 
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Properties;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +17,7 @@ import org.springframework.web.client.RestTemplate;
 import com.revature.beans.Preference;
 import com.revature.beans.Recipe;
 import com.revature.beans.User;
+import com.revature.configurations.KeyConfiguration;
 import com.revature.dtos.edamam.recipes.RecipeDetails;
 import com.revature.dtos.edamam.recipes.RecipeDetailsResults;
 import com.revature.dtos.edamam.recipes.RecipeResults;
@@ -25,13 +29,15 @@ public class RecipeService {
 
 	private static final Logger log = Logger.getLogger(RecipeService.class);
 
+	private static String appId = KeyConfiguration.PROPS.getProperty("edamam.recipe.appId");
+	private static String appKey = KeyConfiguration.PROPS.getProperty("edamam.recipe.appKey");
+
 	@Autowired
 	private static RecipeRepository repo;
 
 	private static String buildAPIUrl(double calories, String keywords) {
-		String apiUrl = "https://api.edamam.com/search?q="
-				+ "&app_id=3ee293b7&app_key=5143a3f492a353eb02eac1fac6912dbc&from=0&to=3&calories="
-				+ (int) (calories * 0.33d) + "&health=" + keywords;
+		String apiUrl = "https://api.edamam.com/search?q=&app_id=" + appId + "&app_key=" + appKey
+				+ "&from=0&to=3&calories=" + (int) (calories * 0.33d) + "&health=" + keywords;
 		log.info("Edamam API Url: " + apiUrl);
 
 		return apiUrl;
