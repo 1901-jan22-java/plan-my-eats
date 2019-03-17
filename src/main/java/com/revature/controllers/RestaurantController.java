@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 
@@ -68,8 +69,6 @@ public class RestaurantController {
 
 			if (responseEntity.getStatusCode().toString().equals("200")) {
 				return new ResponseEntity<List<Restaurant>>(rests, HttpStatus.OK);
-			} else {
-				return new ResponseEntity<List<Restaurant>>(HttpStatus.BAD_REQUEST);
 			}
 
 		} catch (Exception e) {
@@ -80,12 +79,13 @@ public class RestaurantController {
 
 	@RequestMapping(method = RequestMethod.PUT, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<User> updateUserRestaurantHistory(@RequestBody User user) {
-		us.saveUser(user);
-		return new ResponseEntity<User>(user, HttpStatus.OK);
+		User u = us.saveUser(user);
+		return new ResponseEntity<User>(u, HttpStatus.OK);
 	}
 
-	@RequestMapping(path = "/test", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<List<Restaurant>> pleaseWork() {
-		return new ResponseEntity<List<Restaurant>>(rs.getRestaurant(), HttpStatus.OK);
+	@RequestMapping(path = "/test", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<List<Restaurant>> pleaseWork(@RequestParam(value = "keywords") String keywords,
+			@RequestParam(value = "location") String location) {
+		return rs.searchRestaurantsByKeywords(location, keywords);
 	}
 }

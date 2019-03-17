@@ -1,9 +1,7 @@
 package com.revature.services;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Properties;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,38 +28,6 @@ public class RestaurantService {
 	private static RestaurantRepository repo;
 
 	private static String appKey = KeyConfiguration.PROPS.getProperty("google.places.appKey");
-
-	private static String buildAPIUrl(String location, String keywords) {
-		String apiUrl = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?&location=" + location
-				+ "&radius=1500&type=restaurant&keyword=" + keywords + "&key=" + appKey;
-		log.info("API Url: " + apiUrl);
-		return apiUrl;
-	}
-
-	private static ResponseEntity<List<Restaurant>> mapAndCacheGoogleAPI(ResponseEntity<PlaceDetailsResponse> re,
-			String keywords) {
-
-		PlaceDetailsResponse pdr = re.getBody();
-
-		List<Restaurant> rs = new ArrayList<Restaurant>();
-		log.info("Result: " + pdr.getResult());
-
-		for (PlaceDetails pd : pdr.getResult()) {
-			PlaceLocation pl = pd.getGeometry().getLocation();
-
-			StringBuilder sb = new StringBuilder();
-			for (PlacePhoto pp : pd.getPhotos()) {
-				sb.append(pp.getReference() + " ");
-			}
-
-			Restaurant r = new Restaurant(pd.getName(), pd.getVicinity(), keywords, pl.getLatitude(), pl.getLongitude(),
-					sb.toString().substring(0, sb.length() - 1));
-			repo.save(r);
-			rs.add(r);
-		}
-
-		return new ResponseEntity<List<Restaurant>>(rs, re.getStatusCode());
-	}
 
 	public ResponseEntity<List<Restaurant>> searchRestaurantsByKeywords(String location, String keywords) {
 		RestTemplate rt = new RestTemplate();
@@ -94,4 +60,40 @@ public class RestaurantService {
 	public List<Restaurant> getRestaurant() {
 		return repo.findAll();
 	}
+
+	/************************************/
+	/********** HELPER METHODS **********/
+	/************************************/
+
+	private static String buildAPIUrl(String location, String keywords) {
+		String apiUrl = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?&location=" + location
+				+ "&radius=1500&type=restaurant&keyword=" + keywords + "&key=" + appKey;
+		log.info("API Url: " + apiUrl);
+		return apiUrl;
+	}
+
+	private static ResponseEntity<List<Restaurant>> mapAndCacheGoogleAPI(ResponseEntity<PlaceDetailsResponse> re,
+			String keywords) {
+		PlaceDetailsResponse pdr = re.getBody();
+
+		List<Restaurant> rs = new ArrayList<Restaurant>();
+		log.info("Result: " + pdr.getResult());
+
+		for (PlaceDetails pd : pdr.getResult()) {
+			PlaceLocation pl = pd.getGeometry().getLocation();
+
+			StringBuilder sb = new StringBuilder();
+			for (PlacePhoto pp : pd.getPhotos()) {
+				sb.append(pp.getReference() + " ");
+			}
+
+			Restaurant r = new Restaurant(pd.getName(), pd.getVicinity(), keywords, pl.getLatitude(), pl.getLongitude(),
+					sb.toString().substring(0, sb.length() - 1));
+			repo.save(r);
+			rs.add(r);
+		}
+
+		return new ResponseEntity<List<Restaurant>>(rs, re.getStatusCode());
+	}
+
 }

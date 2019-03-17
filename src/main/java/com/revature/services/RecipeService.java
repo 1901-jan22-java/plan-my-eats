@@ -1,11 +1,8 @@
 package com.revature.services;
 
-import java.io.IOException;
-import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.Properties;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,35 +31,6 @@ public class RecipeService {
 
 	@Autowired
 	private static RecipeRepository repo;
-
-	private static String buildAPIUrl(double calories, String keywords) {
-		String apiUrl = "https://api.edamam.com/search?q=&app_id=" + appId + "&app_key=" + appKey
-				+ "&from=0&to=3&calories=" + (int) (calories * 0.33d) + "&health=" + keywords;
-		log.info("Edamam API Url: " + apiUrl);
-
-		return apiUrl;
-	}
-
-	private static ResponseEntity<List<Recipe>> mapAndCacheEdamamAPI(ResponseEntity<RecipeDetailsResults> re,
-			String keywords) {
-		List<Recipe> res = new ArrayList<>();
-
-		for (RecipeResults rr : re.getBody().getHits()) {
-			RecipeDetails rd = rr.getRecipe();
-
-			StringBuilder sb = new StringBuilder();
-			for (String i : rd.getIngredients()) {
-				sb.append(i + "\n");
-			}
-
-			Recipe r = new Recipe(rd.getName(), sb.toString().substring(0, sb.length() - 2),
-					(rd.getCalories() / rd.getServings()), keywords);
-			repo.save(r);
-			res.add(r);
-		}
-
-		return new ResponseEntity<List<Recipe>>(res, re.getStatusCode());
-	}
 
 	public ResponseEntity<List<Recipe>> searchByUserDetails(User u) {
 		// Default calories for a meal
@@ -102,6 +70,7 @@ public class RecipeService {
 	/***********************************/
 	/****** Find recipe by fields ******/
 	/***********************************/
+
 	public Recipe findById(int id) {
 		return repo.findOne(id);
 	}
@@ -129,5 +98,38 @@ public class RecipeService {
 //	public List<Recipe> getRecipesByTypes(String types) {
 //		return repo.findRecipesByTypes(types);
 //	}
+
+	/************************************/
+	/********** HELPER METHODS **********/
+	/************************************/
+
+	private static String buildAPIUrl(double calories, String keywords) {
+		String apiUrl = "https://api.edamam.com/search?q=&app_id=" + appId + "&app_key=" + appKey
+				+ "&from=0&to=3&calories=" + (int) (calories * 0.33d) + "&health=" + keywords;
+		log.info("Edamam API Url: " + apiUrl);
+
+		return apiUrl;
+	}
+
+	private static ResponseEntity<List<Recipe>> mapAndCacheEdamamAPI(ResponseEntity<RecipeDetailsResults> re,
+			String keywords) {
+		List<Recipe> res = new ArrayList<>();
+
+		for (RecipeResults rr : re.getBody().getHits()) {
+			RecipeDetails rd = rr.getRecipe();
+
+			StringBuilder sb = new StringBuilder();
+			for (String i : rd.getIngredients()) {
+				sb.append(i + "\n");
+			}
+
+			Recipe r = new Recipe(rd.getName(), sb.toString().substring(0, sb.length() - 2),
+					(rd.getCalories() / rd.getServings()), keywords);
+			repo.save(r);
+			res.add(r);
+		}
+
+		return new ResponseEntity<List<Recipe>>(res, re.getStatusCode());
+	}
 
 }

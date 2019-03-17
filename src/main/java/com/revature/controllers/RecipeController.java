@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 
@@ -34,6 +35,17 @@ public class RecipeController {
 	UserService us;
 	@Autowired
 	RecipeService rs;
+
+	@RequestMapping(method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<List<Recipe>> getAllRecipes() {
+		return new ResponseEntity<List<Recipe>>(rs.getAll(), HttpStatus.OK);
+	}
+
+	@RequestMapping(path = "/test", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<List<Recipe>> searchByPreferences(@RequestParam(value = "userId") int id) {
+		User u = us.findById(id);
+		return rs.searchByUserDetails(u);
+	}
 
 	@RequestMapping(method = RequestMethod.POST, consumes = MediaType.TEXT_PLAIN_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<RecipeDetailsResults> hitRecApi(@RequestBody User u) {
