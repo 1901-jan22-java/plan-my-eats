@@ -49,5 +49,5 @@ public class PreferenceController {
 			return new ResponseEntity<User>(u, HttpStatus.OK);
 		}
 	}
-	
+
 }

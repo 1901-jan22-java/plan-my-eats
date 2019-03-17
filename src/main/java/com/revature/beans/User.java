@@ -47,7 +47,7 @@ public class User {
 
 	@Column(nullable = false, name = "WEIGHT")
 	private double weight;
-	
+
 	@Transient
 	private String token;
 

@@ -46,9 +46,4 @@ public class RegisterController {
 
 	}
 
-	@RequestMapping(method = RequestMethod.PUT)
-	public ResponseEntity<User> addPreference(@RequestBody User user) {
-		return null;
-	}
-
 }

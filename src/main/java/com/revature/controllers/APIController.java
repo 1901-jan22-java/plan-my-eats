@@ -39,8 +39,6 @@ public class APIController {
 
 			if (responseEntity.getStatusCode().toString().equals("200")) {
 				return new ResponseEntity<PlaceDetailsResponse>(restaurants, HttpStatus.OK);
-			} else {
-				return new ResponseEntity<PlaceDetailsResponse>(HttpStatus.BAD_REQUEST);
 			}
 
 		} catch (Exception e) {
@@ -69,8 +67,6 @@ public class APIController {
 			RecipeDetailsResults recipes = responseEntity.getBody();
 			if (responseEntity.getStatusCode().toString().equals("200")) {
 				return new ResponseEntity<RecipeDetailsResults>(recipes, HttpStatus.OK);
-			} else {
-				return new ResponseEntity<RecipeDetailsResults>(HttpStatus.BAD_REQUEST);
 			}
 
 		} catch (Exception e) {
