@@ -38,7 +38,11 @@ public class PlaceDetailsResponse {
 		List<String> photo = new ArrayList<String>();
 ;
 		for(PlaceDetails p : results) {
-			photo.add(p.getPhotos().get(0).getReference());
+			if(p.getPhotos().size() > 0) {
+				photo.add(p.getPhotos().get(0).getReference());
+			} else {
+				photo.add("No Photo");
+			}
 		}
 		return photo;
 	}
