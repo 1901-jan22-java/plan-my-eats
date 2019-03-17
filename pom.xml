@@ -32,7 +32,7 @@
 	<distributionManagement>
 		<repository>
 			<id>plan-my-eats</id>
-			<url>http://ec2-52-90-151-107.compute-1.amazonaws.com:8080/plan-my-eats</url>
+			<url>http://localhost:8080/</url>
 		</repository>
 	</distributionManagement>
 	<!-- Let Spring handle our dependency management -->
