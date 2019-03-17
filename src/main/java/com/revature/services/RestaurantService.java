@@ -10,10 +10,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.revature.beans.Restaurant;
-import com.revature.beans.RestaurantPhoto;
 import com.revature.dtos.PlaceDetails;
 import com.revature.dtos.PlaceDetailsResponse;
-import com.revature.dtos.PlacePhoto;
 import com.revature.repositories.RestaurantRepository;
 
 @Service
@@ -79,13 +77,13 @@ public class RestaurantService {
 		for (PlaceDetails pd : pdr.getResult()) {
 
 //			pd.getName(), pd.getAddress(), pd.getPhotos();
-			List<RestaurantPhoto> rp = new ArrayList<>();
-			for (PlacePhoto pp : pd.getPhotos()) {
-				rp.add(new RestaurantPhoto(pp.getReference()));
-			}
-
-			Restaurant r = new Restaurant(pd.getName(), pd.getAddress(), rp);
-			rs.add(r);
+//			List<RestaurantPhoto> rp = new ArrayList<>();
+//			for (PlacePhoto pp : pd.getPhotos()) {
+//				rp.add(new RestaurantPhoto(pp.getReference()));
+//			}
+//
+//			Restaurant r = new Restaurant(pd.getName(), pd.);
+//			rs.add(r);
 
 		}
 

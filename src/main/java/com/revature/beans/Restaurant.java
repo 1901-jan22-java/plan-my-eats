@@ -32,49 +32,41 @@ public class Restaurant {
 	@Column(name = "ADDRESS")
 	private String location;
 
+	@Column(name = "TYPE")
+	private String type;
+
 	@Column(name = "LATITUDE")
 	private String latitude;
 
 	@Column(name = "LONGITUDE")
 	private String longitude;
 
-	@Column(name = "TYPE")
-	private String type;
-
-	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy="restaurant")
-	private List<RestaurantPhoto> imgRef;
+	@Column(name = "IMAGE_REFERENCE")
+	private String imgRef;
 
 	public Restaurant() {
 		super();
 	}
 
-	public Restaurant(String name, String location, List<RestaurantPhoto> imgRef) {
+	public Restaurant(String name, String location, String type, String latitude, String longitude, String imgRef) {
 		super();
 		this.name = name;
 		this.location = location;
-		this.imgRef = imgRef;
-	}
-
-	public Restaurant(String name, String location, String latitude, String longitude, String type,
-			List<RestaurantPhoto> imgRef) {
-		super();
-		this.name = name;
-		this.location = location;
+		this.type = type;
 		this.latitude = latitude;
 		this.longitude = longitude;
-		this.type = type;
 		this.imgRef = imgRef;
 	}
 
-	public Restaurant(int restaurantId, String name, String location, String latitude, String longitude, String type,
-			List<RestaurantPhoto> imgRef) {
+	public Restaurant(int restaurantId, String name, String location, String type, String latitude, String longitude,
+			String imgRef) {
 		super();
 		this.restaurantId = restaurantId;
 		this.name = name;
 		this.location = location;
+		this.type = type;
 		this.latitude = latitude;
 		this.longitude = longitude;
-		this.type = type;
 		this.imgRef = imgRef;
 	}
 
@@ -102,6 +94,14 @@ public class Restaurant {
 		this.location = location;
 	}
 
+	public String getType() {
+		return type;
+	}
+
+	public void setType(String type) {
+		this.type = type;
+	}
+
 	public String getLatitude() {
 		return latitude;
 	}
@@ -118,57 +118,18 @@ public class Restaurant {
 		this.longitude = longitude;
 	}
 
-	public String getType() {
-		return type;
-	}
-
-	public void setType(String type) {
-		this.type = type;
-	}
-
-	public List<RestaurantPhoto> getImgRef() {
+	public String getImgRef() {
 		return imgRef;
 	}
 
-	public void setImgRef(List<RestaurantPhoto> imgRef) {
+	public void setImgRef(String imgRef) {
 		this.imgRef = imgRef;
 	}
 
 	@Override
 	public String toString() {
-		return "Restaurant [restaurantId=" + restaurantId + ", name=" + name + ", location=" + location + ", latitude="
-				+ latitude + ", longitude=" + longitude + ", type=" + type + ", imgRef=" + imgRef + "]";
-	}
-
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + ((location == null) ? 0 : location.hashCode());
-		result = prime * result + ((name == null) ? 0 : name.hashCode());
-		return result;
-	}
-
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		Restaurant other = (Restaurant) obj;
-		if (location == null) {
-			if (other.location != null)
-				return false;
-		} else if (!location.equals(other.location))
-			return false;
-		if (name == null) {
-			if (other.name != null)
-				return false;
-		} else if (!name.equals(other.name))
-			return false;
-		return true;
+		return "Restaurant [restaurantId=" + restaurantId + ", name=" + name + ", location=" + location + ", type="
+				+ type + ", latitude=" + latitude + ", longitude=" + longitude + ", imgRef=" + imgRef + "]";
 	}
 
 }

@@ -8,7 +8,6 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class PlaceDetailsResponse {
-
 	@JsonProperty("results")
 	private List<PlaceDetails> results;
 
@@ -17,47 +16,46 @@ public class PlaceDetailsResponse {
 	}
 
 	public List<String> namesList() {
-		int count = 0;
 		List<String> names = new ArrayList<String>();
-		for (int i = 0; i < results.size(); i++) {
-			if (count == 0) {
-				names.add(results.get(i).toString());
-			}
-			count++;
-			if (count == 2) {
-				count = 0;
-			}
+
+		for (PlaceDetails p : results) {
+			names.add(p.getName());
 		}
 		return names;
 	}
 
-	public List<String> AddressList() {
-		int count = 0;
+	public List<String> VicinityList() {
 		List<String> address = new ArrayList<String>();
-		for (int i = 0; i < results.size(); i++) {
-			if (count == 1) {
-				address.add(results.get(i).toString());
-			}
-			count++;
-			if (count == 2) {
-				count = 0;
-			}
+
+		for (PlaceDetails p : results) {
+			address.add(p.getVicinity());
 		}
 		return address;
 	}
 
-	public List<PlacePhoto> PhotosList() {
-		List<PlacePhoto> photo = new ArrayList<PlacePhoto>();
-
-		for (int i = 0; i < results.size(); i++) {
-			if (i % 3 == 2) {
-				for (PlacePhoto pp : results.get(i).getPhotos()) {
-					photo.add(pp);
-				}
-			}
+	public List<String> PhotosList() {
+		List<String> photo = new ArrayList<String>();
+		;
+		for (PlaceDetails p : results) {
+			photo.add(p.getPhotos().get(0).getReference());
 		}
-
 		return photo;
+	}
+
+	public List<String> LatitudeList() {
+		List<String> ll = new ArrayList<String>();
+		for (PlaceDetails pd : results) {
+			ll.add(pd.getGeometry().getLocation().getLatitude());
+		}
+		return ll;
+	}
+
+	public List<String> LongitudeList() {
+		List<String> ll = new ArrayList<>();
+		for (PlaceDetails pd : results) {
+			ll.add(pd.getGeometry().getLocation().getLongitude());
+		}
+		return ll;
 	}
 
 	public void setResult(List<PlaceDetails> results) {
@@ -68,5 +66,4 @@ public class PlaceDetailsResponse {
 	public String toString() {
 		return "PlaceDetailsResponse [results=" + results + "]";
 	}
-
 }

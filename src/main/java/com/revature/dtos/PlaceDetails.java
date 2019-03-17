@@ -13,10 +13,26 @@ public class PlaceDetails {
 	private String name;
 
 	@JsonProperty("vicinity")
-	private String address;
+	private String vicinity;
 
 	@JsonProperty("photos")
-	private List<PlacePhoto> photos = Collections.emptyList();
+	private List<PlacePhoto> photos;
+
+	@JsonProperty("geometry")
+	private PlaceGeometry geometry;
+
+	public PlaceDetails() {
+		super();
+		this.photos = Collections.emptyList();
+	}
+
+	public PlaceDetails(String name, String vicinity, List<PlacePhoto> photos, PlaceGeometry geometry) {
+		super();
+		this.name = name;
+		this.vicinity = vicinity;
+		this.photos = photos;
+		this.geometry = geometry;
+	}
 
 	public String getName() {
 		return name;
@@ -26,12 +42,12 @@ public class PlaceDetails {
 		this.name = name;
 	}
 
-	public String getAddress() {
-		return address;
+	public String getVicinity() {
+		return vicinity;
 	}
 
-	public void setAddress(String address) {
-		this.address = address;
+	public void setVicinity(String vicinity) {
+		this.vicinity = vicinity;
 	}
 
 	public List<PlacePhoto> getPhotos() {
@@ -42,9 +58,18 @@ public class PlaceDetails {
 		this.photos = photos;
 	}
 
+	public PlaceGeometry getGeometry() {
+		return geometry;
+	}
+
+	public void setGeometry(PlaceGeometry geometry) {
+		this.geometry = geometry;
+	}
+
 	@Override
 	public String toString() {
-		return "PlaceDetails [name=" + name + ", address=" + address + ", photos=" + photos + "]";
+		return "PlaceDetails [name=" + name + ", vicinity=" + vicinity + ", photos=" + photos + ", geometry=" + geometry
+				+ "]";
 	}
 
 }

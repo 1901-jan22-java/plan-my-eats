@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -18,45 +17,41 @@ import org.springframework.web.client.RestTemplate;
 
 import com.revature.beans.Preference;
 import com.revature.beans.Recipe;
+import com.revature.beans.Restaurant;
 import com.revature.beans.User;
 import com.revature.dtos.RecipeDetailsResults;
 import com.revature.services.RecipeService;
+import com.revature.services.UserService;
 
 @CrossOrigin
 @RestController
 @RequestMapping("/recipe")
 public class RecipeController {
 
-	private static final Logger log = Logger.getLogger(RecipeController.class);
-
+	@Autowired
+	UserService us;
 	@Autowired
 	RecipeService rs;
 
-	@RequestMapping(method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<List<Recipe>> getRecipes() {
-		return new ResponseEntity<List<Recipe>>(rs.getAll(), HttpStatus.OK);
-	}
-
-	// What in the actual world is this thing... o.o
-	@RequestMapping(method = RequestMethod.POST, consumes = MediaType.TEXT_PLAIN_VALUE, produces = MediaType.APPLICATION_JSON_VALUE, value = "/recipe")
+	@RequestMapping(method = RequestMethod.POST, consumes = MediaType.TEXT_PLAIN_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<RecipeDetailsResults> hitRecApi(@RequestBody User u) {
 		Random rand = new Random();
 		String[] filters = new String[2];
 		double calories = 0;
 
 		/*
-		 * Men BMi = 66.4730 + (13.7516 x weight in kg) + (5.0033 x height in cm) -
+		 * Men BMR = 66.4730 + (13.7516 x weight in kg) + (5.0033 x height in cm) -
 		 * (6.7550 x age in years)
 		 * 
 		 * Women BMR = 655.0955 + (9.5634 x weight in kg) + (1.8496 x height in cm) -
 		 * (4.6756 x age in years)
 		 * 
 		 */
-		if (u.getGender().equalsIgnoreCase("male")) {
+		if (u.getGender() == "male") {
 			calories = 66.4730d + (13.7516 * (u.getWeight() * 0.4539d)) + (5.0033d * (u.getHeight() * 2.54d))
 					- (6.7550 * u.getAge());
 			calories *= 1.2d;
-		} else if (u.getGender().equalsIgnoreCase("female")) {
+		} else if (u.getGender() == "female") {
 			calories = 655.0955d + (9.5634d * (u.getWeight() * 0.4539d)) + (1.8496d * (u.getHeight() * 2.54d))
 					- (4.6756d * u.getAge());
 			calories *= 1.2d;
@@ -101,7 +96,7 @@ public class RecipeController {
 		String apiUrl = "https://api.edamam.com/search?q="
 				+ "&app_id=3ee293b7&app_key=5143a3f492a353eb02eac1fac6912dbc&from=0&to=3&calories="
 				+ (int) (calories * 0.33d) + "&health=" + filters[0] + "+" + filters[1];
-		log.info(apiUrl);
+		System.out.println(apiUrl);
 
 		try {
 			RestTemplate restTemplate = new RestTemplate();
@@ -112,30 +107,28 @@ public class RecipeController {
 			for (int i = 0; i < 20; i++) {
 				Recipe r = new Recipe();
 				r.setCalories(recipes.getCalories(i) / recipes.getServings(i));
-				StringBuilder sb = new StringBuilder();
-				for(String ingredient :recipes.getIngredients(i)) {
-					sb.append(ingredient + "\n");
+				for (int j = 0; j < recipes.getIngredients(i).size(); j++) {
+					r.setIngredients(r.getIngredients() + recipes.getIngredients(i).get(j) + ".");
 				}
-				r.setIngredients(sb.toString().substring(0, sb.length()-2));
 				r.setRecipeName(recipes.getName(i));
 				recp.add(r);
 			}
-
 			if (responseEntity.getStatusCode().toString().equals("200")) {
 				return new ResponseEntity<RecipeDetailsResults>(recipes, HttpStatus.OK);
 			} else {
 				return new ResponseEntity<RecipeDetailsResults>(HttpStatus.BAD_REQUEST);
 			}
 
-		} catch (Exception e) {
-			log.error("User: " + u, e);
+		} catch (Exception theException) {
+			theException.printStackTrace();
 		}
 		return new ResponseEntity<RecipeDetailsResults>(HttpStatus.BAD_REQUEST);
 	}
 
-	@RequestMapping(path = "/test", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<List<Recipe>> pleaseWork(User u) {
-		return rs.searchByUserPreference(u);
+	@RequestMapping(method = RequestMethod.PUT, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<User> updateRestaurantHistory(@RequestBody User user) {
+		us.saveUser(user);
+		return new ResponseEntity<User>(user, HttpStatus.OK);
 	}
-
+	
 }

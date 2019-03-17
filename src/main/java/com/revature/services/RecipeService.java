@@ -64,9 +64,6 @@ public class RecipeService {
 		for (RecipeResults rr : re.getBody().getHits()) {
 			RecipeDetails rd = rr.getRecipe();
 
-			// Recipe Constructor Signature
-			// public Recipe(String ingredients, String recipeName, int calories, String
-			// types)
 			StringBuilder sb = new StringBuilder();
 			for (String i : rd.getIngredients()) {
 				sb.append(i + "\n");
