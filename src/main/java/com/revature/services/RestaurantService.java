@@ -79,7 +79,7 @@ public class RestaurantService {
 			PlaceLocation pl = pd.getGeometry().getLocation();
 
 			Restaurant r = new Restaurant(pd.getName(), pd.getVicinity(), keywords, pl.getLatitude(), pl.getLongitude(),
-					pd.getPhotos().getReference());
+					pd.getPhotos().get(0).getReference());
 			rs.add(r);
 		}
 
