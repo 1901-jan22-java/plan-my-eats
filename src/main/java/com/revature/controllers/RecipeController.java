@@ -4,8 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -28,7 +27,7 @@ import com.revature.services.RecipeService;
 @RequestMapping("/recipe")
 public class RecipeController {
 
-	private static final Log log = LogFactory.getLog(RecipeController.class);
+	private static final Logger log = Logger.getLogger(RecipeController.class);
 
 	@Autowired
 	RecipeService rs;

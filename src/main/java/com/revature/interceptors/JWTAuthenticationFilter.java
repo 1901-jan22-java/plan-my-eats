@@ -3,13 +3,12 @@ package com.revature.interceptors;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.apache.log4j.Logger;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
 public class JWTAuthenticationFilter extends HandlerInterceptorAdapter {
 
-	private static final Log log = LogFactory.getLog(JWTAuthenticationFilter.class);
+	private static final Logger log = Logger.getLogger(JWTAuthenticationFilter.class);
 
 	TokenService tokenService = ImpTokenService.getInstance();
 
@@ -40,7 +39,7 @@ public class JWTAuthenticationFilter extends HandlerInterceptorAdapter {
 		log.info(request.getRequestURI().split("/")[2]);
 		if (request.getRequestURI().split("/")[2].equals("login")
 				|| request.getRequestURI().split("/")[2].equals("register")) {
-			log.error("This is a login request.");
+			log.info("This is a login request.");
 			return true;
 		}
 		final String token = request.getHeader("Authorization");

@@ -4,8 +4,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.revature.beans.Preference;
@@ -15,7 +14,7 @@ import com.revature.services.UserService;
 
 public class TestApp {
 
-	private static final Log log = LogFactory.getLog(TestApp.class);
+	private static final Logger log = Logger.getLogger(TestApp.class.getName());
 
 	@Autowired
 	static UserService us;
@@ -23,11 +22,12 @@ public class TestApp {
 	static PreferenceService ps;
 
 	public static void main(String[] args) {
+//		System.out.println(Thread.currentThread().getContextClassLoader().getResource(""));
 		testRandomSelect();
 	}
 
 	public static void testRandomSelect() {
-
+		
 		List<Integer> a = new ArrayList<>();
 
 		for (int i = 0; i < 20; i++) {
@@ -36,21 +36,18 @@ public class TestApp {
 
 		Collections.shuffle(a);
 		StringBuilder sb = new StringBuilder();
-		
+
 		for (int i = 0; i < 2 && i < a.size(); i++) {
 			sb.append(a.get(i) + "+");
 		}
 
 		sb.setLength(Math.max(sb.length() - 1, 0));
 
-		System.out.println("Array: " + a);
-		System.out.println("StringBuilder: \"" + sb + "\"");
-		System.out.println("String Replace: \"" + sb.toString().replace("+", " ") + "\"");
-		System.out.println("String Replace: \"" + sb.toString().replace("+", " ").replace(" ", "+") + "\"");
-		// We need to figure out how to get loggers working... .-.
-//		log.info(a);
-//		log.info(sb);
-		
+		log.info("Array: " + a);
+		log.info("StringBuilder: \"" + sb + "\"");
+		log.info("String Replace: \"" + sb.toString().replace("+", " ") + "\"");
+		log.info("String Replace: \"" + sb.toString().replace("+", " ").replace(" ", "+") + "\"");
+
 	}
 
 	public static void testServices() {
@@ -68,7 +65,7 @@ public class TestApp {
 
 		log.info(users);
 		log.info(preferences);
-		
+
 		us.saveAll(users);
 		ps.saveAll(preferences);
 	}

@@ -3,8 +3,7 @@ package com.revature.controllers;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -26,7 +25,7 @@ import com.revature.services.UserService;
 @RequestMapping("/restaurant")
 public class RestaurantController {
 
-	private static final Log log = LogFactory.getLog(RestaurantController.class);
+	private static final Logger log = Logger.getLogger(RestaurantController.class);
 	
 	@Autowired
 	RestaurantService rs;

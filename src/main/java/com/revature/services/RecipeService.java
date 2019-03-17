@@ -4,8 +4,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -24,7 +23,7 @@ import com.revature.repositories.RecipeRepository;
 @Transactional
 public class RecipeService {
 
-	private static final Log log = LogFactory.getLog(RecipeService.class);
+	private static final Logger log = Logger.getLogger(RecipeService.class);
 
 	@Autowired
 	private RecipeRepository repo;

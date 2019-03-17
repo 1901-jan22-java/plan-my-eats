@@ -1,7 +1,6 @@
 package com.revature.controllers;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.apache.log4j.Logger;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -20,7 +19,7 @@ import com.revature.dtos.RecipeDetailsResults;
 //@RequestMapping("/api")
 public class APIController {
 
-	private static Log log = LogFactory.getLog(APIController.class);
+	private static Logger log = Logger.getLogger(APIController.class);
 
 	@RequestMapping(path = "/placesapi", method = RequestMethod.POST, consumes = MediaType.TEXT_PLAIN_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<PlaceDetailsResponse> hitPlacesAPI(@RequestBody String params) {

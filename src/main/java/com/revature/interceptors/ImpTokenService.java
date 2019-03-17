@@ -8,8 +8,7 @@ import java.util.Date;
 import javax.crypto.spec.SecretKeySpec;
 import javax.xml.bind.DatatypeConverter;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.apache.log4j.Logger;
 
 import com.revature.beans.User;
 
@@ -20,7 +19,7 @@ import io.jsonwebtoken.SignatureAlgorithm;
 
 public class ImpTokenService implements TokenService {
 
-	private static final Log log = LogFactory.getLog(ImpTokenService.class);
+	private static final Logger log = Logger.getLogger(ImpTokenService.class);
 	
 	private static final long TOKEN_EXPIRY = 1000 * 60 * 60 * 24; // 1 day
 	private static final TokenService instance = new ImpTokenService();

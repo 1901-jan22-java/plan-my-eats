@@ -2,8 +2,7 @@ package com.revature.controllers;
 
 import java.util.List;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -24,7 +23,7 @@ import com.revature.services.UserService;
 @RequestMapping("/preference")
 public class PreferenceController {
 
-	private static final Log log = LogFactory.getLog(PreferenceController.class);
+	private static final Logger log = Logger.getLogger(PreferenceController.class);
 
 	@Autowired
 	PreferenceService ps;

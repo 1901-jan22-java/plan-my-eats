@@ -1,7 +1,6 @@
 package com.revature.controllers;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -25,7 +24,7 @@ import com.revature.services.UserService;
 @RequestMapping("/testing")
 public class TestController {
 
-	private static final Log log = LogFactory.getLog(TestController.class);
+	private static final Logger log = Logger.getLogger(TestController.class);
 
 	@Autowired
 	UserService service;

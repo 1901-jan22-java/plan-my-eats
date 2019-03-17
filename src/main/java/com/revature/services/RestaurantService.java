@@ -3,8 +3,7 @@ package com.revature.services;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -21,7 +20,7 @@ import com.revature.repositories.RestaurantRepository;
 @Transactional
 public class RestaurantService {
 
-	private static final Log log = LogFactory.getLog(RestaurantService.class);
+	private static final Logger log = Logger.getLogger(RestaurantService.class);
 
 	@Autowired
 	private RestaurantRepository repo;
@@ -81,10 +80,10 @@ public class RestaurantService {
 
 //			pd.getName(), pd.getAddress(), pd.getPhotos();
 			List<RestaurantPhoto> rp = new ArrayList<>();
-			for(PlacePhoto pp: pd.getPhotos()){
+			for (PlacePhoto pp : pd.getPhotos()) {
 				rp.add(new RestaurantPhoto(pp.getReference()));
 			}
-			
+
 			Restaurant r = new Restaurant(pd.getName(), pd.getAddress(), rp);
 			rs.add(r);
 
