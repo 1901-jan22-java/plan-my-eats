@@ -1,4 +1,4 @@
-package com.revature.dtos;
+package com.revature.dtos.google.places;
 
 import java.util.Collections;
 import java.util.List;

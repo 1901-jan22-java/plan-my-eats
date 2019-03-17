@@ -11,8 +11,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 
-import com.revature.dtos.PlaceDetailsResponse;
 import com.revature.dtos.RecipeDetailsResults;
+import com.revature.dtos.google.places.PlaceDetailsResponse;
 
 @CrossOrigin
 @RestController

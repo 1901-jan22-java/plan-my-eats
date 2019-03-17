@@ -28,8 +28,10 @@ public class RecipeService {
 	@Autowired
 	private RecipeRepository repo;
 
-	public ResponseEntity<List<Recipe>> searchByUserPreference(User u) {
+	public ResponseEntity<List<Recipe>> searchByUserDetails(User u) {
+		// Default calories for a meal
 		double calories = 500;
+		final int prefLimit = 2;
 
 		if (u.getGender().equalsIgnoreCase("male")) {
 			calories = 66.4730d + (13.7516 * (u.getWeight() * 0.4539d)) + (5.0033d * (u.getHeight() * 2.54d))
@@ -41,24 +43,32 @@ public class RecipeService {
 			calories *= 1.2d;
 		}
 
-		final int prefLimit = 2;
 		List<Preference> prefs = new ArrayList<>(u.getPreferences());
 		Collections.shuffle(prefs);
-		StringBuilder keywords = new StringBuilder();
+		StringBuilder sb = new StringBuilder();
 		for (int i = 0; i < prefLimit && i < prefs.size(); i++) {
-			keywords.append(prefs.get(i).getName() + "+");
+			sb.append(prefs.get(i).getName() + "+");
 		}
-
-		keywords.setLength(Math.max(keywords.length() - 1, 0));
-
-		String apiUrl = "https://api.edamam.com/search?q="
-				+ "&app_id=3ee293b7&app_key=5143a3f492a353eb02eac1fac6912dbc&from=0&to=3&calories="
-				+ (int) (calories * 0.33d) + "&health=" + keywords.toString();
-		log.info("API Url: " + apiUrl);
+		sb.setLength(Math.max(sb.length() - 1, 0));
+		String keywords = sb.toString();
 
 		RestTemplate rt = new RestTemplate();
-		ResponseEntity<RecipeDetailsResults> re = rt.getForEntity(apiUrl, RecipeDetailsResults.class);
+		ResponseEntity<RecipeDetailsResults> re = rt.getForEntity(buildAPIUrl(calories, keywords),
+				RecipeDetailsResults.class);
 
+		return mapAndCacheEdamamAPI(re, keywords);
+	}
+
+	private String buildAPIUrl(double calories, String keywords) {
+		String apiUrl = "https://api.edamam.com/search?q="
+				+ "&app_id=3ee293b7&app_key=5143a3f492a353eb02eac1fac6912dbc&from=0&to=3&calories="
+				+ (int) (calories * 0.33d) + "&health=" + keywords;
+		log.info("API Url: " + apiUrl);
+
+		return apiUrl;
+	}
+
+	public ResponseEntity<List<Recipe>> mapAndCacheEdamamAPI(ResponseEntity<RecipeDetailsResults> re, String keywords) {
 		List<Recipe> res = new ArrayList<>();
 
 		for (RecipeResults rr : re.getBody().getHits()) {
@@ -70,7 +80,7 @@ public class RecipeService {
 			}
 
 			Recipe r = new Recipe(rd.getName(), sb.toString().substring(0, sb.length() - 2),
-					(rd.getCalories() / rd.getServings()), keywords.toString());
+					(rd.getCalories() / rd.getServings()), keywords);
 			repo.save(r);
 			res.add(r);
 		}
@@ -82,6 +92,9 @@ public class RecipeService {
 		return repo.findAll();
 	}
 
+	/***********************************/
+	/****** Find recipe by fields ******/
+	/***********************************/
 	public Recipe findRecipeById(int id) {
 		return repo.findOne(id);
 	}

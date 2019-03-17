@@ -10,9 +10,10 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.revature.beans.Restaurant;
-import com.revature.dtos.PlaceDetails;
-import com.revature.dtos.PlaceDetailsResponse;
-import com.revature.dtos.PlaceLocation;
+import com.revature.dtos.google.places.PlaceDetails;
+import com.revature.dtos.google.places.PlaceDetailsResponse;
+import com.revature.dtos.google.places.PlaceLocation;
+import com.revature.dtos.google.places.PlacePhoto;
 import com.revature.repositories.RestaurantRepository;
 
 @Service
@@ -73,13 +74,18 @@ public class RestaurantService {
 		PlaceDetailsResponse pdr = re.getBody();
 
 		List<Restaurant> rs = new ArrayList<Restaurant>();
-		log.info("Result Size: " + pdr.getResult().toArray().length);
+		log.info("Result: " + pdr.getResult());
 
 		for (PlaceDetails pd : pdr.getResult()) {
 			PlaceLocation pl = pd.getGeometry().getLocation();
 
+			StringBuilder sb = new StringBuilder();
+			for (PlacePhoto pp : pd.getPhotos()) {
+				sb.append(pp.getReference() + " ");
+			}
+
 			Restaurant r = new Restaurant(pd.getName(), pd.getVicinity(), keywords, pl.getLatitude(), pl.getLongitude(),
-					pd.getPhotos().getReference());
+					sb.toString().substring(0, sb.length() - 1));
 			rs.add(r);
 		}
 
