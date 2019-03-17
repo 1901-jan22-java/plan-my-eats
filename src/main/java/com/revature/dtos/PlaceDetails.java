@@ -1,8 +1,5 @@
 package com.revature.dtos;
 
-import java.util.Collections;
-import java.util.List;
-
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
@@ -16,17 +13,16 @@ public class PlaceDetails {
 	private String vicinity;
 
 	@JsonProperty("photos")
-	private List<PlacePhoto> photos;
+	private PlacePhoto photos;
 
 	@JsonProperty("geometry")
 	private PlaceGeometry geometry;
 
 	public PlaceDetails() {
 		super();
-		this.photos = Collections.emptyList();
 	}
 
-	public PlaceDetails(String name, String vicinity, List<PlacePhoto> photos, PlaceGeometry geometry) {
+	public PlaceDetails(String name, String vicinity, PlacePhoto photos, PlaceGeometry geometry) {
 		super();
 		this.name = name;
 		this.vicinity = vicinity;
@@ -50,11 +46,11 @@ public class PlaceDetails {
 		this.vicinity = vicinity;
 	}
 
-	public List<PlacePhoto> getPhotos() {
+	public PlacePhoto getPhotos() {
 		return photos;
 	}
 
-	public void setPhotos(List<PlacePhoto> photos) {
+	public void setPhotos(PlacePhoto photos) {
 		this.photos = photos;
 	}
 

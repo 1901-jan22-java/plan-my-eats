@@ -12,6 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.revature.beans.Restaurant;
 import com.revature.dtos.PlaceDetails;
 import com.revature.dtos.PlaceDetailsResponse;
+import com.revature.dtos.PlaceLocation;
 import com.revature.repositories.RestaurantRepository;
 
 @Service
@@ -75,16 +76,11 @@ public class RestaurantService {
 		log.info("Result Size: " + pdr.getResult().toArray().length);
 
 		for (PlaceDetails pd : pdr.getResult()) {
+			PlaceLocation pl = pd.getGeometry().getLocation();
 
-//			pd.getName(), pd.getAddress(), pd.getPhotos();
-//			List<RestaurantPhoto> rp = new ArrayList<>();
-//			for (PlacePhoto pp : pd.getPhotos()) {
-//				rp.add(new RestaurantPhoto(pp.getReference()));
-//			}
-//
-//			Restaurant r = new Restaurant(pd.getName(), pd.);
-//			rs.add(r);
-
+			Restaurant r = new Restaurant(pd.getName(), pd.getVicinity(), keywords, pl.getLatitude(), pl.getLongitude(),
+					pd.getPhotos().getReference());
+			rs.add(r);
 		}
 
 		return new ResponseEntity<List<Restaurant>>(rs, re.getStatusCode());
