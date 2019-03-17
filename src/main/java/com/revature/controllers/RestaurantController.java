@@ -21,11 +21,11 @@ import com.revature.dtos.google.places.PlaceDetailsResponse;
 import com.revature.services.RestaurantService;
 import com.revature.services.UserService;
 
-@CrossOrigin
 @RestController
+@CrossOrigin
 @RequestMapping("/restaurant")
 public class RestaurantController {
-	
+
 	private static final Logger log = Logger.getLogger(RestaurantController.class);
 
 	@Autowired

@@ -14,8 +14,8 @@ import org.springframework.web.client.RestTemplate;
 import com.revature.dtos.edamam.recipes.RecipeDetailsResults;
 import com.revature.dtos.google.places.PlaceDetailsResponse;
 
-@CrossOrigin
 @RestController
+@CrossOrigin
 @RequestMapping("/search")
 public class APIController {
 
