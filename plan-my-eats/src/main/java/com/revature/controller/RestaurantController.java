@@ -35,7 +35,7 @@ public class RestaurantController {
 	}
 	
 
-	@RequestMapping(method=RequestMethod.POST, consumes=MediaType.TEXT_PLAIN_VALUE, produces=MediaType.APPLICATION_JSON_VALUE, value="/restaurant")
+	@RequestMapping(method=RequestMethod.POST, consumes=MediaType.TEXT_PLAIN_VALUE, produces=MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<List<Restaurant>> hitResApi(@RequestBody String params) {
 		String[] filters = params.split(";");
 		String apiUrl = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?&location=" + filters[0] + "&radius=1500&type=restaurant&keyword=" + filters[1] + "&key=AIzaSyAv7FWb5nyCLZw9fxrpkaKLc3NS1BRGeXM";
@@ -46,7 +46,7 @@ public class RestaurantController {
             ResponseEntity<PlaceDetailsResponse> responseEntity = restTemplate.getForEntity(apiUrl, PlaceDetailsResponse.class);
             PlaceDetailsResponse restaurants = responseEntity.getBody();
           
-            List<Restaurant>rests = new ArrayList<Restaurant>();
+            List<Restaurant> rests = new ArrayList<Restaurant>();
             System.out.print(restaurants.getResult().toArray().length);
             for(int i=0;i<restaurants.getResult().toArray().length;i++) {
             	
@@ -55,6 +55,7 @@ public class RestaurantController {
             	r.setType(filters[1]);
             	r.setLocation(restaurants.AddressList().get(i));
             	r.setImgRef(restaurants.PhotosList().get(i));
+            	r.setLatlng(restaurants.LatLongList().get(i));
             	rests.add(r);
             	
             }

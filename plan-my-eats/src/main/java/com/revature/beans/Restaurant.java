@@ -29,7 +29,8 @@ public class Restaurant
 	@Column(name="IMAGE_REF")
 	private String imgRef;
 	
-	
+	@Column(name="LOCATION")
+	private String latlng;
 
 	public Restaurant() { }
 	
@@ -38,12 +39,14 @@ public class Restaurant
 		this.location = location;
 		this.type = type;
 	}
-	public int getRestuarantId() {
+	public int getRestaurantId() {
 		return restaurantId;
 	}
-	public void setRestuarantId(int restuarantId) {
-		this.restaurantId = restuarantId;
+
+	public void setRestaurantId(int restaurantId) {
+		this.restaurantId = restaurantId;
 	}
+
 	public String getName() {
 		return name;
 	}
@@ -70,9 +73,17 @@ public class Restaurant
 	public void setImgRef(String imgRef) {
 		this.imgRef = imgRef;
 	}
+	public String getLatlng() {
+		return latlng;
+	}
+
+	public void setLatlng(String latlng) {
+		this.latlng = latlng;
+	}
+
 	@Override
 	public String toString() {
-		return "Restuarant [restuarantId=" + restaurantId + ", name=" + name + ", location=" + location + ", type="
+		return "Restuarant [restaurantId=" + restaurantId + ", name=" + name + ", location=" + location + ", type="
 				+ type + "]";
 	}
 }
