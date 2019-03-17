@@ -28,6 +28,15 @@ public class RecipeService {
 	@Autowired
 	private RecipeRepository repo;
 
+	private static String buildAPIUrl(double calories, String keywords) {
+		String apiUrl = "https://api.edamam.com/search?q="
+				+ "&app_id=3ee293b7&app_key=5143a3f492a353eb02eac1fac6912dbc&from=0&to=3&calories="
+				+ (int) (calories * 0.33d) + "&health=" + keywords;
+		log.info("Edamam API Url: " + apiUrl);
+
+		return apiUrl;
+	}
+
 	public ResponseEntity<List<Recipe>> searchByUserDetails(User u) {
 		// Default calories for a meal
 		double calories = 500;
@@ -59,15 +68,6 @@ public class RecipeService {
 		return mapAndCacheEdamamAPI(re, keywords);
 	}
 
-	private String buildAPIUrl(double calories, String keywords) {
-		String apiUrl = "https://api.edamam.com/search?q="
-				+ "&app_id=3ee293b7&app_key=5143a3f492a353eb02eac1fac6912dbc&from=0&to=3&calories="
-				+ (int) (calories * 0.33d) + "&health=" + keywords;
-		log.info("API Url: " + apiUrl);
-
-		return apiUrl;
-	}
-
 	public ResponseEntity<List<Recipe>> mapAndCacheEdamamAPI(ResponseEntity<RecipeDetailsResults> re, String keywords) {
 		List<Recipe> res = new ArrayList<>();
 
@@ -95,27 +95,27 @@ public class RecipeService {
 	/***********************************/
 	/****** Find recipe by fields ******/
 	/***********************************/
-	public Recipe findRecipeById(int id) {
+	public Recipe findById(int id) {
 		return repo.findOne(id);
 	}
 
-	public List<Recipe> getByIngredients(String ingredients) {
+	public List<Recipe> findByIngredients(String ingredients) {
 		return repo.findRecipeByIngredients(ingredients);
 	}
 
-	public Recipe getRecipeByName(String name) {
+	public Recipe findRecipeByName(String name) {
 		return repo.findRecipeByRecipeName(name);
 	}
 
-	public List<Recipe> getByCalories(int calories) {
+	public List<Recipe> findByCalories(int calories) {
 		return repo.findRecipeByCalorie(calories);
 	}
 
-	public List<Recipe> getByLessThanCalorie(int calories) {
+	public List<Recipe> findByLessThanCalorie(int calories) {
 		return repo.findRecipesLessThanCalories(calories);
 	}
 
-	public List<Recipe> getByLGreaterThanCalorie(int calories) {
+	public List<Recipe> findByGreaterThanCalorie(int calories) {
 		return repo.findRecipesGreaterThanCalories(calories);
 	}
 

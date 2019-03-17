@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.client.RestTemplate;
 
 import com.revature.beans.Restaurant;
 import com.revature.dtos.google.places.PlaceDetails;
@@ -25,47 +26,20 @@ public class RestaurantService {
 	@Autowired
 	private RestaurantRepository repo;
 
-	public ResponseEntity<List<Restaurant>> searchRestaurantsByKeywords(String keywords) {
+	private static String buildAPIUrl(String location, String keywords) {
+		String apiUrl = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?&location=" + location
+				+ "&radius=1500&type=restaurant&keyword=" + keywords + "&key=AIzaSyAv7FWb5nyCLZw9fxrpkaKLc3NS1BRGeXM";
+		log.info("API Url: " + apiUrl);
+		return apiUrl;
+	}
 
-//		String[] filters = params.split(";");
-//		String apiUrl = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?&location=" + filters[0]
-//				+ "&radius=1500&type=restaurant&keyword=" + filters[1] + "&key=AIzaSyAv7FWb5nyCLZw9fxrpkaKLc3NS1BRGeXM";
-//		log.info("API Url: " + apiUrl);
-//
-//		try {
-//
-//			RestTemplate restTemplate = new RestTemplate();
-//			ResponseEntity<PlaceDetailsResponse> responseEntity = restTemplate.getForEntity(apiUrl,
-//					PlaceDetailsResponse.class);
-//			PlaceDetailsResponse restaurants = responseEntity.getBody();
-//			
-//			List<Restaurant> rests = new ArrayList<Restaurant>();
-//			log.info("Result Size: " + restaurants.getResult().toArray().length);
-//			
-//			for (int i = 0; i < restaurants.getResult().toArray().length; i++) {
-//
-//				Restaurant r = new Restaurant();
-//				r.setName(restaurants.namesList().get(i));
-//				r.setType(filters[1]);
-//				r.setLocation(restaurants.AddressList().get(i));
-//				r.setImgRef(restaurants.PhotosList().get(i));
-//				rests.add(r);
-//
-//			}
-//
-//			if (responseEntity.getStatusCode().toString().equals("200")) {
-//				return new ResponseEntity<List<Restaurant>>(rests, HttpStatus.OK);
-//			} else {
-//				return new ResponseEntity<List<Restaurant>>(HttpStatus.BAD_REQUEST);
-//			}
-//
-//		} catch (Exception e) {
-//			log.error("Params: " + params, e);
-//		}
-//
-//		return new ResponseEntity<List<Restaurant>>(HttpStatus.BAD_REQUEST);
-//		return new ResponseEntity<List<Restaurant>>();
-		return null;
+	public ResponseEntity<List<Restaurant>> searchRestaurantsByKeywords(String location, String keywords) {
+
+		RestTemplate rt = new RestTemplate();
+		ResponseEntity<PlaceDetailsResponse> re = rt.getForEntity(buildAPIUrl(location, keywords),
+				PlaceDetailsResponse.class);
+
+		return mapAndCacheGoogleAPI(re, keywords);
 	}
 
 	public ResponseEntity<List<Restaurant>> mapAndCacheGoogleAPI(ResponseEntity<PlaceDetailsResponse> re,
