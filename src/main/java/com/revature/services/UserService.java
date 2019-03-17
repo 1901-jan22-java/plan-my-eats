@@ -7,6 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.revature.beans.Preference;
+import com.revature.beans.Recipe;
+import com.revature.beans.Restaurant;
 import com.revature.beans.User;
 import com.revature.repositories.UserRepository;
 
@@ -22,6 +24,7 @@ public class UserService {
 
 	public User saveUser(User u) {
 		repo.save(u);
+		
 		return u;
 	}
 
@@ -66,6 +69,14 @@ public class UserService {
 		u.setPreferences(pref);
 		repo.save(u);
 		
+	}
+	
+	public void updateUser(User u, Set<Preference> pref, Set<Recipe> rec, Set<Restaurant> rest,int id) {
+		u = repo.getOne(id);
+		u.setPreferences(pref);
+		u.setRecipes(rec);
+		u.setRestaurants(rest);
+		repo.save(u);
 	}
 
 	// the method below will most likely change to append to strings
