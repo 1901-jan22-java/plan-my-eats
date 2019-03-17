@@ -32,7 +32,7 @@ public class UserController {
 
 	@Autowired
 	private UserService us;
-	TokenService tokenService = ImpTokenService.getInstance();
+	TokenService ts = ImpTokenService.getInstance();
 
 	@RequestMapping(method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<List<User>> getAll() {
@@ -122,7 +122,7 @@ public class UserController {
 		}
 
 		user = us.saveUser(user);
-		String token = tokenService.generateToken(user);
+		String token = ts.generateToken(user);
 		user.setToken(token);
 		return new ResponseEntity<User>(user, HttpStatus.CREATED);
 	}
@@ -135,7 +135,7 @@ public class UserController {
 			return new ResponseEntity<User>(HttpStatus.NO_CONTENT);
 		}
 
-		String token = tokenService.generateToken(u);
+		String token = ts.generateToken(u);
 		u.setToken(token);
 
 		return new ResponseEntity<User>(u, HttpStatus.OK);

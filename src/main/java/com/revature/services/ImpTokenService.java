@@ -21,12 +21,18 @@ import io.jsonwebtoken.SignatureAlgorithm;
 public class ImpTokenService implements TokenService {
 
 	private static final Logger log = Logger.getLogger(ImpTokenService.class);
-	
+
 	private static final long TOKEN_EXPIRY = 1000 * 60 * 60 * 24; // 1 day
-	private static final TokenService instance = new ImpTokenService();
+	private static final String SECRET = "ThisISAsUPerLoNgPasSWord0417anDNumbRs!BWYUBUUYB*@!^&#GUYWQGD!^@GDUYWQGD&!^FDUQWFUD!&^FUWQYDF^!F";
+
+	private static final TokenService INSTANCE = new ImpTokenService();
+
+	private ImpTokenService() {
+		super();
+	}
 
 	public static final TokenService getInstance() {
-		return instance;
+		return INSTANCE;
 	}
 
 	@Override
@@ -38,12 +44,11 @@ public class ImpTokenService implements TokenService {
 		Date nows = new Date(nowMillis);
 
 		// We will sign our JWT with our ApiKey secret
-		byte[] apiKeySecretBytes = DatatypeConverter.parseBase64Binary(
-				"ThisISAsUPerLoNgPasSWord0417anDNumbRs!BWYUBUUYB*@!^&#GUYWQGD!^@GDUYWQGD&!^FDUQWFUD!&^FUWQYDF^!F");
+		byte[] apiKeySecretBytes = DatatypeConverter.parseBase64Binary(SECRET);
 		Key signingKey = new SecretKeySpec(apiKeySecretBytes, signatureAlgorithm.getJcaName());
 
 		// Let's set the JWT Claims
-		JwtBuilder builder = Jwts.builder().setId(details.getUserId() + "").setIssuedAt(nows)
+		JwtBuilder builder = Jwts.builder().setId("" + details.getUserId()).setIssuedAt(nows)
 				.setSubject(details.getUsername()).signWith(signingKey, signatureAlgorithm);
 
 		// if it has been specified, let's add the expiration
@@ -62,9 +67,8 @@ public class ImpTokenService implements TokenService {
 		try {
 			log.info(token);
 
-			Jwts.parser().setSigningKey(DatatypeConverter.parseBase64Binary(
-					"ThisISAsUPerLoNgPasSWord0417anDNumbRs!BWYUBUUYB*@!^&#GUYWQGD!^@GDUYWQGD&!^FDUQWFUD!&^FUWQYDF^!F"))
-					.parseClaimsJws(token.split(" ")[1]).getBody();
+			Jwts.parser().setSigningKey(DatatypeConverter.parseBase64Binary(SECRET)).parseClaimsJws(token.split(" ")[1])
+					.getBody();
 			return true;
 		} catch (Exception e) {
 			log.error("JWT validation failed at {}. Exception was {}"
