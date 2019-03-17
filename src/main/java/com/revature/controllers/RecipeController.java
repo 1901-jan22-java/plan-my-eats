@@ -41,7 +41,7 @@ public class RecipeController {
 		return new ResponseEntity<List<Recipe>>(rs.getAll(), HttpStatus.OK);
 	}
 
-	@RequestMapping(path = "/test", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+	@RequestMapping(path = "/testrecipe", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<List<Recipe>> searchByPreferences(@RequestParam(value = "userId") int id) {
 		User u = us.findById(id);
 		return rs.searchByUserDetails(u);

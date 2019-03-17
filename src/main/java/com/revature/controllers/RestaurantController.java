@@ -83,7 +83,7 @@ public class RestaurantController {
 		return new ResponseEntity<User>(u, HttpStatus.OK);
 	}
 
-	@RequestMapping(path = "/test", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+	@RequestMapping(path = "/testrestaurant", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<List<Restaurant>> pleaseWork(@RequestParam(value = "keywords") String keywords,
 			@RequestParam(value = "location") String location) {
 		return rs.searchRestaurantsByKeywords(location, keywords);
