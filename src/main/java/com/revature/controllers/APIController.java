@@ -16,7 +16,7 @@ import com.revature.dtos.RecipeDetailsResults;
 
 @CrossOrigin
 @RestController
-//@RequestMapping("/api")
+@RequestMapping("/search")
 public class APIController {
 
 	private static Logger log = Logger.getLogger(APIController.class);
