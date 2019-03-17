@@ -25,7 +25,7 @@ import com.revature.services.UserService;
 @RestController
 @RequestMapping("/restaurant")
 public class RestaurantController {
-
+	
 	private static final Logger log = Logger.getLogger(RestaurantController.class);
 
 	@Autowired
