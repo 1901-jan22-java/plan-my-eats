@@ -27,7 +27,7 @@ public class TestController {
 	private static final Logger log = Logger.getLogger(TestController.class);
 
 	@Autowired
-	UserService service;
+	UserService us;
 
 	@RequestMapping(method = RequestMethod.GET)
 	public String someGetRequest() {
@@ -60,7 +60,7 @@ public class TestController {
 		Recipe rec = prefs.recipes;
 		Preference pre = prefs.preferences;
 
-		User u = service.findByUsername(user.getUsername());
+		User u = us.findByUsername(user.getUsername());
 
 		if (u == null) {
 			return new ResponseEntity<User>(HttpStatus.NO_CONTENT);
