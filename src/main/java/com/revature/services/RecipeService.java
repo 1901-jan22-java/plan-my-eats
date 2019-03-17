@@ -14,9 +14,9 @@ import org.springframework.web.client.RestTemplate;
 import com.revature.beans.Preference;
 import com.revature.beans.Recipe;
 import com.revature.beans.User;
-import com.revature.dtos.RecipeDetails;
-import com.revature.dtos.RecipeDetailsResults;
-import com.revature.dtos.RecipeResults;
+import com.revature.dtos.edamam.recipes.RecipeDetails;
+import com.revature.dtos.edamam.recipes.RecipeDetailsResults;
+import com.revature.dtos.edamam.recipes.RecipeResults;
 import com.revature.repositories.RecipeRepository;
 
 @Service
@@ -26,7 +26,7 @@ public class RecipeService {
 	private static final Logger log = Logger.getLogger(RecipeService.class);
 
 	@Autowired
-	private RecipeRepository repo;
+	private static RecipeRepository repo;
 
 	private static String buildAPIUrl(double calories, String keywords) {
 		String apiUrl = "https://api.edamam.com/search?q="
@@ -35,6 +35,27 @@ public class RecipeService {
 		log.info("Edamam API Url: " + apiUrl);
 
 		return apiUrl;
+	}
+
+	private static ResponseEntity<List<Recipe>> mapAndCacheEdamamAPI(ResponseEntity<RecipeDetailsResults> re,
+			String keywords) {
+		List<Recipe> res = new ArrayList<>();
+
+		for (RecipeResults rr : re.getBody().getHits()) {
+			RecipeDetails rd = rr.getRecipe();
+
+			StringBuilder sb = new StringBuilder();
+			for (String i : rd.getIngredients()) {
+				sb.append(i + "\n");
+			}
+
+			Recipe r = new Recipe(rd.getName(), sb.toString().substring(0, sb.length() - 2),
+					(rd.getCalories() / rd.getServings()), keywords);
+			repo.save(r);
+			res.add(r);
+		}
+
+		return new ResponseEntity<List<Recipe>>(res, re.getStatusCode());
 	}
 
 	public ResponseEntity<List<Recipe>> searchByUserDetails(User u) {
@@ -66,26 +87,6 @@ public class RecipeService {
 				RecipeDetailsResults.class);
 
 		return mapAndCacheEdamamAPI(re, keywords);
-	}
-
-	public ResponseEntity<List<Recipe>> mapAndCacheEdamamAPI(ResponseEntity<RecipeDetailsResults> re, String keywords) {
-		List<Recipe> res = new ArrayList<>();
-
-		for (RecipeResults rr : re.getBody().getHits()) {
-			RecipeDetails rd = rr.getRecipe();
-
-			StringBuilder sb = new StringBuilder();
-			for (String i : rd.getIngredients()) {
-				sb.append(i + "\n");
-			}
-
-			Recipe r = new Recipe(rd.getName(), sb.toString().substring(0, sb.length() - 2),
-					(rd.getCalories() / rd.getServings()), keywords);
-			repo.save(r);
-			res.add(r);
-		}
-
-		return new ResponseEntity<List<Recipe>>(res, re.getStatusCode());
 	}
 
 	public List<Recipe> getAll() {

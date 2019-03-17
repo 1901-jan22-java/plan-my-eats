@@ -14,7 +14,7 @@ import com.revature.repositories.PreferenceRepository;
 public class PreferenceService {
 
 	@Autowired
-	PreferenceRepository repo;
+	private static PreferenceRepository repo;
 
 	public void save(Preference newPref) {
 		repo.save(newPref);
@@ -35,5 +35,5 @@ public class PreferenceService {
 	public Preference getById(int id) {
 		return repo.getOne(id);
 	}
-	
+
 }

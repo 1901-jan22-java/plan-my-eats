@@ -1,4 +1,4 @@
-package com.revature.dtos;
+package com.revature.dtos.edamam.recipes;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;

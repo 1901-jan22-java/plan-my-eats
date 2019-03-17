@@ -19,7 +19,7 @@ import org.springframework.web.client.RestTemplate;
 import com.revature.beans.Preference;
 import com.revature.beans.Recipe;
 import com.revature.beans.User;
-import com.revature.dtos.RecipeDetailsResults;
+import com.revature.dtos.edamam.recipes.RecipeDetailsResults;
 import com.revature.services.RecipeService;
 import com.revature.services.UserService;
 

@@ -16,7 +16,7 @@ import com.revature.repositories.UserRepository;
 public class UserService {
 
 	@Autowired
-	UserRepository repo;
+	private static UserRepository repo;
 
 	public List<User> getAll() {
 		return repo.findAll();
@@ -24,7 +24,7 @@ public class UserService {
 
 	public User saveUser(User u) {
 		repo.save(u);
-		
+
 		return u;
 	}
 
@@ -63,15 +63,15 @@ public class UserService {
 	public User updateUserHeight(int height, String username) {
 		return repo.setUserHeightByUsername(height, username);
 	}
-	
+
 	public void updatePreferences(User u, Set<Preference> pref, int id) {
 		u = repo.getOne(id);
 		u.setPreferences(pref);
 		repo.save(u);
-		
+
 	}
-	
-	public void updateUser(User u, Set<Preference> pref, Set<Recipe> rec, Set<Restaurant> rest,int id) {
+
+	public void updateUser(User u, Set<Preference> pref, Set<Recipe> rec, Set<Restaurant> rest, int id) {
 		u = repo.getOne(id);
 		u.setPreferences(pref);
 		u.setRecipes(rec);

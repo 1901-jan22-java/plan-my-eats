@@ -1,4 +1,4 @@
-package com.revature.dtos;
+package com.revature.dtos.edamam.recipes;
 
 import java.util.List;
 

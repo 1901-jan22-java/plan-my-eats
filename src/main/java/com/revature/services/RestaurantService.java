@@ -24,7 +24,7 @@ public class RestaurantService {
 	private static final Logger log = Logger.getLogger(RestaurantService.class);
 
 	@Autowired
-	private RestaurantRepository repo;
+	private static RestaurantRepository repo;
 
 	private static String buildAPIUrl(String location, String keywords) {
 		String apiUrl = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?&location=" + location
@@ -33,16 +33,7 @@ public class RestaurantService {
 		return apiUrl;
 	}
 
-	public ResponseEntity<List<Restaurant>> searchRestaurantsByKeywords(String location, String keywords) {
-
-		RestTemplate rt = new RestTemplate();
-		ResponseEntity<PlaceDetailsResponse> re = rt.getForEntity(buildAPIUrl(location, keywords),
-				PlaceDetailsResponse.class);
-
-		return mapAndCacheGoogleAPI(re, keywords);
-	}
-
-	public ResponseEntity<List<Restaurant>> mapAndCacheGoogleAPI(ResponseEntity<PlaceDetailsResponse> re,
+	private static ResponseEntity<List<Restaurant>> mapAndCacheGoogleAPI(ResponseEntity<PlaceDetailsResponse> re,
 			String keywords) {
 
 		PlaceDetailsResponse pdr = re.getBody();
@@ -60,10 +51,19 @@ public class RestaurantService {
 
 			Restaurant r = new Restaurant(pd.getName(), pd.getVicinity(), keywords, pl.getLatitude(), pl.getLongitude(),
 					sb.toString().substring(0, sb.length() - 1));
+			repo.save(r);
 			rs.add(r);
 		}
 
 		return new ResponseEntity<List<Restaurant>>(rs, re.getStatusCode());
+	}
+
+	public ResponseEntity<List<Restaurant>> searchRestaurantsByKeywords(String location, String keywords) {
+		RestTemplate rt = new RestTemplate();
+		ResponseEntity<PlaceDetailsResponse> re = rt.getForEntity(buildAPIUrl(location, keywords),
+				PlaceDetailsResponse.class);
+
+		return mapAndCacheGoogleAPI(re, keywords);
 	}
 
 	public Restaurant saveRestaurant(Restaurant r) {
