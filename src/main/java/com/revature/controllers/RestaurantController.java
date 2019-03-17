@@ -39,6 +39,12 @@ public class RestaurantController {
 		return new ResponseEntity<List<Restaurant>>(rs.getRestaurant(), HttpStatus.OK);
 	}
 
+	@RequestMapping(path = "/testrestaurant", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<List<Restaurant>> pleaseWork(@RequestParam(value = "keywords") String keywords,
+			@RequestParam(value = "location") String location) {
+		return rs.searchRestaurantsByKeywords(location, keywords);
+	}
+
 	@RequestMapping(method = RequestMethod.POST, consumes = MediaType.TEXT_PLAIN_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<List<Restaurant>> hitResApi(@RequestBody String params) {
 		String[] filters = params.split(";");
@@ -83,9 +89,4 @@ public class RestaurantController {
 		return new ResponseEntity<User>(u, HttpStatus.OK);
 	}
 
-	@RequestMapping(path = "/testrestaurant", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<List<Restaurant>> pleaseWork(@RequestParam(value = "keywords") String keywords,
-			@RequestParam(value = "location") String location) {
-		return rs.searchRestaurantsByKeywords(location, keywords);
-	}
 }
