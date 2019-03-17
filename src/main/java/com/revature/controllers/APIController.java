@@ -16,12 +16,12 @@ import com.revature.dtos.RecipeDetailsResults;
 
 @CrossOrigin
 @RestController
-//@RequestMapping("/api")
+@RequestMapping("/search")
 public class APIController {
 
 	private static Logger log = Logger.getLogger(APIController.class);
 
-	@RequestMapping(path = "/placesapi", method = RequestMethod.POST, consumes = MediaType.TEXT_PLAIN_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+	@RequestMapping(path = "/restaurant", method = RequestMethod.POST, consumes = MediaType.TEXT_PLAIN_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<PlaceDetailsResponse> hitPlacesAPI(@RequestBody String params) {
 
 		String[] filters = params.split(";");
@@ -51,7 +51,7 @@ public class APIController {
 
 	}
 
-	@RequestMapping(method = RequestMethod.POST, consumes = MediaType.TEXT_PLAIN_VALUE, produces = MediaType.APPLICATION_JSON_VALUE, value = "/recipe")
+	@RequestMapping(path = "/recipe", method = RequestMethod.POST, consumes = MediaType.TEXT_PLAIN_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<RecipeDetailsResults> hitRecApi(@RequestBody String params) {
 
 		String[] filters = params.split(";");
