@@ -19,9 +19,9 @@ import com.revature.beans.Preference;
 import com.revature.beans.Recipe;
 import com.revature.beans.Restaurant;
 import com.revature.beans.User;
-import com.revature.interceptors.ImpTokenService;
-import com.revature.interceptors.TokenService;
+import com.revature.services.ImpTokenService;
 import com.revature.services.UserService;
+import com.revature.services.interfaces.TokenService;
 
 @RestController
 @CrossOrigin

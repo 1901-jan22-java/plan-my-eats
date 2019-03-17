@@ -1,4 +1,4 @@
-package com.revature.interceptors;
+package com.revature.services.interfaces;
 
 import com.revature.beans.User;
 

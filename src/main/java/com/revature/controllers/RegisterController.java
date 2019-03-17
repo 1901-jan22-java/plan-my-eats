@@ -11,9 +11,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.revature.beans.User;
-import com.revature.interceptors.ImpTokenService;
-import com.revature.interceptors.TokenService;
+import com.revature.services.ImpTokenService;
 import com.revature.services.UserService;
+import com.revature.services.interfaces.TokenService;
 
 @RestController
 @CrossOrigin

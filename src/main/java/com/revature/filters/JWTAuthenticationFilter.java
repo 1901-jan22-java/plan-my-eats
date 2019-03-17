@@ -1,10 +1,13 @@
-package com.revature.interceptors;
+package com.revature.filters;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.log4j.Logger;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
+
+import com.revature.services.ImpTokenService;
+import com.revature.services.interfaces.TokenService;
 
 public class JWTAuthenticationFilter extends HandlerInterceptorAdapter {
 

@@ -1,4 +1,4 @@
-package com.revature.interceptors;
+package com.revature.services;
 
 import java.security.Key;
 import java.time.LocalDateTime;
@@ -11,6 +11,7 @@ import javax.xml.bind.DatatypeConverter;
 import org.apache.log4j.Logger;
 
 import com.revature.beans.User;
+import com.revature.services.interfaces.TokenService;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.JwtBuilder;
