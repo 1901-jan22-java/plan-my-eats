@@ -35,9 +35,14 @@ public class PlaceDetailsResponse {
 
 	public List<String> PhotosList() {
 		List<String> photo = new ArrayList<String>();
-		;
+		
 		for (PlaceDetails p : results) {
-			photo.add(p.getPhotos().getReference());
+			System.out.println(p.getPhotos());
+			if(p.getPhotos().size() > 0) {
+				photo.add(p.getPhotos().get(0).getReference());
+			} else {
+				photo.add("No photo");
+			}
 		}
 		return photo;
 	}

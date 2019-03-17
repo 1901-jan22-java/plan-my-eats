@@ -30,9 +30,6 @@ public class User {
 	@GeneratedValue(generator = "PME_USER_SEQ_GEN", strategy = GenerationType.SEQUENCE)
 	private int userId;
 
-	@Column(name = "PREFERENCE_STRING")
-	private String preference;
-
 	@Column(nullable = false, unique = true, name = "USERNAME")
 	private String username;
 
@@ -85,7 +82,6 @@ public class User {
 	public User(String preference, String username, String password, int height, int age, String gender,
 			double weight) {
 		super();
-		this.preference = preference;
 		this.username = username;
 		this.password = password;
 		this.height = height;
@@ -102,14 +98,6 @@ public class User {
 
 	public void setUserId(int userId) {
 		this.userId = userId;
-	}
-
-	public String getPreference() {
-		return preference;
-	}
-
-	public void setPreference(String preference) {
-		this.preference = preference;
 	}
 
 	public String getUsername() {
