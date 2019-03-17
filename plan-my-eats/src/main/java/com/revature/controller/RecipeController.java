@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -18,14 +19,18 @@ import com.revature.beans.Preference;
 import com.revature.beans.Recipe;
 import com.revature.beans.RecipeDetailsResults;
 import com.revature.beans.User;
+import com.revature.service.UserService;
 
 @CrossOrigin
 @RestController
 @RequestMapping("/recipe")
 public class RecipeController 
 {
+	
+	@Autowired
+	UserService services;
 
-	@RequestMapping(method=RequestMethod.POST, consumes=MediaType.TEXT_PLAIN_VALUE, produces=MediaType.APPLICATION_JSON_VALUE, value="/recipe")
+	@RequestMapping(method=RequestMethod.POST, consumes=MediaType.TEXT_PLAIN_VALUE, produces=MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<RecipeDetailsResults> hitRecApi(@RequestBody User u)
 	{
 		Random rand = new Random();
@@ -126,5 +131,11 @@ public class RecipeController
             theException.printStackTrace();
         }
 		return new ResponseEntity<RecipeDetailsResults>(HttpStatus.BAD_REQUEST);
+	}
+	
+	@RequestMapping(method=RequestMethod.PUT, consumes=MediaType.APPLICATION_JSON_VALUE, produces=MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<User> updateRestaurantHistory(@RequestBody User user) {
+		services.saveUser(user);
+		return new ResponseEntity<User>(user, HttpStatus.OK);
 	}
 }

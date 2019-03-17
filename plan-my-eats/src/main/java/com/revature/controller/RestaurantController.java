@@ -16,6 +16,7 @@ import org.springframework.web.client.RestTemplate;
 
 import com.revature.beans.PlaceDetailsResponse;
 import com.revature.beans.Restaurant;
+import com.revature.beans.User;
 import com.revature.service.RestaurantService;
 import com.revature.service.UserService;
 
@@ -72,6 +73,11 @@ public class RestaurantController {
 		return new ResponseEntity<List<Restaurant>>(HttpStatus.BAD_REQUEST);	
 	}
 	
+	@RequestMapping(method=RequestMethod.PUT, consumes=MediaType.APPLICATION_JSON_VALUE, produces=MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<User> updateRestaurantHistory(@RequestBody User user) {
+		services.saveUser(user);
+		return new ResponseEntity<User>(user, HttpStatus.OK);
+	}
 }
 
 
