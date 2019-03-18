@@ -47,6 +47,8 @@ public class RecipeController {
 		filters.add("pastry");
 		filters.add("bread");
 		filters.add("eggs");
+		filters.add("noodle");
+		filters.add("beans");
 		
 		int rand = (int) Math.floor(Math.random()*filters.size());
 		double calories = 0;
@@ -109,7 +111,7 @@ public class RecipeController {
 //			}
 //		}
 		String apiUrl = "https://api.edamam.com/search?q=" + filters.get(rand) 
-				+ "&app_id=3ee293b7&app_key=5143a3f492a353eb02eac1fac6912dbc&from=0&to=3&calories="
+				+ "&app_id=3ee293b7&app_key=5143a3f492a353eb02eac1fac6912dbc&from=0&to=20&calories="
 				+ calorieCount ;
 		log.info(apiUrl);
 
@@ -123,9 +125,6 @@ public class RecipeController {
 			for (int i = 0; i < recipes.getHits().size(); i++) {
 				Recipe r = new Recipe();
 				r.setCalories(recipes.getCalories(i) / recipes.getServings(i));
-//				for (int j = 0; j < recipes.getIngredients(i).size(); j++) {
-//					r.setIngredients(r.getIngredients() + recipes.getIngredients(i).get(j) + ".");
-//				}
 				r.setIngredients(recipes.getIngredients(i).toString());
 				r.setRecipeName(recipes.getName(i));
 				recp.add(r);
