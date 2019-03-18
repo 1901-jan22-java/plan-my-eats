@@ -21,7 +21,6 @@ import com.revature.beans.Restaurant;
 import com.revature.beans.User;
 import com.revature.services.ImpTokenService;
 import com.revature.services.UserService;
-import com.revature.services.interfaces.TokenService;
 
 @RestController
 @CrossOrigin
@@ -32,7 +31,9 @@ public class UserController {
 
 	@Autowired
 	private UserService us;
-	TokenService ts = ImpTokenService.getInstance();
+	
+	@Autowired
+	private ImpTokenService ts;
 
 	@RequestMapping(method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<List<User>> getAll() {

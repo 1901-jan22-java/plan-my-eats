@@ -9,6 +9,7 @@ import javax.crypto.spec.SecretKeySpec;
 import javax.xml.bind.DatatypeConverter;
 
 import org.apache.log4j.Logger;
+import org.springframework.stereotype.Service;
 
 import com.revature.beans.User;
 import com.revature.services.interfaces.TokenService;
@@ -18,22 +19,13 @@ import io.jsonwebtoken.JwtBuilder;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 
+@Service
 public class ImpTokenService implements TokenService {
 
 	private static final Logger log = Logger.getLogger(ImpTokenService.class);
 
 	private static final long TOKEN_EXPIRY = 1000 * 60 * 60 * 24; // 1 day
 	private static final String SECRET = "ThisISAsUPerLoNgPasSWord0417anDNumbRs!BWYUBUUYB*@!^&#GUYWQGD!^@GDUYWQGD&!^FDUQWFUD!&^FUWQYDF^!F";
-
-	private static final TokenService INSTANCE = new ImpTokenService();
-
-	private ImpTokenService() {
-		super();
-	}
-
-	public static final TokenService getInstance() {
-		return INSTANCE;
-	}
 
 	@Override
 	public String generateToken(User details) {
@@ -78,15 +70,6 @@ public class ImpTokenService implements TokenService {
 
 	}
 
-//	@Override
-//	public User getUserDetailsFromToken(String token) {
-//		if (token != null && token.startsWith("Bearer ")) {
-//			Claims claims = Jwts.parser().setSigningKey(keyPair.getPublic()).parseClaimsJws(token.replace("Bearer ", "")).getBody();
-//			return new AuthenticatedUser(claims.getSubject(), (String) claims.get("email"), Arrays.stream(claims.get("roles").toString().split(",")).collect(Collectors.toList()));
-//		}
-//		return null;
-//	}
-
 	@Override
 	public String getTokenId(String token) {
 		if (token != null && token.startsWith("Bearer ")) {
@@ -97,5 +80,16 @@ public class ImpTokenService implements TokenService {
 		}
 		return null;
 	}
+
+//	@Override
+//	public User getUserDetailsFromToken(String token) {
+//		if (token == null || !token.startsWith("Bearer ")) {
+//			return null;
+//		}
+//		Claims claims = Jwts.parser().setSigningKey(keyPair.getPublic()).parseClaimsJws(token.replace("Bearer ", ""))
+//				.getBody();
+//		return new AuthenticatedUser(claims.getSubject(), (String) claims.get("email"),
+//				Arrays.stream(claims.get("roles").toString().split(",")).collect(Collectors.toList()));
+//	}
 
 }

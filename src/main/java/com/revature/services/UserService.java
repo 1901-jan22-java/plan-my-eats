@@ -39,14 +39,6 @@ public class UserService {
 		return repo.findByUsername(username);
 	}
 
-//	public List<User> findByRestauarnt(String restaurant) {
-//		return repo.findByRestaurants(restaurant);
-//	}
-//
-//	public List<User> findByRecipe(String recipe) {
-//		return repo.findByRecipes(recipe);
-//	}
-
 	public User updateUserGender(String gender, String username) {
 		return repo.setUserGenderByUsername(gender, username);
 	}

@@ -8,7 +8,6 @@ import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.client.RestTemplate;
 
 import com.revature.beans.Preference;
@@ -21,7 +20,6 @@ import com.revature.dtos.edamam.recipes.RecipeResults;
 import com.revature.repositories.RecipeRepository;
 
 @Service
-@Transactional
 public class RecipeService {
 
 	private static final Logger log = Logger.getLogger(RecipeService.class);

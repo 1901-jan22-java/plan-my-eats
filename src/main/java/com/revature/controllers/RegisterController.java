@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.RestController;
 import com.revature.beans.User;
 import com.revature.services.ImpTokenService;
 import com.revature.services.UserService;
-import com.revature.services.interfaces.TokenService;
 
 @RestController
 @CrossOrigin
@@ -21,9 +20,10 @@ import com.revature.services.interfaces.TokenService;
 public class RegisterController {
 
 	@Autowired
-	UserService service;
+	private UserService service;
 
-	TokenService tokenService = ImpTokenService.getInstance();
+	@Autowired
+	private ImpTokenService tokenService;
 
 	@RequestMapping(method = RequestMethod.GET)
 	public ResponseEntity<String> showInfo() {

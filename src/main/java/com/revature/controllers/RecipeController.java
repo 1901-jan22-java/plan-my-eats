@@ -24,8 +24,8 @@ import com.revature.dtos.edamam.recipes.RecipeDetailsResults;
 import com.revature.services.RecipeService;
 import com.revature.services.UserService;
 
-@CrossOrigin
 @RestController
+@CrossOrigin
 @RequestMapping("/recipe")
 public class RecipeController {
 
@@ -56,6 +56,13 @@ public class RecipeController {
 		return rs.searchByUserDetails(u);
 	}
 
+	@RequestMapping(method = RequestMethod.PUT, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<User> updateRestaurantHistory(@RequestBody User user) {
+		us.saveUser(user);
+		return new ResponseEntity<User>(user, HttpStatus.OK);
+	}
+
+	@Deprecated
 	@RequestMapping(method = RequestMethod.POST, consumes = MediaType.TEXT_PLAIN_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<RecipeDetailsResults> hitRecApi(@RequestBody User u) {
 		Random rand = new Random();
@@ -146,12 +153,6 @@ public class RecipeController {
 			log.error("", e);
 		}
 		return new ResponseEntity<RecipeDetailsResults>(HttpStatus.BAD_REQUEST);
-	}
-
-	@RequestMapping(method = RequestMethod.PUT, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<User> updateRestaurantHistory(@RequestBody User user) {
-		us.saveUser(user);
-		return new ResponseEntity<User>(user, HttpStatus.OK);
 	}
 
 }

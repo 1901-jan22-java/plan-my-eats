@@ -4,16 +4,17 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
 import com.revature.services.ImpTokenService;
-import com.revature.services.interfaces.TokenService;
 
 public class JWTAuthenticationFilter extends HandlerInterceptorAdapter {
 
 	private static final Logger log = Logger.getLogger(JWTAuthenticationFilter.class);
 
-	TokenService tokenService = ImpTokenService.getInstance();
+	@Autowired
+	private ImpTokenService tokenService;
 
 //	@RequestMapping(method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
 //	public ResponseEntity<User> authorize(@RequestBody User user) {

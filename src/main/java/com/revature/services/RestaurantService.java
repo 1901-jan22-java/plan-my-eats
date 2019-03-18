@@ -7,7 +7,6 @@ import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.client.RestTemplate;
 
 import com.revature.beans.Preference;
@@ -20,15 +19,14 @@ import com.revature.dtos.google.places.PlacePhoto;
 import com.revature.repositories.RestaurantRepository;
 
 @Service
-@Transactional
 public class RestaurantService {
 
 	private static final Logger log = Logger.getLogger(RestaurantService.class);
 
+	private static String appKey = KeyConfiguration.PROPS.getProperty("google.places.appKey");
+
 	@Autowired
 	private static RestaurantRepository repo;
-
-	private static String appKey = KeyConfiguration.PROPS.getProperty("google.places.appKey");
 
 	public ResponseEntity<List<Restaurant>> searchRestaurantsByKeywords(String location, List<String> keywords) {
 		RestTemplate rt = new RestTemplate();

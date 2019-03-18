@@ -5,16 +5,15 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.revature.beans.User;
 import com.revature.services.ImpTokenService;
 import com.revature.services.UserService;
-import com.revature.services.interfaces.TokenService;
 
 @RestController
 @CrossOrigin
@@ -22,38 +21,40 @@ import com.revature.services.interfaces.TokenService;
 public class LoginController {
 
 	@Autowired
-	UserService service;
+	private UserService us;
 
-	TokenService tokenService = ImpTokenService.getInstance();
+	@Autowired
+	private ImpTokenService ts;
 
-	// find user by user name and then save to the session
-	@RequestMapping(path = "/{username}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<User> findByUsername(@PathVariable String username) {
-		// I guess this is all i need but how do we maintain session ? with this user ??
-		// to be revealed later
-		User u = service.findByUsername(username);
+	@RequestMapping(method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<User> findByUsername(@RequestParam(value = "username") String username,
+			@RequestParam(value = "password") String password) {
+		User u = us.findByUsername(username);
 
-		if (u == null) {
-			// user is null, return null/no resp body with a Http status of no content
+		if (u == null || !u.getPassword().equals(password)) {
 			return new ResponseEntity<User>(HttpStatus.NO_CONTENT);
-		} else {
-			// all good, return user w status of ok
-			return new ResponseEntity<User>(u, HttpStatus.OK);
 		}
+		String token = ts.generateToken(u);
+		u.setToken(token);
+		
+		return new ResponseEntity<User>(u, HttpStatus.OK);
 	}
 
+	// find user by user name and then save to the session
 	@RequestMapping(method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<User> login(@RequestBody User user) {
-		User u = service.findByUsername(user.getUsername());
+		// I guess this is all i need but how do we maintain session ? with this user ??
+		// to be revealed later
+		User u = us.findByUsername(user.getUsername());
 		if (u == null || !u.getPassword().equals(user.getPassword())) {
-			// Username does not exist or password is incorrect
+			// user is null, return null/no resp body with a Http status of no content
 			return new ResponseEntity<User>(HttpStatus.NO_CONTENT);
-		} else {
-			String token = tokenService.generateToken(u);
-			u.setToken(token);
-
-			return new ResponseEntity<User>(u, HttpStatus.OK);
 		}
+		String token = ts.generateToken(u);
+		u.setToken(token);
+
+		// all good, return user w status of ok
+		return new ResponseEntity<User>(u, HttpStatus.OK);
 	}
 
 }
