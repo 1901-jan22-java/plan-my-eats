@@ -19,8 +19,8 @@
 
 	<mvc:annotation-driven />
 	<mvc:interceptors>
-		<bean class="com.revature.interceptors.JWTAuthenticationFilter"></bean>
-		<bean class="com.revature.interceptors.CorsInterceptor"></bean>
+		<bean class="com.revature.interceptors.CorsInterceptor" />
+		<bean class="com.revature.interceptors.JWTAuthenticationFilter" />
 	</mvc:interceptors>
 	<mvc:cors>
 		<mvc:mapping path="/**" />
@@ -29,7 +29,7 @@
 	<jpa:repositories
 		base-package="com.revature.repositories" />
 	<tx:annotation-driven />
-	
+
 	<aop:aspectj-autoproxy />
 
 	<context:property-placeholder
