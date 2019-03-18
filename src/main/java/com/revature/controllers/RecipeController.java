@@ -72,7 +72,16 @@ public class RecipeController {
 		}
 		String calorieCount = (int)((calories/3)-100) + "-" + (int)((calories/3)+100);
 		
-		
+		int pRand = (int) Math.floor(Math.random()*u.getPreferences().size());
+		int count = 0;
+		String pref = "";
+		for(Preference p : u.getPreferences()) {
+			if(count == pRand) {
+				pref = p.getName();
+				break;
+			}
+			count++;
+		}
 //		if (u.getPreferences().size() > 3) {
 //			// Keep track of an index
 //			int firstIndex = -1;
@@ -110,9 +119,11 @@ public class RecipeController {
 //				}
 //			}
 //		}
+		
+		
 		String apiUrl = "https://api.edamam.com/search?q=" + filters.get(rand) 
 				+ "&app_id=3ee293b7&app_key=5143a3f492a353eb02eac1fac6912dbc&from=0&to=20&calories="
-				+ calorieCount ;
+				+ calorieCount +"&health=" + pref;
 		log.info(apiUrl);
 
 		try {
@@ -138,8 +149,30 @@ public class RecipeController {
 
 		} catch (Exception e) {
 			log.error("", e);
+			apiUrl = "https://api.edamam.com/search?q=" + filters.get(rand) 
+			+ "&app_id=3ee293b7&app_key=5143a3f492a353eb02eac1fac6912dbc&from=0&to=20&calories="
+			+ calorieCount;
+			
+			RestTemplate restTemplate = new RestTemplate();
+			ResponseEntity<RecipeDetailsResults> responseEntity = restTemplate.getForEntity(apiUrl,
+					RecipeDetailsResults.class);
+			RecipeDetailsResults recipes = responseEntity.getBody();
+
+			List<Recipe> recp = new ArrayList<Recipe>();
+			for (int i = 0; i < recipes.getHits().size(); i++) {
+				Recipe r = new Recipe();
+				r.setCalories(recipes.getCalories(i) / recipes.getServings(i));
+				r.setIngredients(recipes.getIngredients(i).toString());
+				r.setRecipeName(recipes.getName(i));
+				r.setUrl(recipes.getUrl(i));
+				recp.add(r);
+			}
+			if (responseEntity.getStatusCode().toString().equals("200")) {
+				return new ResponseEntity<List<Recipe>>(recp, HttpStatus.OK);
+			} else {
+				return new ResponseEntity<List<Recipe>>(HttpStatus.BAD_REQUEST);
+			}
 		}
-		return new ResponseEntity<List<Recipe>>(HttpStatus.BAD_REQUEST);
 	}
 
 	@RequestMapping(method = RequestMethod.PUT, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)

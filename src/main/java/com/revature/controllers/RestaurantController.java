@@ -53,13 +53,17 @@ public class RestaurantController {
 			PlaceDetailsResponse restaurants = responseEntity.getBody();
 
 			List<Restaurant> rests = new ArrayList<Restaurant>();
-			log.info(restaurants.getResult().toArray().length);
+
 			for (int i = 0; i < restaurants.getResult().toArray().length; i++) {
 
 				Restaurant r = new Restaurant();
 				r.setName(restaurants.NamesList().get(i));
 				r.setLocation(restaurants.VicinityList().get(i));
-				r.setType(filters[1]);
+				if(filters[1].equals(" ")) {
+					r.setType("Random");
+				} else {
+					r.setType(filters[1]);
+				}
 				r.setLatitude(restaurants.LatitudeList().get(i));
 				r.setLongitude(restaurants.LongitudeList().get(i));
 				r.setImgRef(restaurants.PhotosList().get(i));
