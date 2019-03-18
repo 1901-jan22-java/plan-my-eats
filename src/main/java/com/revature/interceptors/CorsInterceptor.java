@@ -3,10 +3,13 @@ package com.revature.interceptors;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.log4j.Logger;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
 public class CorsInterceptor extends HandlerInterceptorAdapter {
 
+	private static final Logger log = Logger.getLogger(CorsInterceptor.class);
+	
 	public static final String CREDENTIALS_NAME = "Access-Control-Allow-Credentials";
 	public static final String ORIGIN_NAME = "Access-Control-Allow-Origin";
 	public static final String METHODS_NAME = "Access-Control-Allow-Methods";
@@ -16,7 +19,7 @@ public class CorsInterceptor extends HandlerInterceptorAdapter {
 	@Override
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
 			throws Exception {
-		System.out.println("We are in the cross origin header");
+		log.info("We are in the cross origin header");
 		response.setHeader(CREDENTIALS_NAME, "true");
 		response.setHeader(ORIGIN_NAME, "*");
 		response.setHeader(METHODS_NAME, "GET, OPTIONS, POST, PUT, DELETE");

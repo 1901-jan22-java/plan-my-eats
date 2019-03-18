@@ -19,7 +19,8 @@
 
 	<mvc:annotation-driven />
 	<mvc:interceptors>
-		<bean class="com.revature.filters.JWTAuthenticationFilter"></bean>
+		<bean class="com.revature.interceptors.JWTAuthenticationFilter"></bean>
+		<bean class="com.revature.interceptors.CorsInterceptor"></bean>
 	</mvc:interceptors>
 	<mvc:cors>
 		<mvc:mapping path="/**" />

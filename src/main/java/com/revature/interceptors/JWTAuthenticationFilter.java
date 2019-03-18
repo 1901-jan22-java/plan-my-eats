@@ -1,4 +1,4 @@
-package com.revature.filters;
+package com.revature.interceptors;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -14,8 +14,7 @@ public class JWTAuthenticationFilter extends HandlerInterceptorAdapter {
 	private static final Logger log = Logger.getLogger(JWTAuthenticationFilter.class);
 
 	@Autowired
-	private ImpTokenService tokenService;
-
+	private ImpTokenService ts;
 
 	// This method is called before the controller
 	@Override
@@ -24,7 +23,8 @@ public class JWTAuthenticationFilter extends HandlerInterceptorAdapter {
 
 		log.info(request.getRequestURI().split("/")[2]);
 		if (request.getRequestURI().split("/")[2].equals("login")
-				|| request.getRequestURI().split("/")[2].equals("register") || request.getMethod().equalsIgnoreCase("Options")) {
+				|| request.getRequestURI().split("/")[2].equals("register")
+				|| request.getMethod().equalsIgnoreCase("Options")) {
 			log.info("This is a login request.");
 			return true;
 		}
@@ -37,7 +37,7 @@ public class JWTAuthenticationFilter extends HandlerInterceptorAdapter {
 			response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
 			return false;
 		}
-		boolean valid = tokenService.validateToken(token);
+		boolean valid = ts.validateToken(token);
 		log.info(valid);
 		if (!valid) {
 			log.error("Authentication failed: Token is invalid");
