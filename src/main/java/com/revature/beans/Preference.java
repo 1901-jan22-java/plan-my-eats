@@ -24,12 +24,23 @@ public class Preference {
 	@Column(name = "NAME")
 	private String name;
 
+	@Column(name = "TYPE")
+	private String type;
+
 	public Preference() {
 	}
 
-	public Preference(String name) {
+	public Preference(String name, String type) {
 		super();
 		this.name = name;
+		this.type = type;
+	}
+
+	public Preference(int prefId, String name, String type) {
+		super();
+		this.prefId = prefId;
+		this.name = name;
+		this.type = type;
 	}
 
 	public int getPrefId() {
@@ -48,9 +59,17 @@ public class Preference {
 		this.name = name;
 	}
 
+	public String getType() {
+		return type;
+	}
+
+	public void setType(String type) {
+		this.type = type;
+	}
+
 	@Override
 	public String toString() {
-		return "Preference [prefId=" + prefId + ", name=" + name + "]";
+		return "Preference [prefId=" + prefId + ", name=" + name + ", type=" + type + "]";
 	}
 
 }

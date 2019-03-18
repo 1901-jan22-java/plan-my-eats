@@ -39,12 +39,19 @@ public class RestaurantController {
 		return new ResponseEntity<List<Restaurant>>(rs.getRestaurant(), HttpStatus.OK);
 	}
 
-	@RequestMapping(path = "/testrestaurant", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<List<Restaurant>> pleaseWork(@RequestParam(value = "keywords") String keywords,
+	@RequestMapping(path = "/search", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<List<Restaurant>> searchRestaurants(@RequestParam(value = "keyword") List<String> keywords,
 			@RequestParam(value = "location") String location) {
 		return rs.searchRestaurantsByKeywords(location, keywords);
 	}
 
+	@RequestMapping(method = RequestMethod.PUT, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<User> updateUserRestaurantHistory(@RequestBody User user) {
+		User u = us.saveUser(user);
+		return new ResponseEntity<User>(u, HttpStatus.OK);
+	}
+
+	@Deprecated
 	@RequestMapping(method = RequestMethod.POST, consumes = MediaType.TEXT_PLAIN_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<List<Restaurant>> hitResApi(@RequestBody String params) {
 		String[] filters = params.split(";");
@@ -65,7 +72,7 @@ public class RestaurantController {
 				Restaurant r = new Restaurant();
 				r.setName(restaurants.NamesList().get(i));
 				r.setLocation(restaurants.VicinityList().get(i));
-				r.setType(filters[1]);
+//				r.setType(filters[1]);
 				r.setLatitude(restaurants.LatitudeList().get(i));
 				r.setLongitude(restaurants.LongitudeList().get(i));
 				r.setImgRef(restaurants.PhotosList().get(i));
@@ -81,12 +88,6 @@ public class RestaurantController {
 			log.error("", e);
 		}
 		return new ResponseEntity<List<Restaurant>>(HttpStatus.BAD_REQUEST);
-	}
-
-	@RequestMapping(method = RequestMethod.PUT, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<User> updateUserRestaurantHistory(@RequestBody User user) {
-		User u = us.saveUser(user);
-		return new ResponseEntity<User>(u, HttpStatus.OK);
 	}
 
 }

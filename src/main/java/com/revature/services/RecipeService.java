@@ -47,20 +47,22 @@ public class RecipeService {
 			calories *= 1.2d;
 		}
 
-		List<Preference> prefs = new ArrayList<>(u.getPreferences());
+		List<Preference> prefs = u.getPreferences();
+		List<String> healths = new ArrayList<>();
 		Collections.shuffle(prefs);
-		StringBuilder sb = new StringBuilder();
-		for (int i = 0; i < prefLimit && i < prefs.size(); i++) {
-			sb.append(prefs.get(i).getName() + "+");
+		for (int i = 0, count = 0; count < prefLimit && i < prefs.size(); i++) {
+			Preference p = prefs.get(i);
+			if(p.getType().equalsIgnoreCase("health")) {
+				healths.add(p.getName());
+				count++;
+			}
 		}
-		sb.setLength(Math.max(sb.length() - 1, 0));
-		String keywords = sb.toString();
 
 		RestTemplate rt = new RestTemplate();
-		ResponseEntity<RecipeDetailsResults> re = rt.getForEntity(buildAPIUrl(calories, keywords),
+		ResponseEntity<RecipeDetailsResults> re = rt.getForEntity(buildAPIUrl(calories, healths),
 				RecipeDetailsResults.class);
 
-		return mapAndCacheEdamamAPI(re, keywords);
+		return mapAndCacheEdamamAPI(re, healths);
 	}
 
 	public List<Recipe> getAll() {
@@ -103,16 +105,21 @@ public class RecipeService {
 	/********** HELPER METHODS **********/
 	/************************************/
 
-	private static String buildAPIUrl(double calories, String keywords) {
+	private static String buildAPIUrl(double calories, List<String> health) {
+		StringBuilder sb = new StringBuilder();
+		for(String s: health) {
+			sb.append("&health=" + s);
+		}
+		
 		String apiUrl = "https://api.edamam.com/search?q=&app_id=" + appId + "&app_key=" + appKey
-				+ "&from=0&to=3&calories=" + (int) (calories * 0.33d) + "&health=" + keywords;
+				+ "&from=0&to=3&calories=" + (int) (calories * 0.33d) + sb.toString();
 		log.info("Edamam API Url: " + apiUrl);
 
 		return apiUrl;
 	}
 
 	private static ResponseEntity<List<Recipe>> mapAndCacheEdamamAPI(ResponseEntity<RecipeDetailsResults> re,
-			String keywords) {
+			List<String> keywords) {
 		List<Recipe> res = new ArrayList<>();
 
 		for (RecipeResults rr : re.getBody().getHits()) {
@@ -122,9 +129,14 @@ public class RecipeService {
 			for (String i : rd.getIngredients()) {
 				sb.append(i + "\n");
 			}
+			
+			List<Preference> words = new ArrayList<>();
+			for(String s: keywords) {
+				words.add(new Preference(s, "Cuisine"));
+			}
 
 			Recipe r = new Recipe(rd.getName(), sb.toString().substring(0, sb.length() - 2),
-					(rd.getCalories() / rd.getServings()), keywords);
+					rd.getCalories(), words);
 			repo.save(r);
 			res.add(r);
 		}

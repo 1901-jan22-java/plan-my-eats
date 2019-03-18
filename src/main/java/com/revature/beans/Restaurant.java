@@ -1,10 +1,17 @@
 package com.revature.beans;
 
+import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
@@ -27,9 +34,6 @@ public class Restaurant {
 	@Column(name = "ADDRESS")
 	private String location;
 
-	@Column(name = "TYPE")
-	private String type;
-
 	@Column(name = "LATITUDE")
 	private String latitude;
 
@@ -39,30 +43,35 @@ public class Restaurant {
 	@Column(name = "IMAGE_REFERENCE")
 	private String imgRef;
 
+	@ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	@JoinTable(name = "PME_RESTAURANT_TYPE", joinColumns = @JoinColumn(name = "RESTAURANT_ID"), inverseJoinColumns = @JoinColumn(name = "PREF_ID"))
+	private List<Preference> type;
+
 	public Restaurant() {
 		super();
 	}
 
-	public Restaurant(String name, String location, String type, String latitude, String longitude, String imgRef) {
+	public Restaurant(String name, String location, String latitude, String longitude, String imgRef,
+			List<Preference> type) {
 		super();
 		this.name = name;
 		this.location = location;
-		this.type = type;
 		this.latitude = latitude;
 		this.longitude = longitude;
 		this.imgRef = imgRef;
+		this.type = type;
 	}
 
-	public Restaurant(int restaurantId, String name, String location, String type, String latitude, String longitude,
-			String imgRef) {
+	public Restaurant(int restaurantId, String name, String location, String latitude, String longitude, String imgRef,
+			List<Preference> type) {
 		super();
 		this.restaurantId = restaurantId;
 		this.name = name;
 		this.location = location;
-		this.type = type;
 		this.latitude = latitude;
 		this.longitude = longitude;
 		this.imgRef = imgRef;
+		this.type = type;
 	}
 
 	public int getRestaurantId() {
@@ -89,14 +98,6 @@ public class Restaurant {
 		this.location = location;
 	}
 
-	public String getType() {
-		return type;
-	}
-
-	public void setType(String type) {
-		this.type = type;
-	}
-
 	public String getLatitude() {
 		return latitude;
 	}
@@ -121,10 +122,18 @@ public class Restaurant {
 		this.imgRef = imgRef;
 	}
 
+	public List<Preference> getType() {
+		return type;
+	}
+
+	public void setType(List<Preference> type) {
+		this.type = type;
+	}
+
 	@Override
 	public String toString() {
-		return "Restaurant [restaurantId=" + restaurantId + ", name=" + name + ", location=" + location + ", type="
-				+ type + ", latitude=" + latitude + ", longitude=" + longitude + ", imgRef=" + imgRef + "]";
+		return "Restaurant [restaurantId=" + restaurantId + ", name=" + name + ", location=" + location + ", latitude="
+				+ latitude + ", longitude=" + longitude + ", imgRef=" + imgRef + ", type=" + type + "]";
 	}
 
 }

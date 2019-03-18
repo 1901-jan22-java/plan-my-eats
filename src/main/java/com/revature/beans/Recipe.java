@@ -1,10 +1,17 @@
 package com.revature.beans;
 
+import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
@@ -30,14 +37,15 @@ public class Recipe {
 	@Column(name = "CALORIES")
 	private int calories;
 
-	@Column(name = "TYPES")
-	private String types;
+	@ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	@JoinTable(name = "PME_RECIPE_TYPE", joinColumns = @JoinColumn(name = "RECIPE_ID"), inverseJoinColumns = @JoinColumn(name = "PREF_ID"))
+	private List<Preference> types;
 
 	public Recipe() {
 		super();
 	}
 
-	public Recipe(String recipeName, String ingredients, int calories, String types) {
+	public Recipe(String recipeName, String ingredients, int calories, List<Preference> types) {
 		super();
 		this.recipeName = recipeName;
 		this.ingredients = ingredients;
@@ -45,7 +53,7 @@ public class Recipe {
 		this.types = types;
 	}
 
-	public Recipe(int recipeId, String recipeName, String ingredients, int calories, String types) {
+	public Recipe(int recipeId, String recipeName, String ingredients, int calories, List<Preference> types) {
 		super();
 		this.recipeId = recipeId;
 		this.recipeName = recipeName;
@@ -62,20 +70,20 @@ public class Recipe {
 		this.recipeId = recipeId;
 	}
 
-	public String getIngredients() {
-		return ingredients;
-	}
-
-	public void setIngredients(String ingredients) {
-		this.ingredients = ingredients;
-	}
-
 	public String getRecipeName() {
 		return recipeName;
 	}
 
 	public void setRecipeName(String recipeName) {
 		this.recipeName = recipeName;
+	}
+
+	public String getIngredients() {
+		return ingredients;
+	}
+
+	public void setIngredients(String ingredients) {
+		this.ingredients = ingredients;
 	}
 
 	public int getCalories() {
@@ -86,18 +94,12 @@ public class Recipe {
 		this.calories = calories;
 	}
 
-	public String getTypes() {
+	public List<Preference> getTypes() {
 		return types;
 	}
 
-	public void setTypes(String types) {
+	public void setTypes(List<Preference> types) {
 		this.types = types;
-	}
-
-	@Override
-	public String toString() {
-		return "Recipe [recipeId=" + recipeId + ", ingredients=" + ingredients + ", recipeName=" + recipeName
-				+ ", calories=" + calories + ", types=" + types + "]";
 	}
 
 	@Override

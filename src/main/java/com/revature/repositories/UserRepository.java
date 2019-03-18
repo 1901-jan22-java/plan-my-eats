@@ -1,7 +1,6 @@
 package com.revature.repositories;
 
 import java.util.List;
-import java.util.Set;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
@@ -29,7 +28,7 @@ public interface UserRepository extends JpaRepository<User, Integer> {
 
 	@Modifying
 	@Query("update User u set u.preferences=?1 WHERE u.userId = ?2")
-	void setUserPreferenceByUserId(Set<Preference> s, Integer userId);
+	void setUserPreferenceByUserId(List<Preference> s, Integer userId);
 
 	@Modifying
 	@Query("update User u set u.preferences=?1 WHERE u.username = ?2")
@@ -37,7 +36,7 @@ public interface UserRepository extends JpaRepository<User, Integer> {
 
 	@Modifying
 	@Query("update User u set u.preferences=?1 WHERE u.userId = ?2")
-	User setUserPreferenceByUserId(Set<Preference> s, int id);
+	User setUserPreferenceByUserId(List<Preference> s, int id);
 
 	@Modifying
 	@Query("update User u set u.preferences=?1 WHERE u.username = ?2")

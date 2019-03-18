@@ -41,6 +41,15 @@ public class RecipeController {
 		return new ResponseEntity<List<Recipe>>(rs.getAll(), HttpStatus.OK);
 	}
 
+	/*
+	 * TODO: FINISH THIS
+	 */
+	@RequestMapping(path = "/search", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<List<Recipe>> search(@RequestParam(value = "health") List<String> search) {
+		
+		return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+	}
+	
 	@RequestMapping(path = "/testrecipe", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<List<Recipe>> searchByPreferences(@RequestParam(value = "userId") int id) {
 		User u = us.findById(id);

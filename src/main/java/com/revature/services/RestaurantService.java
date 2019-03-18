@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.client.RestTemplate;
 
+import com.revature.beans.Preference;
 import com.revature.beans.Restaurant;
 import com.revature.configurations.KeyConfiguration;
 import com.revature.dtos.google.places.PlaceDetails;
@@ -29,7 +30,7 @@ public class RestaurantService {
 
 	private static String appKey = KeyConfiguration.PROPS.getProperty("google.places.appKey");
 
-	public ResponseEntity<List<Restaurant>> searchRestaurantsByKeywords(String location, String keywords) {
+	public ResponseEntity<List<Restaurant>> searchRestaurantsByKeywords(String location, List<String> keywords) {
 		RestTemplate rt = new RestTemplate();
 		ResponseEntity<PlaceDetailsResponse> re = rt.getForEntity(buildAPIUrl(location, keywords),
 				PlaceDetailsResponse.class);
@@ -65,15 +66,19 @@ public class RestaurantService {
 	/********** HELPER METHODS **********/
 	/************************************/
 
-	private static String buildAPIUrl(String location, String keywords) {
+	private static String buildAPIUrl(String location, List<String> keywords) {
+		StringBuilder kwSB = new StringBuilder();
+		for (String s : keywords) {
+			kwSB.append("&keyword=" + s);
+		}
 		String apiUrl = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?&location=" + location
-				+ "&radius=1500&type=restaurant&keyword=" + keywords + "&key=" + appKey;
+				+ "&radius=1500&type=restaurant" + kwSB.toString() + "&key=" + appKey;
 		log.info("API Url: " + apiUrl);
 		return apiUrl;
 	}
 
 	private static ResponseEntity<List<Restaurant>> mapAndCacheGoogleAPI(ResponseEntity<PlaceDetailsResponse> re,
-			String keywords) {
+			List<String> keywords) {
 		PlaceDetailsResponse pdr = re.getBody();
 
 		List<Restaurant> rs = new ArrayList<Restaurant>();
@@ -86,9 +91,13 @@ public class RestaurantService {
 			for (PlacePhoto pp : pd.getPhotos()) {
 				sb.append(pp.getReference() + " ");
 			}
+			List<Preference> prefs = new ArrayList<>();
+			for (String p : keywords) {
+				prefs.add(new Preference(p, "cuisine"));
+			}
 
-			Restaurant r = new Restaurant(pd.getName(), pd.getVicinity(), keywords, pl.getLatitude(), pl.getLongitude(),
-					sb.toString().substring(0, sb.length() - 1));
+			Restaurant r = new Restaurant(pd.getName(), pd.getVicinity(), pl.getLatitude(), pl.getLongitude(),
+					sb.toString().substring(0, sb.length() - 1), prefs);
 			repo.save(r);
 			rs.add(r);
 		}

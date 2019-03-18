@@ -1,7 +1,7 @@
 package com.revature.beans;
 
-import java.util.HashSet;
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -53,15 +53,15 @@ public class User {
 
 	@ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	@JoinTable(name = "PME_RECIPE_HISTORY", joinColumns = @JoinColumn(name = "USER_ID"), inverseJoinColumns = @JoinColumn(name = "RECIPE_ID"))
-	private Set<Recipe> recipes = new HashSet<Recipe>();
+	private List<Recipe> recipes = new ArrayList<Recipe>();
 
 	@ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	@JoinTable(name = "PME_RESTAURANT_HISTORY", joinColumns = @JoinColumn(name = "USER_ID"), inverseJoinColumns = @JoinColumn(name = "RESTUARANT_ID"))
-	private Set<Restaurant> restaurants = new HashSet<Restaurant>();
+	private List<Restaurant> restaurants = new ArrayList<Restaurant>();
 
 	@ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	@JoinTable(name = "PME_PREFERENCE_PROFILE", joinColumns = @JoinColumn(name = "USER_ID"), inverseJoinColumns = @JoinColumn(name = "PREF_ID"))
-	private Set<Preference> preferences = new HashSet<Preference>();
+	private List<Preference> preferences = new ArrayList<Preference>();
 
 	public User() {
 		super();
@@ -148,27 +148,27 @@ public class User {
 		this.weight = weight;
 	}
 
-	public Set<Recipe> getRecipes() {
+	public List<Recipe> getRecipes() {
 		return recipes;
 	}
 
-	public void setRecipes(Set<Recipe> recipes) {
+	public void setRecipes(List<Recipe> recipes) {
 		this.recipes = recipes;
 	}
 
-	public Set<Restaurant> getRestaurants() {
+	public List<Restaurant> getRestaurants() {
 		return restaurants;
 	}
 
-	public void setRestaurants(Set<Restaurant> restaurants) {
+	public void setRestaurants(List<Restaurant> restaurants) {
 		this.restaurants = restaurants;
 	}
 
-	public Set<Preference> getPreferences() {
+	public List<Preference> getPreferences() {
 		return preferences;
 	}
 
-	public void setPreferences(Set<Preference> preferences) {
+	public void setPreferences(List<Preference> preferences) {
 		this.preferences = preferences;
 	}
 

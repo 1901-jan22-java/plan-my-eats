@@ -1,7 +1,6 @@
 package com.revature.services;
 
 import java.util.List;
-import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -64,15 +63,14 @@ public class UserService {
 		return repo.setUserHeightByUsername(height, username);
 	}
 
-	public void updatePreferences(User u, Set<Preference> pref, int id) {
+	public void updatePreferences(User u, List<Preference> pref, int id) {
 		u = repo.getOne(id);
 		u.setPreferences(pref);
 		repo.save(u);
-
 	}
 
-	public void updateUser(User u, Set<Preference> pref, Set<Recipe> rec, Set<Restaurant> rest, int id) {
-		u = repo.getOne(id);
+	public void updateUser(int id, List<Preference> pref, List<Recipe> rec, List<Restaurant> rest) {
+		User u = repo.getOne(id);
 		u.setPreferences(pref);
 		u.setRecipes(rec);
 		u.setRestaurants(rest);
@@ -88,7 +86,7 @@ public class UserService {
 		return repo.setUserInfoByUsername(height, weight, gender, age, username);
 	}
 
-	public User updatePreferences(Set<Preference> pref, int id) {
+	public User updatePreferences(List<Preference> pref, int id) {
 		return repo.setUserPreferenceByUserId(pref, id);
 	}
 
