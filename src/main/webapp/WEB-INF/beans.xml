@@ -28,6 +28,8 @@
 	<jpa:repositories
 		base-package="com.revature.repositories" />
 	<tx:annotation-driven />
+	
+	<aop:aspectj-autoproxy />
 
 	<context:property-placeholder
 		location="/WEB-INF/db.properties" />

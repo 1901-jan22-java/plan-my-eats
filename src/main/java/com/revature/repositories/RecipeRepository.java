@@ -8,8 +8,8 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.data.jpa.repository.Query;
 import com.revature.beans.Recipe;
 
-@Repository
 @Transactional
+@Repository
 public interface RecipeRepository extends JpaRepository<Recipe, Integer> {
 
 	// get by ingred, name, calories types
@@ -27,5 +27,5 @@ public interface RecipeRepository extends JpaRepository<Recipe, Integer> {
 
 	@Query("Select r from Recipe r WHERE r.calories > ?1")
 	List<Recipe> findRecipesGreaterThanCalories(int calories);
-	
+
 }

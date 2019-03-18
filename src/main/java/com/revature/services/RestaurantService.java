@@ -7,6 +7,7 @@ import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.client.RestTemplate;
 
 import com.revature.beans.Preference;
@@ -18,6 +19,7 @@ import com.revature.dtos.google.places.PlaceLocation;
 import com.revature.dtos.google.places.PlacePhoto;
 import com.revature.repositories.RestaurantRepository;
 
+@Transactional
 @Service
 public class RestaurantService {
 
@@ -26,7 +28,7 @@ public class RestaurantService {
 	private static String appKey = KeyConfiguration.PROPS.getProperty("google.places.appKey");
 
 	@Autowired
-	private static RestaurantRepository repo;
+	private RestaurantRepository repo;
 
 	public ResponseEntity<List<Restaurant>> searchRestaurantsByKeywords(String location, List<String> keywords) {
 		RestTemplate rt = new RestTemplate();
@@ -64,7 +66,7 @@ public class RestaurantService {
 	/********** HELPER METHODS **********/
 	/************************************/
 
-	private static String buildAPIUrl(String location, List<String> keywords) {
+	private String buildAPIUrl(String location, List<String> keywords) {
 		StringBuilder kwSB = new StringBuilder();
 		for (String s : keywords) {
 			kwSB.append("&keyword=" + s);
@@ -75,7 +77,7 @@ public class RestaurantService {
 		return apiUrl;
 	}
 
-	private static ResponseEntity<List<Restaurant>> mapAndCacheGoogleAPI(ResponseEntity<PlaceDetailsResponse> re,
+	private ResponseEntity<List<Restaurant>> mapAndCacheGoogleAPI(ResponseEntity<PlaceDetailsResponse> re,
 			List<String> keywords) {
 		PlaceDetailsResponse pdr = re.getBody();
 

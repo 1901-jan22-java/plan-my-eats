@@ -6,8 +6,8 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.revature.beans.Preference;
 
-@Repository
 @Transactional
+@Repository
 public interface PreferenceRepository extends JpaRepository<Preference, Integer> {
 
 	Preference getPreferenceByPrefId(int prefId);

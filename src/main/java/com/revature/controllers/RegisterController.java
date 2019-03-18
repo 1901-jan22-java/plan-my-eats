@@ -20,10 +20,10 @@ import com.revature.services.UserService;
 public class RegisterController {
 
 	@Autowired
-	private UserService service;
+	private UserService us;
 
 	@Autowired
-	private ImpTokenService tokenService;
+	private ImpTokenService ts;
 
 	@RequestMapping(method = RequestMethod.GET)
 	public ResponseEntity<String> showInfo() {
@@ -32,18 +32,16 @@ public class RegisterController {
 
 	@RequestMapping(method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<User> register(@RequestBody User user) {
+		User u = us.findByUsername(user.getUsername());
 
-		User u = service.findByUsername(user.getUsername());
-
-		if (u == null) {
-			user = service.saveUser(user);
-			String token = tokenService.generateToken(user);
-			user.setToken(token);
-			return new ResponseEntity<User>(user, HttpStatus.CREATED);
-		} else {
+		if (u != null) {
 			return new ResponseEntity<User>(HttpStatus.CONFLICT);
 		}
-
+		user = us.saveUser(user);
+		String token = ts.generateToken(user);
+		user.setToken(token);
+		
+		return new ResponseEntity<User>(user, HttpStatus.CREATED);
 	}
 
 }

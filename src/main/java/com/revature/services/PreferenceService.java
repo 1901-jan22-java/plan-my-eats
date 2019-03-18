@@ -4,15 +4,17 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.revature.beans.Preference;
 import com.revature.repositories.PreferenceRepository;
 
+@Transactional
 @Service
 public class PreferenceService {
 
 	@Autowired
-	private static PreferenceRepository repo;
+	private PreferenceRepository repo;
 
 	public void save(Preference newPref) {
 		repo.save(newPref);

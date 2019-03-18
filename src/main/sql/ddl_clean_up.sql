@@ -6,6 +6,7 @@ drop table pme_preference_profile;
 drop table pme_preferences;
 drop table pme_users;
 
+drop sequence pme_photo_res_seq;
 drop sequence pme_rec_seq;
 drop sequence pme_res_seq;
 drop sequence pme_user_seq;

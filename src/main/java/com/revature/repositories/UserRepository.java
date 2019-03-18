@@ -11,8 +11,8 @@ import org.springframework.transaction.annotation.Transactional;
 import com.revature.beans.Preference;
 import com.revature.beans.User;
 
-@Repository
 @Transactional
+@Repository
 public interface UserRepository extends JpaRepository<User, Integer> {
 
 	User findByUserId(int id);

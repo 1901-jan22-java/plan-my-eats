@@ -8,6 +8,7 @@ import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.client.RestTemplate;
 
 import com.revature.beans.Preference;
@@ -19,6 +20,7 @@ import com.revature.dtos.edamam.recipes.RecipeDetailsResults;
 import com.revature.dtos.edamam.recipes.RecipeResults;
 import com.revature.repositories.RecipeRepository;
 
+@Transactional
 @Service
 public class RecipeService {
 
@@ -28,7 +30,7 @@ public class RecipeService {
 	private static String appKey = KeyConfiguration.PROPS.getProperty("edamam.recipe.appKey");
 
 	@Autowired
-	private static RecipeRepository repo;
+	private RecipeRepository repo;
 
 	public ResponseEntity<List<Recipe>> searchByUserDetails(User u) {
 		// Default calories for a meal
@@ -103,7 +105,7 @@ public class RecipeService {
 	/********** HELPER METHODS **********/
 	/************************************/
 
-	private static String buildAPIUrl(double calories, List<String> health) {
+	private String buildAPIUrl(double calories, List<String> health) {
 		StringBuilder sb = new StringBuilder();
 		for(String s: health) {
 			sb.append("&health=" + s);
@@ -116,7 +118,7 @@ public class RecipeService {
 		return apiUrl;
 	}
 
-	private static ResponseEntity<List<Recipe>> mapAndCacheEdamamAPI(ResponseEntity<RecipeDetailsResults> re,
+	private ResponseEntity<List<Recipe>> mapAndCacheEdamamAPI(ResponseEntity<RecipeDetailsResults> re,
 			List<String> keywords) {
 		List<Recipe> res = new ArrayList<>();
 

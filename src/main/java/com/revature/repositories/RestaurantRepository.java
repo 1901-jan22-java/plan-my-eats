@@ -9,8 +9,8 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.revature.beans.Restaurant;
 
-@Repository
 @Transactional
+@Repository
 public interface RestaurantRepository extends JpaRepository<Restaurant, Integer> {
 
 	@Query("Select r from Restaurant r WHERE r.type = ?1")
