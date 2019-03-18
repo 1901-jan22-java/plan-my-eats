@@ -17,6 +17,7 @@ import com.revature.repositories.UserRepository;
 @Service
 public class UserService {
 
+	@SuppressWarnings("unused")
 	private static final Logger log = Logger.getLogger(UserService.class);
 	
 	@Autowired
@@ -37,12 +38,10 @@ public class UserService {
 	}
 
 	public User findById(int id) {
-		log.error("REPO: " + repo);
 		return repo.findByUserId(id);
 	}
 
 	public User findByUsername(String username) {
-		log.error("REPO: " + repo);
 		return repo.findByUsername(username);
 	}
 
