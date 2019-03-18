@@ -32,6 +32,9 @@ public class Recipe {
 
 	@Column(name = "TYPES")
 	private String types;
+	
+	@Column(name = "URL")
+	private String url;
 
 	public Recipe() {
 		super();
@@ -92,6 +95,14 @@ public class Recipe {
 
 	public void setTypes(String types) {
 		this.types = types;
+	}
+
+	public String getUrl() {
+		return url;
+	}
+
+	public void setUrl(String url) {
+		this.url = url;
 	}
 
 	@Override

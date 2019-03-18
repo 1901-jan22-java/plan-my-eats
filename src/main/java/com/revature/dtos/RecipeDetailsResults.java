@@ -26,6 +26,10 @@ public class RecipeDetailsResults {
 	public int getServings(int i) {
 		return hits.get(i).getRecipe().getServings();
 	}
+	
+	public String getUrl(int i) {
+		return hits.get(i).getRecipe().getUrl();
+	}
 
 	public List<String> getIngredients(int i) {
 		return hits.get(i).getRecipe().getIngredients();

@@ -19,6 +19,9 @@ public class RecipeDetails {
 
 	@JsonProperty("yield")
 	private int servings;
+	
+	@JsonProperty("url")
+	private String url;
 
 	public String getName() {
 		return name;
@@ -50,6 +53,14 @@ public class RecipeDetails {
 
 	public void setServings(int servings) {
 		this.servings = servings;
+	}
+
+	public String getUrl() {
+		return url;
+	}
+
+	public void setUrl(String url) {
+		this.url = url;
 	}
 
 	@Override

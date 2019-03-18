@@ -127,6 +127,7 @@ public class RecipeController {
 				r.setCalories(recipes.getCalories(i) / recipes.getServings(i));
 				r.setIngredients(recipes.getIngredients(i).toString());
 				r.setRecipeName(recipes.getName(i));
+				r.setUrl(recipes.getUrl(i));
 				recp.add(r);
 			}
 			if (responseEntity.getStatusCode().toString().equals("200")) {
