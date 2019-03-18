@@ -19,7 +19,7 @@ import com.revature.services.PreferenceService;
 import com.revature.services.UserService;
 
 @RestController
-@CrossOrigin
+@CrossOrigin(allowedHeaders="*")
 @RequestMapping("/preference")
 public class PreferenceController {
 
