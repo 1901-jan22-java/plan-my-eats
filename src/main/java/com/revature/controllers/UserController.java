@@ -89,16 +89,6 @@ public class UserController {
 		return new ResponseEntity<>(rs, HttpStatus.OK);
 	}
 
-//	@RequestMapping(path = "/{id}/recipes", method = RequestMethod.PUT, produces = MediaType.APPLICATION_JSON_VALUE)
-//	public ResponseEntity<Collection<Recipe>> updateUserRecipes(@PathVariable int id, @RequestBody Recipe r) {
-//		User u = us.findById(id);
-//		Collection<Recipe> rs = u.getRecipes();
-//		if (u == null || rs.isEmpty()) {
-//			return new ResponseEntity<Collection<Recipe>>(HttpStatus.NO_CONTENT);
-//		}
-//		return new ResponseEntity<>(rs, HttpStatus.OK);
-//	}
-
 	// find user by user name and then save to the session
 	@RequestMapping(path = "/{username}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<User> findByUsername(@PathVariable String username) {
@@ -114,7 +104,7 @@ public class UserController {
 	public ResponseEntity<User> updateUser(@RequestBody User user) {
 		return new ResponseEntity<User>(us.saveUser(user), HttpStatus.OK);
 	}
-
+	
 	@RequestMapping(path = "/register", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<User> register(@RequestBody User user) {
 		User u = us.findByUsername(user.getUsername());

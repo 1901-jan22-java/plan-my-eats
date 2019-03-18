@@ -29,7 +29,7 @@ public class JWTAuthenticationFilter extends HandlerInterceptorAdapter {
 			return true;
 		}
 		final String token = request.getHeader("Authorization");
-		log.error(token);
+		log.info(token);
 		if (token == null) {
 			log.info("Authentication Failed.");
 			response.resetBuffer();

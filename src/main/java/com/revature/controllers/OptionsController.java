@@ -9,9 +9,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @Controller
 public class OptionsController {
 
-    @RequestMapping(method = RequestMethod.OPTIONS)
-    public ResponseEntity<?> handle() {
-        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-    }
+	@RequestMapping(method = RequestMethod.OPTIONS)
+	public ResponseEntity<?> handle() {
+		return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+	}
 
 }

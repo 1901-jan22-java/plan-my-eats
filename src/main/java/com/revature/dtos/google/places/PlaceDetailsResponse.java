@@ -3,11 +3,15 @@ package com.revature.dtos.google.places;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.log4j.Logger;
+
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class PlaceDetailsResponse {
+	private static final Logger log = Logger.getLogger(PlaceDetailsResponse.class);
+
 	@JsonProperty("results")
 	private List<PlaceDetails> results;
 
@@ -35,10 +39,10 @@ public class PlaceDetailsResponse {
 
 	public List<String> PhotosList() {
 		List<String> photo = new ArrayList<String>();
-		
+
 		for (PlaceDetails p : results) {
-			System.out.println(p.getPhotos());
-			if(p.getPhotos().size() > 0) {
+			log.info(p.getPhotos());
+			if (p.getPhotos().size() > 0) {
 				photo.add(p.getPhotos().get(0).getReference());
 			} else {
 				photo.add("No photo");

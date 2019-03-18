@@ -52,15 +52,16 @@ public class RecipeService {
 		Collections.shuffle(prefs);
 		for (int i = 0, count = 0; count < prefLimit && i < prefs.size(); i++) {
 			Preference p = prefs.get(i);
-			if(p.getType().equalsIgnoreCase("health")) {
+			if (p.getType().equalsIgnoreCase("health")) {
 				healths.add(p.getName());
 				count++;
 			}
 		}
 
+		String APIUrl = buildAPIUrl(calories, healths);
+		log.error("API URL: " + APIUrl);
 		RestTemplate rt = new RestTemplate();
-		ResponseEntity<RecipeDetailsResults> re = rt.getForEntity(buildAPIUrl(calories, healths),
-				RecipeDetailsResults.class);
+		ResponseEntity<RecipeDetailsResults> re = rt.getForEntity(APIUrl, RecipeDetailsResults.class);
 
 		return mapAndCacheEdamamAPI(re, healths);
 	}
@@ -107,10 +108,10 @@ public class RecipeService {
 
 	private String buildAPIUrl(double calories, List<String> health) {
 		StringBuilder sb = new StringBuilder();
-		for(String s: health) {
+		for (String s : health) {
 			sb.append("&health=" + s);
 		}
-		
+
 		String apiUrl = "https://api.edamam.com/search?q=&app_id=" + appId + "&app_key=" + appKey
 				+ "&from=0&to=3&calories=" + (int) (calories * 0.33d) + sb.toString();
 		log.info("Edamam API Url: " + apiUrl);
@@ -129,14 +130,13 @@ public class RecipeService {
 			for (String i : rd.getIngredients()) {
 				sb.append(i + "\n");
 			}
-			
+
 			List<Preference> words = new ArrayList<>();
-			for(String s: keywords) {
-				words.add(new Preference(s, "Cuisine"));
+			for (String s : keywords) {
+				words.add(new Preference(s, "cuisine"));
 			}
 
-			Recipe r = new Recipe(rd.getName(), sb.toString().substring(0, sb.length() - 2),
-					rd.getCalories(), words);
+			Recipe r = new Recipe(rd.getName(), sb.toString().substring(0, sb.length() - 2), rd.getCalories(), words);
 			repo.save(r);
 			res.add(r);
 		}

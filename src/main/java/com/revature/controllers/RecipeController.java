@@ -25,7 +25,7 @@ import com.revature.services.RecipeService;
 import com.revature.services.UserService;
 
 @RestController
-@CrossOrigin
+@CrossOrigin(allowedHeaders = "*")
 @RequestMapping("/recipe")
 public class RecipeController {
 
@@ -33,6 +33,7 @@ public class RecipeController {
 
 	@Autowired
 	UserService us;
+
 	@Autowired
 	RecipeService rs;
 
@@ -41,15 +42,21 @@ public class RecipeController {
 		return new ResponseEntity<List<Recipe>>(rs.getAll(), HttpStatus.OK);
 	}
 
+	@RequestMapping(method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<List<Recipe>> getRecipes(@RequestBody User u) {
+		log.error("Made it here");
+		return rs.searchByUserDetails(u);
+	}
+
 	/*
 	 * TODO: FINISH THIS
 	 */
 	@RequestMapping(path = "/search", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<List<Recipe>> search(@RequestParam(value = "health") List<String> search) {
-		
+
 		return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 	}
-	
+
 	@RequestMapping(path = "/testrecipe", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<List<Recipe>> searchByPreferences(@RequestParam(value = "userId") int id) {
 		User u = us.findById(id);
@@ -63,8 +70,9 @@ public class RecipeController {
 	}
 
 	@Deprecated
-	@RequestMapping(method = RequestMethod.POST, consumes = MediaType.TEXT_PLAIN_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<RecipeDetailsResults> hitRecApi(@RequestBody User u) {
+//	@RequestMapping(method = RequestMethod.POST, consumes = MediaType.TEXT_PLAIN_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+//	@RequestBody 
+	public ResponseEntity<RecipeDetailsResults> hitRecApi(User u) {
 		Random rand = new Random();
 		String[] filters = new String[2];
 		double calories = 0;

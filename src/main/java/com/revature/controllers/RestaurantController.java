@@ -22,9 +22,8 @@ import com.revature.dtos.google.places.PlaceDetailsResponse;
 import com.revature.services.RestaurantService;
 import com.revature.services.UserService;
 
-
 @RestController
-@CrossOrigin(allowedHeaders="*")
+@CrossOrigin(allowedHeaders = "*")
 @RequestMapping("/restaurant")
 public class RestaurantController {
 
