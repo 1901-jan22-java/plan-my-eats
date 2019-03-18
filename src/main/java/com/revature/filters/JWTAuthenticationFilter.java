@@ -16,24 +16,6 @@ public class JWTAuthenticationFilter extends HandlerInterceptorAdapter {
 	@Autowired
 	private ImpTokenService tokenService;
 
-//	@RequestMapping(method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-//	public ResponseEntity<User> authorize(@RequestBody User user) {
-//		log.info("Attempting to find JWT token");
-//		final String token = user.getToken();
-//
-//		if (token == null) {
-//			log.error("Authentication failed");
-//			return new ResponseEntity<User>(HttpStatus.BAD_REQUEST);
-//		}
-//
-//		if (tokenService.validateToken(token)) {
-//			log.error("Token is invalid! Log in again to request a new token!");
-//			return new ResponseEntity<User>(HttpStatus.UNAUTHORIZED);
-//		}
-//
-//		log.info("JWT found and is valid! Passing request on");
-//		return null;
-//	}
 
 	// This method is called before the controller
 	@Override
@@ -42,12 +24,12 @@ public class JWTAuthenticationFilter extends HandlerInterceptorAdapter {
 
 		log.info(request.getRequestURI().split("/")[2]);
 		if (request.getRequestURI().split("/")[2].equals("login")
-				|| request.getRequestURI().split("/")[2].equals("register")) {
+				|| request.getRequestURI().split("/")[2].equals("register") || request.getMethod().equalsIgnoreCase("Options")) {
 			log.info("This is a login request.");
 			return true;
 		}
 		final String token = request.getHeader("Authorization");
-
+		log.error(token);
 		if (token == null) {
 			log.info("Authentication Failed.");
 			response.resetBuffer();

@@ -19,7 +19,7 @@ import com.revature.services.PreferenceService;
 import com.revature.services.UserService;
 
 @RestController
-@CrossOrigin
+@CrossOrigin(allowedHeaders = "*")
 @RequestMapping("/preference")
 public class PreferenceController {
 
@@ -48,6 +48,11 @@ public class PreferenceController {
 			us.saveUser(u);
 			return new ResponseEntity<User>(u, HttpStatus.OK);
 		}
+	}
+
+	@RequestMapping(method = RequestMethod.OPTIONS)
+	public ResponseEntity handle() {
+		return new ResponseEntity(HttpStatus.NO_CONTENT);
 	}
 
 }
