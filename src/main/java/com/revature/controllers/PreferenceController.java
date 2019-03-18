@@ -50,4 +50,10 @@ public class PreferenceController {
 		}
 	}
 	
+	@RequestMapping(method = RequestMethod.OPTIONS)
+    public ResponseEntity handle() {
+        return new ResponseEntity(HttpStatus.NO_CONTENT);
+    }
+
+	
 }

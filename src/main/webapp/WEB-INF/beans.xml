@@ -19,6 +19,9 @@
 
 	<mvc:annotation-driven />
 	<mvc:interceptors>
+		<bean class="com.revature.interceptors.CorsInterceptor"></bean>
+	</mvc:interceptors>
+	<mvc:interceptors>
 		<bean class="com.revature.interceptors.JWTAuthenticationFilter"></bean>
 	</mvc:interceptors>
 	<mvc:cors>
