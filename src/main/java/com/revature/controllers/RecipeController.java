@@ -69,6 +69,10 @@ public class RecipeController {
 			calories = 655.0955d + (9.5634d * (u.getWeight() * 0.4539d)) + (1.8496d * (u.getHeight() * 2.54d))
 					- (4.6756d * u.getAge());
 			calories *= 1.2d;
+		} else {
+			calories = 655.0955d + (9.5634d * (u.getWeight() * 0.4539d)) + (1.8496d * (u.getHeight() * 2.54d))
+					- (4.6756d * u.getAge());
+			calories *= 1.2d;
 		}
 		String calorieCount = (int)((calories/3)-100) + "-" + (int)((calories/3)+100);
 		
